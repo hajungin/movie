@@ -1,0 +1,203 @@
+body{
+    font-family: 'Lato', sans-serif;
+    background-color: #242333;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+#container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 800px;
+
+}
+
+.movieContainer {
+    display: flex; /* 요소들을 수평으로 나란히 배치 */
+    align-items: center; /* 요소들을 수직 중앙 정렬 */
+    justify-content: space-between; /* 요소들을 양 끝으로 정렬 */
+    margin-top: 5px; /* 상단 여백 설정 */
+}
+
+/* .movieContainer{
+    margin: 20px 0px;
+} */
+
+.showcase{
+    background-color: #777;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    margin: 16px 0;
+    padding: 5px 10px;
+}
+
+.movieContainer select {
+    margin: 20px 10px; /* 위쪽과 좌우 여백 조정 */
+    padding: 10px; /* 내부 여백 설정 */
+    border-radius: 10px; /* 테두리 모서리 둥글게 만들기 */
+    appearance: none; /* 기본 UI 제거 */
+    border: 1px solid #ccc; /* 테두리 스타일 설정 */
+    width: 250px; /* 선택창 너비 설정 */
+    font-size: 16px; /* 폰트 크기 설정 */
+}
+
+/* .movieContainer select{
+    margin: 10px;
+    padding: 5px 15px 5px 15px;
+    border-radius: 7px;
+    appearance: none;
+    border: 0;
+} */
+
+.movieContainer select option{
+
+   text-align: left;
+}
+label[for="movie"] {
+    font-size: 30px; /* 레이블 폰트 크기 설정 */
+    margin-right: 10px; /* 레이블과 선택창 사이 여백 조정 */
+}
+
+
+li{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.small{
+    color: #777;
+    margin-left: 10px;
+}
+
+.showcase .seat:hover{
+    cursor: default;
+    scale: 1;
+}
+
+.showcase .selectedSeat:hover{
+    cursor: default;
+    scale: 1;
+}
+
+.screen {
+    background-color: #fff;
+    margin: 25px;
+    padding: 5px;
+    width: 400px;
+    height: 100px;
+    transform: rotateX(-45deg) scale(1.5); /* 회전 후 크기를 1.5배 확대 */
+    transform-origin: center center; /* 중앙을 기준으로 회전 중심점 설정*/
+    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    }
+
+/*
+.screen{
+   background-color: #fff;
+   margin: 25px;
+   padding: 5px;
+   width: 140px;
+   height: 80px;
+   transform: rotateX(-45deg);
+   box-shadow: 0 3px 10px rgb(255 255 255 / 70%);
+} */
+
+
+.selectedSeatIcon{
+    background-color: #6feaf6;
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: default;
+}
+
+.seat:hover{
+    scale: 1.2;
+}
+
+.selectedSeat:hover{
+    scale: 1.2;
+}
+
+.seat:nth-of-type(2){
+    margin-right: 18px;
+}
+
+.seat:nth-of-type(7){
+    margin-left: 18px;
+}
+
+.occupiedSeat:nth-of-type(2){
+    margin-right: 18px;
+}
+.occupiedSeat:nth-of-type(7){
+    margin-left: 18px;
+}
+
+.seat{
+    background-color: #444451;
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+}
+
+.availableSeat{
+    background-color: #444451;
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: default;
+}
+
+
+.selectedSeat{
+    background-color: #6feaf6;
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: pointer;
+}
+
+.occupiedSeat{
+    background-color: #fff;
+    width: 30px;
+    height: 30px;
+    margin: 8px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+
+
+.row{
+    display: flex;
+    justify-content: center; /* 좌석들을 수평 중앙 정렬 */
+
+}
+
+.text{
+    margin-top: 30px;
+    padding: 20px;
+}
+
+#count{
+    color: #6feaf6;
+}
+
+#costs{
+    color: #6feaf6;
+}
