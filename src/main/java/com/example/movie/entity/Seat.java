@@ -20,10 +20,17 @@ public class Seat {
     @Column(name = "location_no")
     private Long locationNo;
 
+    @Column(name = "user_no")
+    private Long userNo; //이것만 추가하면 굳이 ticket 테이블 필요 없을 듯?
+
+
     @Column(name = "seat_no")
     private int seatRowNo;
 
     @Column(name = "seat_column_no")
     private int seatColumnNo;
+
+    @Column(name = "seat_sales")
+    private boolean seatSales;
 
 }

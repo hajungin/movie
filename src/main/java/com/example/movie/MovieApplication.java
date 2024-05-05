@@ -2,8 +2,9 @@ package com.example.movie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = SecurityAutoConfiguration.class) //security 로그인 비밀번호가 계속 안 떠서 임시로 막아둠
 public class MovieApplication {
 
 	public static void main(String[] args) {
