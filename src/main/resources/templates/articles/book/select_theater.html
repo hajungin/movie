@@ -10,13 +10,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/select_seat_css.css">
 </head>
-
-
 <body>
-    <form th:action="@{/cnema/seat}" method="post">
+    <form th:action="@{/cnema/theater}" method="post" id="selectionForm">
         <div class="location-container">
-            <select th:value="${locationDto.locationNo}">
-                <option th:each="locationDto : ${locationDtoList}"  th:text="${locationDto.locationName}"></option>
+            <label for="location">지점 선택:</label>
+            <br><br>
+            <select id="location" name="location">
+                <option disabled selected value="">지점을 선택해주세요</option>
+                <option th:each="locationDto : ${locationDtoList}"
+                    th:value="${locationDto.locationNo}"
+                    th:text="${locationDto.locationName}"></option>
             </select>
         </div>
         <br>
@@ -24,39 +27,45 @@
             <label for="movie">
                 Pick a Movie :
             </label>
-            <select name="pickMovie" id="movie">
-                <option class="price" value="10">Avengers:Endgame ($10)</option>
-                <option class="price" value="12">Joker ($12)</option>
-                <option class="price" value="8">Toy Story 4 ($8)</option>
-                <option class="price" value="9">The Lion King ($9)</option>
+            <br>
+            <select name="movie" id="movie">
+                <option disabled selected value="">영화를 선택해주세요</option>
+                <option th:each="moviesDto : ${moviesDtoList}"
+                        th:value="${moviesDto.movieNo}"
+                        th:text="${moviesDto.movieTitle}"></option>
             </select>
         </div>
         <br>
         <div class="select-container">
-            <select class="select" th:value="${date}">
-                <option th:each="date : ${dateList}" th:text="${#temporals.format(date, 'yyyy-MM-dd')}">
+            <label for="date">날짜 선택:</label>
+            <br>
+            <select id="date" name="date" class="select">
+                <option disabled selected value="">날짜를 선택해주세요</option>
+                <option th:each="date : ${dateList}"
+                        th:value="${date}"
+                        th:text="${#temporals.format(date, 'yyyy-MM-dd')}">
                 </option>
             </select>
         </div>
-        <input type="submit" value="다음" class="next">
+        <button class="next" type="button" onclick="submitSelection()">다음</button>
     </form>
     <br><br>
         <a href="/cnema">
             <input type="button" value="메인으로" class="back">
         </a>
+<script>
 
-    <script>
-        // 사용자가 선택 사항을 제출할 때 실행되는 함수
-        function submitSelection() {
-            // 사용자가 선택한 영화, 지점, 날짜 정보를 폼에 추가
-            const movie = document.getElementById('movie').value;
-            const location = document.getElementById('location').value;
-            const date = document.getElementById('date').value;
+            // 사용자가 선택 사항을 제출할 때 실행되는 함수
+            function submitSelection() {
+                // 사용자가 선택한 영화, 지점, 날짜 정보를 폼에 추가
+                const movie = document.getElementById('movie').value;
+                const location = document.getElementById('location').value;
+                const date = document.getElementById('date').value;
 
-            // 폼을 제출 (선택한 영화, 지점, 날짜 정보가 서버로 전송됨)
-            document.getElementById('selectionForm').submit();
-        }
-    </script>
+                // 폼을 제출 (선택한 영화, 지점, 날짜 정보가 서버로 전송됨)
+                document.getElementById('selectionForm').submit();
+            }
+</script>
 
 </body>
 </html>

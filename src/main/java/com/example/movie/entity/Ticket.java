@@ -28,6 +28,9 @@ public class Ticket {
     @Column(name = "location_no")
     private Long locationNo;
 
+    @Column(name="seat_id")
+    private Long seatId;
+
     @Column(name = "book_date")
     private LocalDateTime bookDate; //예약 날짜 (영화보는 날짜)
 
