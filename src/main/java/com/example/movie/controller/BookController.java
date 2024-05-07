@@ -70,7 +70,7 @@ public class BookController {
 
 
     @PostMapping("/seat")
-    public String selectSeat(@){
+    public String selectSeat(){
 
         return "redirect:/";
     }

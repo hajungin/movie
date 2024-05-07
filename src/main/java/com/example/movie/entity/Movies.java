@@ -25,7 +25,7 @@ public class Movies {
     private LocalDateTime movieDate;
 
     @Column(name = "movie_rate")
-    private String movieRate;//성인 등급 -> boolean 으로 yes or no로 처리 할 건지 아예 예전 Gender 처럼 enum 타입으로 만들건지 생각필요
+    private boolean movieRate;//성인 등급 -> boolean 으로 yes or no로 처리 할 건지 아예 예전 Gender 처럼 enum 타입으로 만들건지 생각필요
 
     @Column(name = "good_point_avg")
     private double goodPointAvg; // board 엔티티 goodPoint 값 평균값으로 구할거니 double타입
