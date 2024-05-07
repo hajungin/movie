@@ -1,16 +1,18 @@
 package com.example.movie.controller;
 
 import com.example.movie.dto.LocationDto;
+import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.SeatDto;
 import com.example.movie.service.LocationService;
+import com.example.movie.service.MoviesService;
 import com.example.movie.service.SeatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -23,10 +25,12 @@ public class BookController {
 
     private final LocationService locationService;
     private final SeatService seatService;
+    private final MoviesService moviesService;
 
-    public BookController(LocationService locationService, SeatService seatService) {
+    public BookController(LocationService locationService, SeatService seatService, MoviesService moviesService) {
         this.locationService = locationService;
         this.seatService = seatService;
+        this.moviesService = moviesService;
     }
 
     @GetMapping("theater")
@@ -40,10 +44,10 @@ public class BookController {
         model.addAttribute("dateList", dateList);
 
         List<LocationDto> locationDtoList = locationService.findAll();
-        log.info("================================================");
-        log.info(locationDtoList.stream().toList().toString());
-
         model.addAttribute("locationDtoList", locationDtoList);
+
+        List<MoviesDto> moviesDtoList = moviesService.findAll();
+        model.addAttribute("moviesDtoList", moviesDtoList);
         return "/articles/book/select_theater";
     }
 
@@ -69,8 +73,18 @@ public class BookController {
     }
 
 
-    @PostMapping("/seat")
-    public String selectSeat(){
+    @PostMapping("/theater")
+    public String selectSeat(
+            @RequestParam("movie") Long movieId,
+            @RequestParam("location") Long locationId,
+            @RequestParam("date") String date,
+            Model model){
+        log.info("===============================");
+        log.info("===============================");
+        log.info("===============================");
+        log.info(String.valueOf(movieId));
+        log.info(String.valueOf(locationId));
+        log.info(date);
 
         return "redirect:/";
     }
