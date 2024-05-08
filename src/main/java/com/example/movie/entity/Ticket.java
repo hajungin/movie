@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -32,6 +33,6 @@ public class Ticket {
     private Long seatId;
 
     @Column(name = "book_date")
-    private LocalDateTime bookDate; //예약 날짜 (영화보는 날짜)
+    private LocalDate bookDate; //예약 날짜 (영화보는 날짜)
 
 }

@@ -9,3 +9,11 @@ VALUES
 (3.8, '2024-05-02 13:00:00', 'PG', 'Toy Story'),
 (4.2, '2024-05-03 14:00:00', 'PG-13', 'Jurassic Park');
 
+insert into location (location_name) values ('서울');
+insert into location (location_name) values ('일산');
+insert into location (location_name) values ('용인');
+insert into location (location_name) values ('대전');
+insert into location (location_name) values ('부산');
+insert into location (location_name) values ('광주');
+insert into location (location_name) values ('춘천');
+
