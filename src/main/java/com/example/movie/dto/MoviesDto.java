@@ -23,7 +23,7 @@ public class MoviesDto {
 
     private double goodPointAvg;
 
-    public static MoviesDto fromEntity(Movies movies){
+    public static MoviesDto fromMoviesEntity(Movies movies){
         return new MoviesDto(
                 movies.getMovieNo(),
                 movies.getMovieTitle(),

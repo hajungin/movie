@@ -20,13 +20,13 @@ public class MovieService {
         List<MoviesDto> moviesDtoList = new ArrayList<>();
         return moviesRepository.findAll()
                 .stream()
-                .map(x->MoviesDto.fromEntity(x))
+                .map(x->MoviesDto.fromMoviesEntity(x))
                 .toList();
     }
 
     public MoviesDto getOneMovie(Long movieNo) {
         return moviesRepository.findById(movieNo)
-                .map(x->MoviesDto.fromEntity(x))
+                .map(x->MoviesDto.fromMoviesEntity(x))
                 .orElse(null);
     }
 
