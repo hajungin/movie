@@ -27,6 +27,7 @@ public class AdminController {
     }
 
     @GetMapping("")
+//    관리자 페이지 메인 화면
     public String adminView(Model model){
         List<UserDto> userDtoList = userService.findAll();
         model.addAttribute("user",userDtoList);
@@ -34,6 +35,7 @@ public class AdminController {
     }
 
     @GetMapping("user")
+//    관리자페이지 회원관리 화면
     public String userView(Model model){
         List<UserDto> userDtoList = userService.findAll();
         model.addAttribute("user",userDtoList);
@@ -41,41 +43,28 @@ public class AdminController {
     }
 
     @GetMapping("update")
+//    관리자페이지 회원 수정화면
     public String updateView(@RequestParam("updateId")Long userNo,
                              Model model){
         UserDto userDto = userService.getOneUser(userNo);
         model.addAttribute("userDto",userDto);
         return "admin/user_update";
     }
-
     @PostMapping("update")
-    public String updateView(@Valid @ModelAttribute("userDto") UserDto userDto,
-                             BindingResult bindingResult){
-
-        if (bindingResult.hasErrors()){
-            return "admin/user_update";
-        }
-        if (!userDto.getPassword1().equals(userDto.getPassword2())){
-            bindingResult.rejectValue("password2","passwordIncorrect",
-                    "2개의 패스워드가 일치하지 않습니다.");
-            return "admin/user_update";
-        }
-        log.info("==============="+userDto.toString());
-
+    public String updateView(@ModelAttribute("userDto") UserDto userDto){
         userService.update(userDto);
-
-        log.info("==============="+userDto.toString());
-        // 유효성 검사를 통과한 경우, 해당 로직을 처리하고 적절한 뷰로 이동합니다.
         return "redirect:/admin/user";
     }
 
     @PostMapping("/delete/{deleteId}")
+//    관리자페이지 회원삭제
     public String delete(@PathVariable("deleteId")Long id){
         userService.delete(id);
         return "redirect:/admin/user";
     }
 
     @GetMapping("movie")
+//    관리자페이지 영화관리화면
     public String movieView(Model model){
         List<MoviesDto> moviesDtoList = movieService.findAll();
         model.addAttribute("movie",moviesDtoList);
@@ -83,6 +72,7 @@ public class AdminController {
     }
 
     @GetMapping("movie_update")
+//    관리자페이지 영화수정 화면
     public String movieUpdateView(@RequestParam("updateId")Long movieNo,
                              Model model){
 
@@ -90,8 +80,14 @@ public class AdminController {
         model.addAttribute("movie",moviesDto);
         return "admin/movie_update";
     }
+    @PostMapping("movie_update")
+    public String movieUpdateView(@ModelAttribute("moviesDto") MoviesDto moviesDto){
+        movieService.update(moviesDto);
+        return "redirect:/admin/movie";
+    }
 
     @PostMapping("/deleted/{deleteId}")
+//    관리자페이지 영화삭제 화면
     public String deleteMovie(@PathVariable("deleteId")Long movieNo){
         movieService.delete(movieNo);
         return "redirect:/admin/movie";

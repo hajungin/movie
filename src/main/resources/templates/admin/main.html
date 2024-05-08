@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default_layout}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<!-- 부트스트랩 CSS 링크 추가 -->
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="content" layout:fragment="content">
-    <div>
-		<span class="nav-item">
-		<a class="nav-link" th:href="@{/admin/user}">회원관리</a>
-		</span>
-        <span class="nav-item">
-		<a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
-		</span>
-        <span class="nav-item">
-		<a class="nav-link" href="#">예매</a>
-		</span>
-    </div>
+	<div class="navbar navbar-expand-lg navbar-light bg-light">
+		<div class="container-fluid">
+			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<!-- 현재 페이지가 회원 관리 페이지인 경우 active 클래스 추가 -->
+					<a class="nav-link" th:href="@{/admin/user}" >회원관리</a>
+				</li>
+				<li class="nav-item">
+					<!-- 현재 페이지가 영화 관리 페이지인 경우 active 클래스 추가 -->
+					<a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.example.movie.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
+@Builder
 public class Movies {
     //영화 movie_no(pk), movie_title, movie_date(개봉일), movie_price, movie_rate, good_point_avg
     @Id

@@ -1,6 +1,7 @@
 package com.example.movie.service;
 
 import com.example.movie.dto.MoviesDto;
+import com.example.movie.entity.Movies;
 import com.example.movie.repository.MoviesRepository;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,15 @@ public class MovieService {
 
     public void delete(Long movieNo) {
         moviesRepository.deleteById(movieNo);
+    }
+
+    public void update(MoviesDto moviesDto) {
+        Movies movies = Movies.builder()
+                .movieNo(moviesDto.getMovieNo())
+                .movieTitle(moviesDto.getMovieTitle())
+                .movieDate(moviesDto.getMovieDate())
+                .movieRate(moviesDto.getMovieRate())
+                .build();
+        moviesRepository.save(movies);
     }
 }
