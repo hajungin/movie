@@ -5,43 +5,70 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="content" layout:fragment="content">
-    <h4 align="center">영화관리</h4>
+    <div class="container">
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin}">관리자메인</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">|</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/user}">회원관리</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">|</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
+            </li>
+        </ul>
+    <h4 class="text-center">영화관리</h4>
     <br>
-    <table class="table table-bordered border-primary">
-        <tr>
-            <th>영화번호</th>
-            <th>영화제목</th>
-            <th>영화 날짜</th>
-            <th>영화 등급</th>
-            <th>수정</th>
-            <th>삭제</th>
-
-        </tr>
-        <tr th:each="movie : ${movie}" th:object="${movie}">
-            <td th:text="*{movieNo}"></td>
-            <td th:text="*{movieTitle}"></td>
-            <td th:text="*{movieDate}"></td>
-            <td th:text="*{movieRate}"></td>
-            <td>
-                <form th:action="@{/admin/movie_update}" method="get">
-                    <input type="hidden" name="updateId" th:value="*{movieNo}">
-                    <input type="submit" value="수정">
-                </form>
-            </td>
-            <td>
-                <!--PathVariable 로 전달해서 삭제처리-->
-                <form th:action="@{/admin/deleted/{deleteId}(deleteId=*{movieNo})}" method="post">
-
-                    <input type="hidden" name="deleteId" th:value="*{movieNo}">
-                    <input type="submit" value="삭제">
-                </form>
-            </td>
-        </tr>
-    </table>
+    <div class="table-responsive">
+        <table class="table table-bordered border-primary">
+            <thead class="table-primary">
+            <tr>
+                <th>영화번호</th>
+                <th>영화제목</th>
+                <th>영화 날짜</th>
+                <th>영화 등급</th>
+                <th>영화 평점</th>
+                <th>수정</th>
+                <th>삭제</th>
+                <th>상세페이지</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="movie : ${movie}" th:object="${movie}">
+                <td th:text="*{movieNo}"></td>
+                <td th:text="*{movieTitle}"></td>
+                <td th:text="*{movieDate}"></td>
+                <td th:text="*{movieRate}"></td>
+                <td th:text="*{goodPointAvg}"></td>
+                <td>
+                    <form th:action="@{/admin/movie_update}" method="get">
+                        <input type="hidden" name="updateId" th:value="*{movieNo}">
+                        <button type="submit" class="btn btn-primary btn-sm">수정</button>
+                    </form>
+                </td>
+                <td>
+                    <!--PathVariable 로 전달해서 삭제처리-->
+                    <form th:action="@{/admin/deleted/{deleteId}(deleteId=*{movieNo})}" method="post">
+                        <input type="hidden" name="deleteId" th:value="*{movieNo}">
+                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
 </div>
 </body>
 </html>
