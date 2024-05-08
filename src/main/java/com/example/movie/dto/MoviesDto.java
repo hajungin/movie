@@ -17,7 +17,7 @@ public class MoviesDto {
 
     private String movieTitle;
 
-    private LocalDateTime movieDate;
+    private String movieDate;
 
     private String movieRate;
 
@@ -32,4 +32,5 @@ public class MoviesDto {
                 movies.getGoodPointAvg()
         );
     }
+
 }
