@@ -16,7 +16,7 @@ public class Seat {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서 나중에 AUTO로 전환
     private Long seatId;
 
-    @Column(name = "seat_no")
+    @Column(name = "seat_row_no")
     private int seatRowNo;
 
     @Column(name = "seat_column_no")

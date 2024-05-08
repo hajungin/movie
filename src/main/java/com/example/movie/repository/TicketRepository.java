@@ -9,5 +9,4 @@ import java.util.List;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    List<Long> findSeatIdByMovieNoAndLocationNoAndBookDate(Long movieNo, Long locationNo, LocalDate bookDate);
 }

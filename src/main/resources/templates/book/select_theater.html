@@ -53,19 +53,30 @@
         <a href="/cnema">
             <input type="button" value="메인으로" class="back">
         </a>
-<script>
+    <script>
+        // 사용자가 선택 사항을 제출할 때 실행되는 함수
+        function submitSelection() {
+            // 사용자가 선택한 영화, 지점, 날짜 정보를 폼에 추가
 
-            // 사용자가 선택 사항을 제출할 때 실행되는 함수
-            function submitSelection() {
-                // 사용자가 선택한 영화, 지점, 날짜 정보를 폼에 추가
-                const movie = document.getElementById('movie').value;
-                const location = document.getElementById('location').value;
-                const date = document.getElementById('date').value;
-
-                // 폼을 제출 (선택한 영화, 지점, 날짜 정보가 서버로 전송됨)
-                document.getElementById('selectionForm').submit();
+            if (document.getElementById("movie").value.trim().length == 0) {
+                alert("영화를 선택하지 않았습니다.");
+                document.getElementById("movie").focus();
+                return false;
             }
-</script>
+            if (document.getElementById("location").value.trim().length == 0) {
+                alert("지점을 선택하지 않았습니다.");
+                document.getElementById("location").focus();
+                return false;
+            }
+            if (document.getElementById("date").value.trim().length == 0) {
+                alert("날짜를 선택하지 않았습니다.");
+                document.getElementById("date").focus();
+                return false;
+            }
 
+            // 폼을 제출 (선택한 영화, 지점, 날짜 정보가 서버로 전송됨)
+            document.getElementById('selectionForm').submit();
+        }
+    </script>
 </body>
 </html>

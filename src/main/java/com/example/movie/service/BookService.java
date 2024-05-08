@@ -1,10 +1,10 @@
 package com.example.movie.service;
 
+import com.example.movie.dto.SeatDto;
 import com.example.movie.repository.SeatRepository;
 import com.example.movie.repository.TicketRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,7 +17,9 @@ public class BookService {
         this.seatRepository = seatRepository;
     }
 
-    public List<Long> findSeatIdsByMovieNoAndLocationNoAndBookDate(Long movieNo, Long locationNo, LocalDate bookDate) {
-        return ticketRepository.findSeatIdByMovieNoAndLocationNoAndBookDate(movieNo, locationNo, bookDate);
+
+    public List<SeatDto> findAllSeats() {
+        return seatRepository.findAll().stream()
+                .map(x->SeatDto.fromSeatEntity(x)).toList();
     }
 }
