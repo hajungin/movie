@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <h4 align="center">영화관리</h4>
+    <br>
+    <table class="table table-bordered border-primary">
+        <tr>
+            <th>영화번호</th>
+            <th>영화제목</th>
+            <th>영화 날짜</th>
+            <th>영화 등급</th>
+            <th>수정</th>
+            <th>삭제</th>
+
+        </tr>
+        <tr th:each="movie : ${movie}" th:object="${movie}">
+            <td th:text="*{movieNo}"></td>
+            <td th:text="*{movieTitle}"></td>
+            <td th:text="*{movieDate}"></td>
+            <td th:text="*{movieRate}"></td>
+            <td>
+                <form th:action="@{/admin/movie_update}" method="get">
+                    <input type="hidden" name="updateId" th:value="*{movieNo}">
+                    <input type="submit" value="수정">
+                </form>
+            </td>
+            <td>
+                <!--PathVariable 로 전달해서 삭제처리-->
+                <form th:action="@{/admin/deleted/{deleteId}(deleteId=*{movieNo})}" method="post">
+
+                    <input type="hidden" name="deleteId" th:value="*{movieNo}">
+                    <input type="submit" value="삭제">
+                </form>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

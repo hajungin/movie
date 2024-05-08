@@ -3,6 +3,7 @@ package com.example.movie.entity;
 import com.example.movie.constant.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class User {
 //유저: user_no(pk), user_id. password, user_name, birth,phone, user_role,
 
@@ -27,9 +29,11 @@ public class User {
     @Column(name = "user_name")
     private String userName;
 
-    private int birth;
+    private String birth;
 
-    private int phone;
+    private String email;
+
+    private String phone;
 
     @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
