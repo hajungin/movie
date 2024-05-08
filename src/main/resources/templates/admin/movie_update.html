@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 부트스트랩 CSS 링크 추가 -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/user_check.js}"></script>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="container">
+        <ul class="nav nav-tabs mb-3">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin}">관리자메인</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">|</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/user}">회원관리</a>
+            </li>
+            <li class="nav-item">
+                <span class="nav-link">|</span>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
+            </li>
+        </ul>
+
+        <br>
+
+        <form th:action="@{/admin/movie_update}" method="post" th:object="${movie}" class="row g-3">
+            <div align="center" class="col-md-6 offset-md-3">
+                <label for="id" class="form-label text-center">ID : [[*{movieNo}]]</label>
+            </div>
+
+            <div class="col-md-6">
+                <label for="movieTitle" class="form-label">영화제목</label>
+                <input type="text" class="form-control" th:field="*{movieTitle}">
+                <div class="error-class" th:errors="*{movieTitle}"></div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="movieDate" class="form-label">개봉일</label>
+                <input type="text" class="form-control" th:field="*{movieDate}">
+                <div class="error-class" th:errors="*{movieDate}"></div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="movieRate" class="form-label">영화 등급</label>
+                <input type="text" class="form-control" th:field="*{movieRate}">
+                <div class="error-class" th:errors="*{movieRate}"></div>
+            </div>
+
+            <div class="col-md-6">
+                <label for="goodPointAvg" class="form-label">영화 평점</label>
+                <input type="text" class="form-control" th:field="*{goodPointAvg}">
+                <div class="error-class" th:errors="*{goodPointAvg}"></div>
+            </div>
+
+            <input type="hidden" th:field="*{movieNo}">
+
+            <div align="center" class="col-12">
+                <input type="button" value="수정" class="btn btn-primary" onclick="check()">
+                <a class="btn btn-secondary" th:href="@{/admin/movie}">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
