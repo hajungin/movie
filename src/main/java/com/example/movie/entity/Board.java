@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Board {
+
 //  게시판 board_id(pk),title,content, movie_no,user_id, good_point
     @Id
     @Column(name = "board_id")
@@ -33,4 +34,3 @@ public class Board {
     @Column(name = "good_point")
     private int goodPoint; // 별점 줄건데 소숫점까지 넣을거면 double로 수정필요
 }
-
