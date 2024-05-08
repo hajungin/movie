@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf/org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/select_seat_css.css">
+</head>
+<body>
+<form th:action="@{/cnema/seat}" method="post">
+    <div id="container">
+        <ul class="showcase">
+            <li>
+                <div class="availableSeat"></div>
+                <small class="small">Available Seat</small>
+            </li>
+            <li>
+                <div class="selectedSeatIcon"></div>
+                <small class="small">Selected Seat</small>
+            </li>
+            <li>
+                <div class="occupiedSeat"></div>
+                <small class="small">Occupied Seat</small>
+            </li>
+        </ul>
+
+        <div class="seatContainer">
+            <div class="screen"></div>
+            <div class="row" th:each="row: ${row}">
+                <span class="seat" th:each="column : ${column}"}></span>
+            </div>
+        </div>
+
+        <p class="text">You have selected <span id="count">0</span> seats for a price of $ <span id="costs">0</span></p>
+        <input type="submit" value="예매" class="next">
+        <a href="/cnema">
+            <input type="button" value="메인으로" class="back">
+        </a>
+
+    </div>
+</form>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () =>{
+
+const seatContainer = document.querySelector('.seatContainer');
+
+const movie = document.getElementById('movie'); // 선택할 영화
+let moviePrice = Number(movie.value); // 영화과격
+
+let count = document.querySelector('#count'); // 인원수
+let costs = document.querySelector('#costs'); // 가격
+
+// 선택한 좌석수 텍스트 변경해주기
+
+function countSeatPrice(){
+const selectedSeatCount = document.querySelectorAll('.selectedSeat').length;
+
+count.textContent = selectedSeatCount;
+costs.textContent = selectedSeatCount * moviePrice;
+
+}
+
+
+//좌석 클릭했을때
+
+seatContainer.addEventListener('click', (e) => {
+
+if(e.target.className === 'seat'){
+    e.target.className = 'selectedSeat';
+} else if(e.target.className === 'selectedSeat'){
+    e.target.className = 'seat';
+}
+
+countSeatPrice();
+})
+
+// 영화 변경할때
+
+movie.addEventListener('change', (e) => {
+
+moviePrice = Number(e.target.value);
+
+countSeatPrice()
+
+})
+
+
+
+
+})
+</script>
+</body>
+
+</html>

@@ -1,8 +1,11 @@
+server:
+  port: 8090
+
 #MySQL 연결하기
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/golf
+    url: jdbc:mysql://localhost:3306/cnema
     username: root
     password: 1111
 
@@ -14,7 +17,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create
+      ddl-auto: validate
     properties:
       hibernate:
         show_sql: true
