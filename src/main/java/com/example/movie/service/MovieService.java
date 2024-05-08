@@ -44,4 +44,13 @@ public class MovieService {
                 .build();
         moviesRepository.save(movies);
     }
+
+    public List<MoviesDto> getAllMovies() {
+        List<MoviesDto> moviesDtoList = new ArrayList<>();
+        moviesRepository.findAll().forEach(
+                movies -> moviesDtoList.add(MoviesDto.fromMoviesEntity(movies))
+        );
+        return moviesDtoList;
+    }
+    // 게시판에 영화제목 선택을 위해 추가함
 }

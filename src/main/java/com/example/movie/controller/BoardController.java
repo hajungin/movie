@@ -1,8 +1,10 @@
 package com.example.movie.controller;
 
 import com.example.movie.dto.BoardDto;
+import com.example.movie.dto.MoviesDto;
 import com.example.movie.repository.BoardRepository;
 import com.example.movie.service.BoardService;
+import com.example.movie.service.MovieService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +16,12 @@ import java.util.List;
 public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
+    private final MovieService movieService;
 
-    public BoardController(BoardRepository boardRepository, BoardService boardService) {
+    public BoardController(BoardRepository boardRepository, BoardService boardService, MovieService movieService) {
         this.boardRepository = boardRepository;
         this.boardService = boardService;
+        this.movieService = movieService;
     }
 
     @GetMapping("board_view")
@@ -29,6 +33,8 @@ public class BoardController {
 
     @GetMapping("/board_insert")
     public String showBoardInsertForm(Model model) {
+        List<MoviesDto> moviesDtoList = movieService.getAllMovies();
+        model.addAttribute("moviesDtoList", moviesDtoList);
         model.addAttribute("boardDto", new BoardDto());
         return "board/board_insert";
     }
@@ -38,9 +44,4 @@ public class BoardController {
         boardService.boardInsert(dto);
         return "redirect:/board/board_view";
     }
-
-//    @GetMapping("/updade")
-//    public String boardUpdate(@RequestParam("updateId")Long id,
-//                              Model model) {
-//    }
 }
