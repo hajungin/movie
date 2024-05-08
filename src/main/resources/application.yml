@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8080
 
 #MySQL 연결하기
 spring:
@@ -17,7 +17,7 @@ spring:
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         show_sql: true
