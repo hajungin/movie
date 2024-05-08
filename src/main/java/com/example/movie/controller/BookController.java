@@ -3,7 +3,6 @@ package com.example.movie.controller;
 import com.example.movie.dto.LocationDto;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.SeatDto;
-import com.example.movie.dto.TicketDto;
 import com.example.movie.service.BookService;
 import com.example.movie.service.LocationService;
 import com.example.movie.service.MovieService;
@@ -76,8 +75,8 @@ public class BookController {
         Long locationNo = (Long) session.getAttribute("locationNo");
         LocalDate date = (LocalDate) session.getAttribute("date");
 
-        List<Long> seatId = bookService.findSeatIdsByMovieNoAndLocationNoAndBookDate(movieNo, locationNo, date);
-
+        List<SeatDto> seatDtoList = bookService.findAllSeats();
+        model.addAttribute("seatDtoList", seatDtoList);
 //        int[] row = new int[6];
 //        int[] column = new int[8];
 //        for (int i = 0; i < row.length; i++) {
