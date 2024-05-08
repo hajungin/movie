@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Controller
@@ -64,12 +65,12 @@ public class AdminController {
     }
 
     @GetMapping("movie")
-//    관리자페이지 영화관리화면
-    public String movieView(Model model){
+    public String movieView(Model model) {
         List<MoviesDto> moviesDtoList = movieService.findAll();
-        model.addAttribute("movie",moviesDtoList);
+        model.addAttribute("movie", moviesDtoList);
         return "admin/movie";
     }
+
 
     @GetMapping("movie_update")
 //    관리자페이지 영화수정 화면
@@ -91,6 +92,12 @@ public class AdminController {
     public String deleteMovie(@PathVariable("deleteId")Long movieNo){
         movieService.delete(movieNo);
         return "redirect:/admin/movie";
+    }
+
+    @GetMapping("insert")
+//    관리자페이지 영화 등록 화면
+    public String insertMovie(){
+        return "admin/movie_insert";
     }
 
 }
