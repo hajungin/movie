@@ -51,3 +51,11 @@ function check() {
     document.getElementById("frm").submit();
     return true;
 }
+
+
+function res(){
+    alert("처음부터 다시 입력합니다.")
+    document.getElementById("frm").reset();
+    document.getElementById("userId").focus();
+
+}

@@ -15,6 +15,7 @@ import lombok.ToString;
 public class UserDto {
 
     private Long userNo;
+
     @NotEmpty(message = "사용자 ID는 필수입니다.")
     private String userId;
 

@@ -3,6 +3,8 @@ package com.example.movie.service;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.entity.Movies;
 import com.example.movie.repository.MoviesRepository;
+import jakarta.persistence.EntityManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.List;
 
 @Service
 public class MovieService {
+    @Autowired
+    EntityManager em;
     
     private final MoviesRepository moviesRepository;
 
@@ -23,6 +27,11 @@ public class MovieService {
                 .stream()
                 .map(x->MoviesDto.fromMoviesEntity(x))
                 .toList();
+    }
+
+    public List<Movies> findAllEm(){
+        List<Movies> moviesList = em.createQuery("SELECT m FROM Movies m", Movies.class).getResultList();
+        return moviesList;
     }
 
     public MoviesDto getOneMovie(Long movieNo) {
