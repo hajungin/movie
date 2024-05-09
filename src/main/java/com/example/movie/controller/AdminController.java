@@ -2,23 +2,34 @@ package com.example.movie.controller;
 
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.UserDto;
+import com.example.movie.entity.Movies;
+import com.example.movie.entity.User;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
 import jakarta.validation.Valid;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Slf4j
 @RequestMapping("admin")
 public class AdminController {
+
+    private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
 
@@ -29,17 +40,20 @@ public class AdminController {
 
     @GetMapping("")
 //    관리자 페이지 메인 화면
-    public String adminView(Model model){
-        List<UserDto> userDtoList = userService.findAll();
-        model.addAttribute("user",userDtoList);
+    public String adminView(){
         return "admin/main";
     }
 
     @GetMapping("user")
 //    관리자페이지 회원관리 화면
     public String userView(Model model){
+        //        레포지토리 사용
         List<UserDto> userDtoList = userService.findAll();
         model.addAttribute("user",userDtoList);
+
+//        엔티티 매니저 사용
+//        List<User> userList = userService.findAllEm();
+//        model.addAttribute("user",userList);
         return "admin/user";
     }
 
@@ -49,6 +63,9 @@ public class AdminController {
                              Model model){
         UserDto userDto = userService.getOneUser(userNo);
         model.addAttribute("userDto",userDto);
+
+//        User user = userService.getOneUserEm(userNo);
+//        model.addAttribute("userDto",user);
         return "admin/user_update";
     }
     @PostMapping("update")
@@ -66,8 +83,10 @@ public class AdminController {
 
     @GetMapping("movie")
     public String movieView(Model model) {
-        List<MoviesDto> moviesDtoList = movieService.findAll();
-        model.addAttribute("movie", moviesDtoList);
+//        List<MoviesDto> moviesDtoList = movieService.findAll();
+//        model.addAttribute("movie", moviesDtoList);
+        List<Movies> moviesList = movieService.findAllEm();
+        model.addAttribute("movie", moviesList);
         return "admin/movie";
     }
 
@@ -96,8 +115,15 @@ public class AdminController {
 
     @GetMapping("insert")
 //    관리자페이지 영화 등록 화면
-    public String insertMovie(){
+    public String insertMovie(Model model){
+        model.addAttribute("movie", new MoviesDto());
         return "admin/movie_insert";
     }
+    @PostMapping("insert")
+    public String insertMovie(@ModelAttribute("movie")MoviesDto dto){
+        movieService.insert(dto);
+        return "redirect:/admin/movie";
+    }
+
 
 }
