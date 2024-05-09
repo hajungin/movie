@@ -16,7 +16,6 @@ import java.time.LocalDateTime;
 public class Movies {
     //영화 movie_no(pk), movie_title, movie_date(개봉일), movie_price, movie_rate, good_point_avg
     @Id
-    @Column(name = "movie_no")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서 나중에 AUTO로 전환
     private Long movieNo;
 
@@ -24,7 +23,7 @@ public class Movies {
     private String movieTitle;
 
     @Column(name = "movie_date")
-    private LocalDateTime movieDate;
+    private String movieDate;
 
     @Column(name = "movie_rate")
     private String movieRate;

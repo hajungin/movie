@@ -15,10 +15,11 @@ public class SeatDto {
     private Long seatId;
     private int seatRowNo;
     private int seatColumnNo;
+    private Long ticketNo;
 
     public static SeatDto fromSeatEntity(Seat seat){
         return new SeatDto(
-                seat.getSeatId(),seat.getSeatRowNo(), seat.getSeatColumnNo()
+                seat.getSeatId(),seat.getSeatRowNo(),seat.getSeatColumnNo(),seat.getTicket().getTicketNo()
         );
     }
 }

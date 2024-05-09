@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 
 
 public class MovieApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(MovieApplication.class, args);
 	}

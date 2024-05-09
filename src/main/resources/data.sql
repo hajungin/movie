@@ -19,21 +19,33 @@ insert into location (location_name) values ('부산');
 insert into location (location_name) values ('광주');
 insert into location (location_name) values ('춘천');
 
-insert into seat (seat_row_no, seat_column_no) values (1, 1);
-insert into seat (seat_row_no, seat_column_no) values (1, 2);
-insert into seat (seat_row_no, seat_column_no) values (1, 3);
-insert into seat (seat_row_no, seat_column_no) values (2, 1);
-insert into seat (seat_row_no, seat_column_no) values (3, 1);
-insert into seat (seat_row_no, seat_column_no) values (4, 4);
-insert into seat (seat_row_no, seat_column_no) values (6, 6);
-insert into seat (seat_row_no, seat_column_no) values (4, 3);
-insert into seat (seat_row_no, seat_column_no) values (3, 4);
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 1, 1, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 2, 1, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 3, 1, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 4, 1, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 5, 1, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 1, 3, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (2, 1, 3, '2024-05-10');
+insert into ticket (movie_no, user_no, location_no, book_date) values (2, 2, 3, '2024-05-10');
+insert into ticket (movie_no, user_no, location_no, book_date) values (1, 1, 2, '2024-05-09');
+insert into ticket (movie_no, user_no, location_no, book_date) values (2, 1, 2, '2024-05-10');
+insert into ticket (movie_no, user_no, location_no, book_date) values (2, 2, 2, '2024-05-10');
 
 
-insert into ticket (movie_no, user_no, seat_id, location_no, book_date) values (1, 1, 1, 1, '2024-01-01');
-insert into ticket (movie_no, user_no, seat_id, location_no, book_date) values (1, 2, 2, 1, '2024-01-01');
-insert into ticket (movie_no, user_no, seat_id, location_no, book_date) values (1, 3, 3, 1, '2024-01-01');
-insert into ticket (movie_no, user_no, seat_id, location_no, book_date) values (1, 4, 4, 1, '2024-01-01');
-insert into ticket (movie_no, user_no, seat_id, location_no, book_date) values (1, 5, 5, 1, '2024-01-01');
+
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (0, 0, 1);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (1, 2, 1);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (1, 3, 1);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (2, 1, 1);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (3, 1, 1);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (4, 4, 2);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (5, 3, 7);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (4, 3, 7);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (3, 4, 7);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (4, 4, 10);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (5, 3, 11);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (4, 3, 11);
+insert into seat (seat_row_no, seat_column_no, ticket_no) values (3, 4, 11);
+
 
 

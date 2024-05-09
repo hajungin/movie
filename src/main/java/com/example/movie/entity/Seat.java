@@ -12,14 +12,15 @@ import lombok.NoArgsConstructor;
 public class Seat {
 
     @Id
-    @Column(name = "seat_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서 나중에 AUTO로 전환
     private Long seatId;
 
-    @Column(name = "seat_row_no")
     private int seatRowNo;
-
-    @Column(name = "seat_column_no")
     private int seatColumnNo;
+
+    @ManyToOne
+    @JoinColumn(name = "ticketNo")
+    private Ticket ticket;
+
 
 }

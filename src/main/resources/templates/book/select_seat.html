@@ -28,15 +28,17 @@
             </li>
         </ul>
 
-        <div class="seatContainer">
-            <div class="screen"></div>
-            <div class="row" th:each="row: ${row}">
-                <span class="seat" th:each="column : ${column}" >
-                ></span>
-            </div>
+        <div th:each="row, rowStat : ${seats}" class="row">
+        <span th:each="seatStatus, colStat : ${row}"
+              th:class="${seatStatus} ? 'seat' : 'occupiedSeat'"
+              th:attr="data-row=${rowStat.index}, data-column=${colStat.index}"
+              onclick="selectSeat(this)">
+        </span>
         </div>
 
+
         <p class="text">You have selected <span id="count">0</span> seats for a price of $ <span id="costs">0</span></p>
+
         <input type="submit" value="예매" class="next">
         <a href="/cnema">
             <input type="button" value="메인으로" class="back">
@@ -62,6 +64,8 @@
             });
         });
     });
+
+
 </script>
 
 
