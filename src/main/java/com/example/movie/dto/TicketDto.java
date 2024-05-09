@@ -19,8 +19,4 @@ public class TicketDto {
     private Long locationNo;
     private LocalDate bookDate; //예약 날짜 (영화보는 날짜)
 
-    private MoviesDto moviesDto;
-    private UserDto userDto;
-    private SeatDto seatDto;
-
 }
