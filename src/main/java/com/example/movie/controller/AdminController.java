@@ -2,6 +2,8 @@ package com.example.movie.controller;
 
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.UserDto;
+import com.example.movie.entity.Movies;
+import com.example.movie.entity.User;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
 import jakarta.validation.Valid;
@@ -38,17 +40,20 @@ public class AdminController {
 
     @GetMapping("")
 //    관리자 페이지 메인 화면
-    public String adminView(Model model){
-        List<UserDto> userDtoList = userService.findAll();
-        model.addAttribute("user",userDtoList);
+    public String adminView(){
         return "admin/main";
     }
 
     @GetMapping("user")
 //    관리자페이지 회원관리 화면
     public String userView(Model model){
+        //        레포지토리 사용
         List<UserDto> userDtoList = userService.findAll();
         model.addAttribute("user",userDtoList);
+
+//        엔티티 매니저 사용
+//        List<User> userList = userService.findAllEm();
+//        model.addAttribute("user",userList);
         return "admin/user";
     }
 
@@ -58,6 +63,9 @@ public class AdminController {
                              Model model){
         UserDto userDto = userService.getOneUser(userNo);
         model.addAttribute("userDto",userDto);
+
+//        User user = userService.getOneUserEm(userNo);
+//        model.addAttribute("userDto",user);
         return "admin/user_update";
     }
     @PostMapping("update")
@@ -75,8 +83,10 @@ public class AdminController {
 
     @GetMapping("movie")
     public String movieView(Model model) {
-        List<MoviesDto> moviesDtoList = movieService.findAll();
-        model.addAttribute("movie", moviesDtoList);
+//        List<MoviesDto> moviesDtoList = movieService.findAll();
+//        model.addAttribute("movie", moviesDtoList);
+        List<Movies> moviesList = movieService.findAllEm();
+        model.addAttribute("movie", moviesList);
         return "admin/movie";
     }
 
