@@ -52,5 +52,14 @@ public class MovieService {
         );
         return moviesDtoList;
     }
+
+    public void insert(MoviesDto dto) {
+        Movies movies = Movies.builder()
+                .movieTitle(dto.getMovieTitle())
+                .movieDate(dto.getMovieDate())
+                .movieRate(dto.getMovieRate())
+                .build();
+        moviesRepository.save(movies);
+    }
     // 게시판에 영화제목 선택을 위해 추가함
 }

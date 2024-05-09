@@ -24,7 +24,7 @@ public class Movies {
     private String movieTitle;
 
     @Column(name = "movie_date")
-    private LocalDateTime movieDate;
+    private String movieDate;
 
     @Column(name = "movie_rate")
     private String movieRate;
