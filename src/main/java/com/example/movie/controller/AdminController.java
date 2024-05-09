@@ -5,20 +5,29 @@ import com.example.movie.dto.UserDto;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
 import jakarta.validation.Valid;
+import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @Slf4j
 @RequestMapping("admin")
 public class AdminController {
+
+    private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
 
@@ -96,8 +105,15 @@ public class AdminController {
 
     @GetMapping("insert")
 //    관리자페이지 영화 등록 화면
-    public String insertMovie(){
+    public String insertMovie(Model model){
+        model.addAttribute("movie", new MoviesDto());
         return "admin/movie_insert";
     }
+    @PostMapping("insert")
+    public String insertMovie(@ModelAttribute("movie")MoviesDto dto){
+        movieService.insert(dto);
+        return "redirect:/admin/movie";
+    }
+
 
 }
