@@ -15,7 +15,7 @@ public class BoardDto {
     private String content;
     private Long movieNo;
     private Long userId;
-    private int goodPoint;
+    private double goodPoint;
     private String movieTitle;
 
     public static BoardDto fromBoardEntity(Board board) {

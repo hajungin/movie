@@ -32,7 +32,7 @@ public class Board {
     private Long userId;
 
     @Column(name = "good_point")
-    private int goodPoint; // 별점 줄건데 소숫점까지 넣을거면 double로 수정필요
+    private double goodPoint; // 별점 줄건데 소숫점까지 넣을거면 double로 수정필요
 
     @Column(name = "movie_title")
     private String movieTitle;

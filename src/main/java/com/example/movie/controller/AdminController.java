@@ -6,9 +6,11 @@ import com.example.movie.entity.Movies;
 import com.example.movie.entity.User;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
@@ -28,7 +30,8 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("admin")
 public class AdminController {
-
+    @Autowired
+    EntityManager em;
     private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
@@ -77,6 +80,7 @@ public class AdminController {
     @PostMapping("/delete/{deleteId}")
 //    관리자페이지 회원삭제
     public String delete(@PathVariable("deleteId")Long id){
+//        userService.delete(id);
         userService.delete(id);
         return "redirect:/admin/user";
     }

@@ -20,7 +20,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서 나중에 AUTO로 전환
     private Long userNo;
 
-    @Column(name = "user_id", length = 20)
+    @Column(name = "user_id")
     private String userId;
 
     @Column(nullable = false)
