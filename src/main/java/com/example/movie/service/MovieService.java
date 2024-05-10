@@ -50,6 +50,7 @@ public class MovieService {
                 .movieTitle(moviesDto.getMovieTitle())
                 .movieDate(moviesDto.getMovieDate())
                 .movieRate(moviesDto.getMovieRate())
+                .goodPointAvg(moviesDto.getGoodPointAvg())
                 .build();
         moviesRepository.save(movies);
     }
@@ -67,6 +68,7 @@ public class MovieService {
                 .movieTitle(dto.getMovieTitle())
                 .movieDate(dto.getMovieDate())
                 .movieRate(dto.getMovieRate())
+//                .goodPointAvg(dto.getGoodPointAvg())
                 .build();
         moviesRepository.save(movies);
     }

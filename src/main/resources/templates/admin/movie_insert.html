@@ -5,10 +5,7 @@
 	<title>영화 등록</title>
 	<!-- 부트스트랩 CSS 링크 추가 -->
 	<link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<style>
-		/* 사용자 정의 CSS */
-        /* 필요한 경우 여기에 사용자 정의 스타일을 추가할 수 있습니다. */
-	</style>
+	<script type="text/javascript" th:src="@{/js/movie_check.js}"></script>
 </head>
 <body>
 <div class="content" layout:fragment="content">
@@ -30,11 +27,13 @@
 			<a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
 		</li>
 	</ul>
+
 	<h4 class="text-center">*** 영화 등록 ***</h4>
+
 	<form id="frm" class="container" th:action="@{/admin/insert}" method="post" th:object="${movie}">
 		<div class="mb-3">
-			<label for="title" class="form-label">영화 제목</label>
-			<input id="title" type="text" class="form-control" th:field="*{movieTitle}">
+			<label for="movieTitle" class="form-label">영화 제목</label>
+			<input id="movieTitle" type="text" class="form-control" th:field="*{movieTitle}">
 		</div>
 
 		<div class="mb-3">
@@ -53,7 +52,13 @@
 			</select>
 		</div>
 
-		<button type="submit" class="btn btn-primary">저장</button>
+		<div class="mb-3">
+			<label for="goodPointAvg" class="form-label"></label>
+			<input id="goodPointAvg" type="hidden" class="form-control" th:field="*{goodPointAvg}" readonly>
+		</div>
+
+
+		<button type="button" class="btn btn-primary" onclick="check()">등록</button>
 		<button type="reset" class="btn btn-secondary">초기화</button>
 
 		<div class="text-end">
