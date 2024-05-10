@@ -4,9 +4,12 @@ import com.example.movie.constant.SeatCoordinates;
 import com.example.movie.dto.LocationDto;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.SeatDto;
+import com.example.movie.dto.TicketDto;
 import com.example.movie.service.BookService;
 import com.example.movie.service.LocationService;
 import com.example.movie.service.MovieService;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -57,9 +60,6 @@ public class BookController {
             @RequestParam("location") Long locationNo,
             @RequestParam("date") LocalDate date,
             HttpSession session){
-        log.info(String.valueOf(movieNo));
-        log.info(String.valueOf(locationNo));
-        log.info(String.valueOf(date));
         session.setAttribute("movieNo", movieNo);
         session.setAttribute("locationNo", locationNo);
         session.setAttribute("date", date);
@@ -73,23 +73,15 @@ public class BookController {
         Long locationNo = (Long) session.getAttribute("locationNo");
         LocalDate date = (LocalDate) session.getAttribute("date");
 
-        log.info("===============================");
-        log.info("===============================");
-        log.info("===============================");
-        log.info(String.valueOf(movieNo));
-        log.info(String.valueOf(locationNo));
-        log.info(String.valueOf(date));
         model.addAttribute("movieNo", movieNo);
         model.addAttribute("locationNo", locationNo);
         model.addAttribute("date", date);
 
+//        List<SeatDto> seatDtoList = bookService.findSeatByMovieLocationAndDate(movieNo, locationNo, date); JPQL 사용전
+//        log.info("==============2====================");
+//        log.info(seatDtoList.toString());
 
-
-//        List<SeatDto> seatDtoList =bookService.findAllSeat();
-
-
-        List<SeatDto> seatDtoList = bookService.findSeatByMovieLocationAndDate(movieNo, locationNo, date);
-        log.info(seatDtoList.toString());
+        List<SeatDto> seatDtoList = bookService.searchSeatByMovieLocationAndDate(movieNo, locationNo, date);
 
         int numRows = 6;
         int numColumns = 8;
@@ -100,4 +92,18 @@ public class BookController {
         model.addAttribute("seats", seats);
         return "/book/select_seat";
     }
+
+    @PostMapping("/seat")
+    public String selectSeat(@RequestParam("movieNo") Long movieNo,
+                             @RequestParam("locationNo") Long locationNo,
+                             @RequestParam("date") LocalDate date,
+                             @RequestParam("selectedSeats") String selectedSeats){
+
+        log.info(String.valueOf(movieNo));
+
+        bookService.ticketBookService(movieNo, locationNo, date, selectedSeats);
+
+        return "redirect:/cnema";
+    }
+
 }
