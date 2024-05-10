@@ -14,6 +14,8 @@ public class SecurityConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+//    비밀번호 해시화
+
     @Bean           //    @Bean 은 클래스 인스턴스이다
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -26,11 +28,11 @@ public class SecurityConfig {
 
                 .formLogin((form)->form
                         .loginPage("/user/login")
-                        .loginProcessingUrl("/login")
+                        .loginProcessingUrl("/login"))
 //                        자동으로 시큐리티가 잡아채서 해결함으로써 getMapping 이 필요없다
 //                        .usernameParameter("email")
 //                        이메일로 로그인하는 방법은 여기 설정해주고 인터페이스에 쿼리메서드를 생성하여 서비스에서 끌어오는 방법?
-                        .defaultSuccessUrl("/articles/paging",true))
+//                        .defaultSuccessUrl("/articles/paging",true))
                 .logout((out)->out
                         .logoutSuccessUrl("/")
                         .logoutUrl("/logout"))

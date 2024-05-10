@@ -47,6 +47,10 @@ function check() {
         document.getElementById("email").focus();
         return false;
     }
+    if (!email.includes('@')) {
+            alert("이메일 형식이 올바르지 않습니다.");
+            return false;
+        }
     alert("입력이 완료되었습니다.");
     document.getElementById("frm").submit();
     return true;

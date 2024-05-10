@@ -56,9 +56,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void delete(Long id) {
-        userRepository.deleteById(id);
-    }
+//    public void delete(Long id) {
+//        userRepository.deleteById(id);
+//    }
 
     public List<User> findAllEm() {
         List<User> userList = em.createQuery("SELECT m FROM User m",User.class).getResultList();
@@ -90,5 +90,12 @@ public class UserService {
             user.setUserRole(UserRole.USER);
         }
         em.persist(user);
+    }
+
+
+    @Transactional
+    public void delete(Long id) {
+        User user = em.find(User.class,id);
+        em.remove(user);
     }
 }
