@@ -40,8 +40,28 @@ public class BoardController {
     }
 
     @PostMapping("board_insert")
-    public String boardInsert(@ModelAttribute("boardDto")BoardDto dto) {
-        boardService.boardInsert(dto);
+    public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
+        boardService.insert(dto);
+        return "redirect:/board/board_view";
+    }
+
+    @GetMapping("update")
+    public String showBoardUpdateForm(@RequestParam("updateId")Long id,
+                              Model model) {
+        BoardDto boardDto = boardService.getOneBoard(id);
+        model.addAttribute("boardDto", boardDto);
+        return "board/board_update";
+    }
+
+    @PostMapping("update")
+    public String boardUpdateView(@ModelAttribute("boardDto")BoardDto boardDto) {
+        boardService.update(boardDto);
+        return "redirect:/board/board_view";
+    }
+
+    @PostMapping("/delete/{deleteId}")
+    public String deleteBoard(@PathVariable("deleteId")Long id) {
+        boardService.delete(id);
         return "redirect:/board/board_view";
     }
 }
