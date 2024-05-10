@@ -41,6 +41,8 @@
             <br>
             <select id="date" name="date" class="select">
                 <option disabled selected value="">날짜를 선택해주세요</option>
+                <option th:value="2024-05-09">2024-05-09</option>
+
                 <option th:each="date : ${dateList}"
                         th:value="${date}"
                         th:text="${#temporals.format(date, 'yyyy-MM-dd')}">

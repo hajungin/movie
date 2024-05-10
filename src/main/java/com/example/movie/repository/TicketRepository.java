@@ -12,8 +12,4 @@ import java.util.List;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
-    @Query("SELECT t FROM Ticket t WHERE t.movies.movieNo = :movieNo AND t.location.locationNo = :locationNo AND t.bookDate = :date")
-    List<Ticket> searchMovieNoAndLocationNoAndDate(@Param("movieNo") Long movieNo,
-                                                   @Param("locationNo") Long locationNo,
-                                                   @Param("date") LocalDate date);
 }
