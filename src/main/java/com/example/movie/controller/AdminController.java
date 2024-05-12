@@ -1,10 +1,15 @@
 package com.example.movie.controller;
 
+import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
+import com.example.movie.dto.TicketDto;
 import com.example.movie.dto.UserDto;
+import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
 import com.example.movie.entity.User;
+import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
+import com.example.movie.service.TicketService;
 import com.example.movie.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
@@ -35,10 +40,14 @@ public class AdminController {
     private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
+    private final TicketService ticketService;
+    private final BoardService boardService;
 
-    public AdminController(UserService userService, MovieService movieService) {
+    public AdminController(UserService userService, MovieService movieService, TicketService ticketService, BoardService boardService) {
         this.userService = userService;
         this.movieService = movieService;
+        this.ticketService = ticketService;
+        this.boardService = boardService;
     }
 
     @GetMapping("")
@@ -81,6 +90,7 @@ public class AdminController {
 //    관리자페이지 회원삭제
     public String delete(@PathVariable("deleteId")Long id){
 //        userService.delete(id);
+//        테이블이 foreign key 로 연결되어 있어 엔티티 매니저를 사용하여 삭제
         userService.delete(id);
         return "redirect:/admin/user";
     }
@@ -127,6 +137,26 @@ public class AdminController {
     public String insertMovie(@ModelAttribute("movie")MoviesDto dto){
         movieService.insert(dto);
         return "redirect:/admin/movie";
+    }
+
+    @GetMapping("ticket")
+    public String ticket(Model model){
+        List<TicketDto> ticketDtoList = ticketService.findAll();
+        log.info(ticketDtoList.toString());
+        model.addAttribute("ticket",ticketDtoList);
+        return "admin/ticket";
+    }
+
+    @GetMapping("board")
+    public String board(Model model){
+//        List<BoardDto> boardDtoList = boardService.findAll();
+//        log.info("========="+boardDtoList.toString());
+//        model.addAttribute("board",boardDtoList);
+
+        List<Board> boardDtoListt = boardService.findAllem();
+        log.info(boardDtoListt.toString());
+        model.addAttribute("board",boardDtoListt);
+        return "admin/board";
     }
 
 

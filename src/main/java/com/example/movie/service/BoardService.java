@@ -1,10 +1,11 @@
 package com.example.movie.service;
 
 import com.example.movie.dto.BoardDto;
-import com.example.movie.dto.MoviesDto;
 import com.example.movie.entity.Board;
-import com.example.movie.entity.Movies;
 import com.example.movie.repository.BoardRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -59,5 +60,22 @@ public class BoardService {
 
     public void delete(Long id) {
         boardRepository.deleteById(id);
+    }
+
+    public List<BoardDto> findAll() {
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        return boardRepository.findAll()
+                .stream()
+                .map(x->BoardDto.fromBoardEntity(x))
+                .toList();
+    }
+
+    @Autowired
+    EntityManager em;
+    public List<Board> findAllem() {
+        String sql = "SELECT b FROM Board b";
+        Query query = em.createQuery(sql);
+        List<Board> boardList = query.getResultList();
+        return boardList;
     }
 }

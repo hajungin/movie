@@ -17,6 +17,7 @@ public class Movies {
     //영화 movie_no(pk), movie_title, movie_date(개봉일), movie_price, movie_rate, good_point_avg
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서 나중에 AUTO로 전환
+    @Column(name = "movie_no")
     private Long movieNo;
 
     @Column(name = "movie_title", nullable = false)

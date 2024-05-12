@@ -15,6 +15,8 @@ public class BoardDto {
     private String content;
     private Long movieNo;
     private Long userId;
+
+//    두 개 빼야됨
     private double goodPoint;
     private String movieTitle;
 

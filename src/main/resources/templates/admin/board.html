@@ -40,47 +40,29 @@
                 <a class="nav-link" th:href="@{/admin/board}">영화게시판관리</a>
             </li>
         </ul>
-    <h4 class="text-center">*** 회원관리 ***</h4>
+            <h4 class="text-center">*** 게시판 관리 ***</h4>
+
     <br>
     <div class="table-responsive">
         <table class="table table-bordered border-primary">
             <thead class="table-primary">
             <tr>
-                <th>회원번호</th>
-                <th>회원아이디</th>
-                <th>회원비밀번호</th>
-                <th>회원이름</th>
-                <th>생년월일</th>
-                <th>전화번호</th>
-                <th>이메일</th>
-                <th>등급</th>
-                <th>수정</th>
-                <th>삭제</th>
+                <th>게시판 번호</th>
+                <th>영화 </th>
+                <th>제목</th>
+                <th>내용</th>
+                <th>작성자</th>
             </tr>
             </thead>
+
             <tbody>
-            <tr th:each="user : ${user}" th:object="${user}">
-                <td th:text="*{userNo}"></td>
-                <td th:text="*{userId}"></td>
-                <td th:text="*{password1}"></td>
-                <td th:text="*{userName}"></td>
-                <td th:text="*{birth}"></td>
-                <td th:text="*{phone}"></td>
-                <td th:text="*{email}"></td>
-                <td th:text="*{userRole}"></td>
-                <td>
-                    <form th:action="@{/admin/update}" method="get">
-                        <input type="hidden" name="updateId" th:value="*{userNo}">
-                        <button type="submit" class="btn btn-primary btn-sm">수정</button>
-                    </form>
-                </td>
-                <td>
-                    <!--PathVariable 로 전달해서 삭제처리-->
-                    <form th:action="@{/admin/delete/{deleteId}(deleteId=*{userNo})}" method="post">
-                        <input type="hidden" name="deleteId" th:value="*{userNo}">
-                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
-                    </form>
-                </td>
+            <tr th:each="board : ${board}" th:object="${board}">
+<!--                <td th:text="*{boardId}"></td>-->
+<!--                <td th:text="*{movieTitle}"></td>-->
+<!--                <td th:text="*{movieNo}"</td>-->
+<!--                <td th:text="*{userNo}"></td>-->
+<!--                <td th:text="*{bookDate}"></td>-->
+<!--                <td th:text="*{seatId}"></td>-->
             </tr>
             </tbody>
         </table>
