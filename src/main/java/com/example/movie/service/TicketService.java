@@ -23,6 +23,4 @@ public class TicketService {
                 .map(x->TicketDto.fromTicketEntity(x))
                 .toList();
     }
-
-
 }
