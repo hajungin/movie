@@ -9,17 +9,20 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Map;
 
 public class PrincipalDetails implements UserDetails {
 
-    private com.example.movie.entity.User user;
+    private User user;
 
-    public PrincipalDetails(User user){
+    public PrincipalDetails(User user) {
         this.user = user;
     }
+
     public User getUser(){
         return user;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collect =  new ArrayList<>();
@@ -35,7 +38,7 @@ public class PrincipalDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return user.getUserId();
     }
 
     @Override

@@ -26,15 +26,14 @@ public class SecurityConfig {
                         .requestMatchers("/**").permitAll())
 //                        .anyRequest().authenticated())
 
-                .formLogin((form)->form
+                .formLogin(form->form
                         .loginPage("/user/login")
-                        .loginProcessingUrl("/login"))
-//                        자동으로 시큐리티가 잡아채서 해결함으로써 getMapping 이 필요없다
-//                        .usernameParameter("email")
-//                        이메일로 로그인하는 방법은 여기 설정해주고 인터페이스에 쿼리메서드를 생성하여 서비스에서 끌어오는 방법?
-//                        .defaultSuccessUrl("/articles/paging",true))
+                        .loginProcessingUrl("/user/login") //security 가 처리하는 곳
+                        .usernameParameter("userId") //userId로 세팅되어있는 걸로도 로그인을 시도하겠다.
+                        .defaultSuccessUrl("/cnema",true)) //로그인 성공했을 때 들어갈 url
+
                 .logout((out)->out
-                        .logoutSuccessUrl("/")
+                        .logoutSuccessUrl("/cnema")
                         .logoutUrl("/logout"))
                 .csrf(csrf -> csrf.disable());
 
