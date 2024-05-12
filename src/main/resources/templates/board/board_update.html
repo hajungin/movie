@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="container">
+        <form th:action="@{/board/update}" method="post" th:object="${boardDto}">
+            <div>
+                <label for="movieTitle" class="form-label">영화제목</label>
+                <input type="text" class="form-control" th:field="*{movieTitle}">
+            </div>
+
+            <div>
+                <label for="title" class="form-label">제목</label>
+                <input type="text" class="form-control" th:field="*{title}">
+            </div>
+
+            <div>
+                <label for="content" class="form-label">내용</label>
+                <input type="text" class="form-control" th:field="*{content}">
+            </div>
+
+            <div>
+                <label for="goodPoint" class="form-label">별점</label>
+                <input type="text" class="form-control" th:field="*{goodPoint}">
+            </div>
+
+            <input type="hidden" th:field="*{boardId}">
+
+            <div align="center" class="col-12">
+                <button type="submit" class="btn btn-primary">수정</button>
+                <a class="btn btn-secondary" th:href="@{/board/borad_view}">취소</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
