@@ -26,7 +26,7 @@ public class Board {
     private String content;
 
     @Column(name = "good_point",nullable = false)
-    private double goodPoint;
+    private int goodPoint;
 
     @ManyToOne
     @JoinColumn(name = "movie_no")

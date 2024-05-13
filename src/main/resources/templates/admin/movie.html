@@ -62,8 +62,8 @@
                 <td th:text="*{movieNo}"></td>
                 <td th:text="*{movieTitle}"></td>
                 <td th:text="*{#strings.substring(movieDate,0,4)} + '년' +
-                    *{#strings.substring(movieDate,4,6)} + '월' +
-                    *{#strings.substring(movieDate,6,8)} + '일'">
+                    *{#strings.substring(movieDate,5,7)} + '월' +
+                    *{#strings.substring(movieDate,8,10)} + '일'">
                 </td>
                 <td th:text="*{movieRate}"></td>
                 <td th:text="*{goodPointAvg}"></td>

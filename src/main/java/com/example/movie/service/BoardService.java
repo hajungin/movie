@@ -78,13 +78,13 @@ public class BoardService {
 //        }
 
 
-//    public List<BoardDto> findAll() {
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//        return boardRepository.findAll()
-//                .stream()
-////                .map(x->BoardDto.fromBoardEntity(x))
-//                .toList();
-//    }
+    public List<BoardDto> findAll() {
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        return boardRepository.findAll()
+                .stream()
+                .map(x->BoardDto.fromBoardEntity(x))
+                .toList();
+    }
 
     @Autowired
     EntityManager em;
@@ -97,7 +97,6 @@ public class BoardService {
 
     public Page<Board> pageList(Pageable pageable) {
         return boardRepository.findAll(pageable);
-
     }
 
     private static final int BAR_LENGTH=5;
@@ -122,4 +121,5 @@ public class BoardService {
         List<Board> movie = query.getResultList();
         return movie;
     }
+
 }
