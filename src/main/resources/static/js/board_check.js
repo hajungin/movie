@@ -1,7 +1,7 @@
 function check() {
     // 작성자
-    var userId = document.getElementById("userId").value.trim();
-    if (userId.length === 0) {
+    var userId = document.getElementById("userName").value.trim();
+    if (userName.length === 0) {
         alert("작성자를 입력하세요.");
         return false;
     }
