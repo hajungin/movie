@@ -88,7 +88,7 @@ public class AdminController {
         return "redirect:/admin/user";
     }
 
-    @PostMapping("/delete/{deleteId}")
+    @PostMapping("/delete-user/{deleteId}")
 //    관리자페이지 회원삭제
     public String delete(@PathVariable("deleteId") Long id) {
 //        userService.delete(id);
@@ -123,7 +123,7 @@ public class AdminController {
         return "redirect:/admin/movie";
     }
 
-    @PostMapping("/deleted/{deleteId}")
+    @PostMapping("/deleted-movie/{deleteId}")
 //    관리자페이지 영화삭제 화면
     public String deleteMovie(@PathVariable("deleteId") Long movieNo) {
         movieService.delete(movieNo);
@@ -160,8 +160,8 @@ public class AdminController {
         return "admin/board";
     }
 
-    @GetMapping("/deleted/{deleteId}")
-//    관리자페이지 영화삭제 화면
+    @PostMapping("/deleted-board/{deleteId}")
+//    관리자페이지 게시판삭제 화면
     public String deleteBoard(@PathVariable("deleteId") Long boardId) {
         boardService.delete(boardId);
         return "redirect:/admin/board";

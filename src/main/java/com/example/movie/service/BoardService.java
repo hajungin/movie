@@ -122,4 +122,11 @@ public class BoardService {
         return movie;
     }
 
+
+    public List<Board> title(Long movieNo) {
+        String sql = "SELECT b.title, b.content FROM Board b WHERE b.movies.movieNo =:number";
+        TypedQuery<Board> query = em.createQuery(sql, Board.class).setParameter("number",movieNo);
+        List<Board> titleList = query.getResultList();
+        return titleList;
+    }
 }

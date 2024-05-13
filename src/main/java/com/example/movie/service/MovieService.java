@@ -50,6 +50,7 @@ public class MovieService {
     public void delete(Long movieNo) {
         Movies movies = em.find(Movies.class,movieNo);
         em.remove(movies);
+//        moviesRepository.deleteById(movieNo);
     }
 
     public void update(MoviesDto moviesDto) {

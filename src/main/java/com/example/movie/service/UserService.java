@@ -93,9 +93,11 @@ public class UserService {
     }
 
 
-    @Transactional
+//    @Transactional
     public void delete(Long id) {
-        User user = em.find(User.class,id);
-        em.remove(user);
+//        User user = em.find(User.class,id);
+//        em.remove(user);
+        userRepository.deleteById(id);
+
     }
 }
