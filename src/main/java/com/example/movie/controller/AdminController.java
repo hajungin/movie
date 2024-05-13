@@ -123,7 +123,7 @@ public class AdminController {
         return "redirect:/admin/movie";
     }
 
-    @PostMapping("/deleted/{deleteId}")
+    @PostMapping("/deleted-movie/{deleteId}")
 //    관리자페이지 영화삭제 화면
     public String deleteMovie(@PathVariable("deleteId") Long movieNo) {
         movieService.delete(movieNo);
@@ -160,7 +160,7 @@ public class AdminController {
         return "admin/board";
     }
 
-    @GetMapping("/deleted/{deleteId}")
+    @PostMapping("/deleted-board/{deleteId}")
 //    관리자페이지 영화삭제 화면
     public String deleteBoard(@PathVariable("deleteId") Long boardId) {
         boardService.delete(boardId);

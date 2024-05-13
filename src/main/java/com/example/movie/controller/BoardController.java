@@ -2,9 +2,14 @@ package com.example.movie.controller;
 
 import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
+import com.example.movie.entity.Board;
 import com.example.movie.repository.BoardRepository;
 import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,14 +30,28 @@ public class BoardController {
     }
 
     @GetMapping("list")
-    public String viewAll(Model model) {
+    public String mainList(Model model,
+                           @PageableDefault(page = 0, size = 10, sort = "boardId",
+                           direction = Sort.Direction.ASC)Pageable pageable) {
+        Page<Board> boardPage = boardService.pageList(pageable);
+
+        int totalPage = boardPage.getTotalPages();
+        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
+                pageable.getPageNumber(), totalPage);
+        model.addAttribute("pagination", barNumbers);
+        model.addAttribute("paging", boardPage);
+        return "board/list";
+    }
+
+    @GetMapping("list")
+    public String mainList(Model model) {
         List<BoardDto> boardDtoList = boardService.viewAllBoard();
         model.addAttribute("boardDto", boardDtoList);
         return "board/list";
     }
 
     @GetMapping("/insert")
-    public String showBoardInsertForm(Model model) {
+    public String boardInsertForm(Model model) {
         List<MoviesDto> moviesDtoList = movieService.getAllMovies();
         model.addAttribute("moviesDtoList", moviesDtoList);
         model.addAttribute("boardDto", new BoardDto());
@@ -46,7 +65,7 @@ public class BoardController {
     }
 
     @GetMapping("update")
-    public String showBoardUpdateForm(@RequestParam("updateId") Long boardId,
+    public String boardUpdateForm(@RequestParam("updateId") Long boardId,
                                       Model model) {
         BoardDto boardDto = boardService.getOneBoard(boardId);
         List<MoviesDto> moviesDtoList = movieService.getAllMovies();
