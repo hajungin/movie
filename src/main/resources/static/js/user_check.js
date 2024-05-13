@@ -42,24 +42,28 @@ function check() {
         document.getElementById("phone").focus();
         return false;
     }
+    if (!/^\d+$/.test(phone)) {
+        alert("전화번호는 숫자만 입력해주세요.");
+        document.getElementById("phone").focus();
+        return false;
+    }
     if (email.length == 0) {
         alert("이메일이 입력되지 않았습니다.");
         document.getElementById("email").focus();
         return false;
     }
-    if (!email.includes('@')) {
-            alert("이메일 형식이 올바르지 않습니다.");
-            return false;
-        }
+    if (!/^.+@.+\..+$/.test(email)) {
+        alert("올바른 이메일 형식이 아닙니다.");
+        document.getElementById("email").focus();
+        return false;
+    }
     alert("입력이 완료되었습니다.");
     document.getElementById("frm").submit();
     return true;
 }
 
-
 function res(){
     alert("처음부터 다시 입력합니다.")
     document.getElementById("frm").reset();
     document.getElementById("userId").focus();
-
 }
