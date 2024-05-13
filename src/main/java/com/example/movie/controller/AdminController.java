@@ -144,14 +144,6 @@ public class AdminController {
     }
 
 
-    @GetMapping("ticket")
-    public String ticket(Model model) {
-        List<TicketDto> ticketDtoList = ticketService.findAll();
-        log.info(ticketDtoList.toString());
-        model.addAttribute("ticket", ticketDtoList);
-        return "admin/ticket";
-    }
-
 
     @GetMapping("board")
     public String board(Model model,
