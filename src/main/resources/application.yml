@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8090
 
 #MySQL 연결하기
 spring:
@@ -9,16 +9,16 @@ spring:
     username: root
     password: 1111
 
-#  sql:
-#    init:
-#      mode: always
+  sql:
+    init:
+      mode: always
 
 
   jpa:
     defer-datasource-initialization: true
     hibernate:
 
-      ddl-auto: validate
+      ddl-auto: create
 
     properties:
       hibernate:

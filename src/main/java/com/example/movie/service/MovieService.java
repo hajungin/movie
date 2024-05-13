@@ -1,7 +1,9 @@
 package com.example.movie.service;
 
 import com.example.movie.dto.MoviesDto;
+import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
+import com.example.movie.repository.BoardRepository;
 import com.example.movie.repository.MoviesRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,11 @@ public class MovieService {
     EntityManager em;
     
     private final MoviesRepository moviesRepository;
+    private final BoardRepository boardRepository;
 
-    public MovieService(MoviesRepository moviesRepository) {
+    public MovieService(MoviesRepository moviesRepository, BoardRepository boardRepository) {
         this.moviesRepository = moviesRepository;
+        this.boardRepository = boardRepository;
     }
 
     public List<MoviesDto> findAll() {
@@ -31,6 +35,8 @@ public class MovieService {
 
     public List<Movies> findAllEm(){
         List<Movies> moviesList = em.createQuery("SELECT m FROM Movies m", Movies.class).getResultList();
+//        Long result = em.createQuery("SELECT AVG(b.good_point) Board b", Long.class);
+//        moviesList.set(boardList.)
         return moviesList;
     }
 
