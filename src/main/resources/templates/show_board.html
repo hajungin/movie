@@ -9,7 +9,24 @@
 </head>
 <body>
 <div class="content" layout:fragment="content">
+<h4>*** 관람 후기 ***</h4>
+    <div class="table-responsive">
+        <table class="table table-bordered border-primary">
+            <thead class="table-primary">
+            <tr>
+                <th>제목</th>
+                <th>내용</th>
+            </tr>
+            </thead>
 
+            <tbody>
+            <tr th:each="board : ${board}" th:object="${board}">
+                <td th:text="*{title}"></td>
+                <td th:text="*{content}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 </body>
 </html>
