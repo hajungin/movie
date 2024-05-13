@@ -67,6 +67,7 @@ public class MovieService {
             ticket.setMovies(null);
         }
         em.remove(movies);
+//        moviesRepository.deleteById(movieNo);
     }
 
 

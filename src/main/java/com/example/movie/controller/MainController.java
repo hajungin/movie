@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -42,9 +43,11 @@ public class MainController {
     }
 
     @GetMapping("board")
-    public String board(Model model){
-        List<BoardDto> boardDtoList = boardService.findAll();
-        model.addAttribute("board",boardDtoList);
+    public String board(@RequestParam("movieNo")Long movieNo,
+                        Model model){
+        List<Board> boardList = boardService.title(movieNo);
+
+        model.addAttribute("board",boardList);
         return "show_board";
     }
 }
