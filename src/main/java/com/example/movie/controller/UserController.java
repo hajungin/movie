@@ -14,10 +14,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("user")
@@ -105,11 +104,18 @@ public class UserController {
             User user = userDetails.getUser();
             Long userNo = user.getUserNo();
 
-            Ticket ticket = bookService.viewReservationDetails(userNo);
-            model.addAttribute("ticket", ticket);
+            List<Ticket> ticketList = bookService.viewReservationDetails(userNo);
+            model.addAttribute("ticketList", ticketList);
         }
         return "user/user_ticket";
     }
+    @PostMapping("/deleted/{ticketNo}")
+//    관리자페이지 영화삭제 화면
+    public String deleteMovie(@PathVariable("ticketNo") Long ticketNo) {
 
+        bookService.ticketCancel(ticketNo);
+
+        return "redirect:/user/main";
+    }
 
 }

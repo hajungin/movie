@@ -113,7 +113,6 @@ public class BookController {
             User user = userDetails.getUser();
             Long userNo = user.getUserNo();
             bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats);
-
         }
 
         return "redirect:/cnema";

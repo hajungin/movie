@@ -24,22 +24,35 @@
         </ul>
 
         <body>
-        <h1>티켓 정보</h1>
-        <div th:if="${ticket != null}">
-            <p>TicketNo: <span th:text="${ticket.ticketNo}"></span></p>
-            <p>영화: <span th:text="${ticket.movies.movieTitle}"></span></p>
-            <p>지점: <span th:text="${ticket.location.locationName}"></span></p>
-            <p>예매 날짜: <span th:text="${ticket.bookDate}"></span></p>
-            <p>좌석:</p>
-            <h1>좌석 정보</h1>
-            <div th:each="seat : ${ticket.seatList}">
-                <p>Seat: <span th:text="${seat.getRowLabel()} + ${seat.seatColumnNo}"></span></p>
+        <div th:if="${ticketList != null}">
+            <div th:each="ticket : ${ticketList}">
+                <h1>================================================</h1>
+                <h1>티켓 정보</h1>
+                <p>TicketNo: <span th:text="${ticket.ticketNo}"></span></p>
+                <p>영화: <span th:text="${ticket.movies.movieTitle}"></span></p>
+                <p>지점: <span th:text="${ticket.location.locationName}"></span></p>
+                <p>예매 날짜: <span th:text="${ticket.bookDate}"></span></p>
+                <p>좌석:</p>
+                <h1>좌석 정보</h1>
+                <div th:each="seat : ${ticket.seatList}">
+                    <p>Seat: <span th:text="${seat.getRowLabel()} + ${seat.seatColumnNo}"></span></p>
+                </div>
+
+                <form th:action="@{/user/deleted/{ticketNo}(ticketNo=${ticket.ticketNo})}" method="post">
+                <input type="hidden" name="ticketNo" th:value="${ticket.ticketNo}">
+                <button type="submit" class="btn btn-danger btn-sm">예매 취소</button>
+                </form>
+
             </div>
         </div>
-        <div th:if="${ticket == null}">
+
+
+        <div th:if="${ticketList == null}">
             <p>예매 정보가 없습니다.</p>
         </div>
         </body>
+
+
     </div>
 </div>
 </body>
