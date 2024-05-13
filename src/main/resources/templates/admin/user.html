@@ -76,7 +76,7 @@
                 </td>
                 <td>
                     <!--PathVariable 로 전달해서 삭제처리-->
-                    <form th:action="@{/admin/delete/{deleteId}(deleteId=*{userNo})}" method="post">
+                    <form th:action="@{/admin/delete-user/{deleteId}(deleteId=*{userNo})}" method="post">
                         <input type="hidden" name="deleteId" th:value="*{userNo}">
                         <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                     </form>

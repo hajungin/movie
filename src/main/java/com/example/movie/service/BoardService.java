@@ -64,8 +64,12 @@ public class BoardService {
     }
 
 
+    @Transactional
     public void delete(Long id) {
-        boardRepository.deleteById(id);
+        Board board = em.find(Board.class, id);
+        board.setMovies(null);
+        board.setUser(null);
+        em.remove(board);
     }
 
 //        public void delete(Long id) {
