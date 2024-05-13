@@ -26,8 +26,8 @@ public class BoardController {
 
     @GetMapping("board_view")
     public String viewAll(Model model) {
-        List<BoardDto> boardDtoList = boardService.viewAllBoard();
-        model.addAttribute("boardDto", boardDtoList);
+//        List<BoardDto> boardDtoList = boardService.viewAllBoard();
+//        model.addAttribute("boardDto", boardDtoList);
         return "board/board_view";
     }
 
@@ -48,8 +48,8 @@ public class BoardController {
     @GetMapping("update")
     public String showBoardUpdateForm(@RequestParam("updateId")Long id,
                               Model model) {
-        BoardDto boardDto = boardService.getOneBoard(id);
-        model.addAttribute("boardDto", boardDto);
+//        BoardDto boardDto = boardService.getOneBoard(id);
+//        model.addAttribute("boardDto", boardDto);
         return "board/board_update";
     }
 

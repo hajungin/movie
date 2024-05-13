@@ -57,12 +57,11 @@
 
             <tbody>
             <tr th:each="board : ${board}" th:object="${board}">
-<!--                <td th:text="*{boardId}"></td>-->
-<!--                <td th:text="*{movieTitle}"></td>-->
-<!--                <td th:text="*{movieNo}"</td>-->
-<!--                <td th:text="*{userNo}"></td>-->
-<!--                <td th:text="*{bookDate}"></td>-->
-<!--                <td th:text="*{seatId}"></td>-->
+                <td th:text="*{boardId}"></td>
+                <td th:text="*{movies.movieTitle}"></td>
+                <td th:text="*{title}"></td>
+                <td th:text="*{content}"></td>
+                <td th:text="*{user.userName}"></td>
             </tr>
             </tbody>
         </table>
