@@ -72,12 +72,12 @@ public class BookService {
     }
 
     @Transactional
-    public Ticket viewReservationDetails(Long userNo){
+    public List<Ticket> viewReservationDetails(Long userNo){
 
         String sql = "SELECT t FROM Ticket t WHERE t.user.userNo = :userNo";
         TypedQuery<Ticket> query = em.createQuery(sql, Ticket.class)
                 .setParameter("userNo", userNo);
-        Ticket ticketInformation = query.getSingleResult();
+        List<Ticket> ticketInformation = query.getResultList();
 
         return ticketInformation;
     }
@@ -88,6 +88,12 @@ public class BookService {
         TypedQuery<Ticket> query = em.createQuery(sql, Ticket.class);
         List<Ticket> ticketList = query.getResultList();
         return ticketList;
+    }
+
+    @Transactional
+    public void ticketCancel(Long ticketNo){
+        Ticket ticket = em.find(Ticket.class, ticketNo);
+        em.remove(ticket);
     }
 
 
