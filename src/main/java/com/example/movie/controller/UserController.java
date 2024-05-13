@@ -107,9 +107,7 @@ public class UserController {
 
             Ticket ticket = bookService.viewReservationDetails(userNo);
             model.addAttribute("ticket", ticket);
-
         }
-
         return "user/user_ticket";
     }
 
