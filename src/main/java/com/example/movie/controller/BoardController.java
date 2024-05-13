@@ -46,9 +46,9 @@ public class BoardController {
     }
 
     @GetMapping("update")
-    public String showBoardUpdateForm(@RequestParam("updateId") Long id,
+    public String showBoardUpdateForm(@RequestParam("updateId") Long boardId,
                                       Model model) {
-        BoardDto boardDto = boardService.getOneBoard(id);
+        BoardDto boardDto = boardService.getOneBoard(boardId);
         List<MoviesDto> moviesDtoList = movieService.getAllMovies();
         model.addAttribute("boardDto", boardDto);
         model.addAttribute("moviesDtoList", moviesDtoList);
