@@ -48,22 +48,28 @@
             <thead class="table-primary">
             <tr>
                 <th>ticket 번호</th>
-                <th>지점</th>
+                <th>User 이름</th>
                 <th>영화 제목</th>
-                <th>이름</th>
+                <th>지점</th>
                 <th>예매 날짜</th>
                 <th>좌석 번호</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr th:each="ticket : ${ticket}" th:object="${ticket}">
-                <td th:text="*{ticketNo}"></td>
-                <td th:text="*{locationNo}"></td>
-                <td th:text="*{movieNo}"</td>
-                <td th:text="*{userNo}"></td>
-                <td th:text="*{bookDate}"></td>
-                <td th:text="*{seatId}"></td>
+            <tr th:each="ticket : ${ticketList}">
+                <td th:text="${ticket.ticketNo}"></td>
+                <td th:text="${ticket.user.userId}"></td>
+                <td th:text="${ticket.movies.movieTitle}"></td>
+                <td th:text="${ticket.location.locationName}"></td>
+                <td th:text="${ticket.bookDate}"></td>
+                <td>
+                    <!-- Iterate over seatList for each ticket -->
+                    <div th:each="seat : ${ticket.seatList}">
+                        <span th:text="${seat.getRowLabel()} + ${seat.seatColumnNo}"></span>
+                        <br/> <!-- Optional: Add line break for each seat -->
+                    </div>
+                </td>
             </tr>
             </tbody>
         </table>

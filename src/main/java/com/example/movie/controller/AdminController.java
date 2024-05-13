@@ -1,35 +1,27 @@
 package com.example.movie.controller;
 
-import com.example.movie.dto.BoardDto;
+import com.example.movie.config.PrincipalDetails;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.TicketDto;
 import com.example.movie.dto.UserDto;
 import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
+import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
 import com.example.movie.service.BoardService;
+import com.example.movie.service.BookService;
 import com.example.movie.service.MovieService;
-import com.example.movie.service.TicketService;
 import com.example.movie.service.UserService;
 import jakarta.persistence.EntityManager;
-import jakarta.validation.Valid;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.File;
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @Slf4j
@@ -40,14 +32,14 @@ public class AdminController {
     private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
-    private final TicketService ticketService;
     private final BoardService boardService;
+    private final BookService bookService;
 
-    public AdminController(UserService userService, MovieService movieService, TicketService ticketService, BoardService boardService) {
+    public AdminController(UserService userService, MovieService movieService, BoardService boardService, BookService bookService) {
         this.userService = userService;
         this.movieService = movieService;
-        this.ticketService = ticketService;
         this.boardService = boardService;
+        this.bookService = bookService;
     }
 
     @GetMapping("")
@@ -139,14 +131,6 @@ public class AdminController {
         return "redirect:/admin/movie";
     }
 
-    @GetMapping("ticket")
-    public String ticket(Model model){
-        List<TicketDto> ticketDtoList = ticketService.findAll();
-        log.info(ticketDtoList.toString());
-        model.addAttribute("ticket",ticketDtoList);
-        return "admin/ticket";
-    }
-
     @GetMapping("board")
     public String board(Model model){
 //        List<BoardDto> boardDtoList = boardService.findAll();
@@ -158,6 +142,17 @@ public class AdminController {
         model.addAttribute("board",boardDtoListt);
         return "admin/board";
     }
+
+    //티켓 관리 페이지
+    @GetMapping("ticket")
+    public String ticket(Model model){
+
+        List<Ticket> ticketList = bookService.viewTicketList();
+        model.addAttribute("ticketList", ticketList);
+
+        return "admin/ticket";
+    }
+
 
 
 }
