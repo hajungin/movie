@@ -53,6 +53,7 @@
                     <th>지점</th>
                     <th>예매 날짜</th>
                     <th>좌석 번호</th>
+                    <th>삭제</th>
                 </tr>
                 </thead>
 
@@ -69,6 +70,12 @@
                             <span th:text="${seat.getRowLabel()} + ${seat.seatColumnNo}"></span>
                             <br/> <!-- Optional: Add line break for each seat -->
                         </div>
+                    </td>
+                    <td>
+                        <form th:action="@{/admin/deleted-book/{ticketNo}(ticketNo=${ticket.ticketNo})}" method="post">
+                            <input type="hidden" name="ticketNo" th:value="${ticket.ticketNo}">
+                            <button type="submit" class="btn btn-danger btn-sm">예매 취소</button>
+                        </form>
                     </td>
                 </tr>
                 </tbody>
