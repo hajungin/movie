@@ -66,7 +66,7 @@
                 <td th:text="*{user.userName}"></td>
                 <td th:text="*{goodPoint}+'점'"></td>
                 <td>
-                    <form th:action="@{/admin/deleted/{deleteId}(deleteId=*{boardId})}" method="post">
+                    <form th:action="@{/admin/deleted-board/{deleteId}(deleteId=*{boardId})}" method="post">
                         <input type="hidden" name="deleteId" th:value="*{boardId}">
                         <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                     </form>

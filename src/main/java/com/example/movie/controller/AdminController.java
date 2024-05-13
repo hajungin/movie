@@ -6,8 +6,10 @@ import com.example.movie.dto.TicketDto;
 import com.example.movie.dto.UserDto;
 import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
+import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
 import com.example.movie.service.BoardService;
+import com.example.movie.service.BookService;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
 import jakarta.persistence.EntityManager;
@@ -44,11 +46,13 @@ public class AdminController {
     private final UserService userService;
     private final MovieService movieService;
     private final BoardService boardService;
+    private final BookService bookService;
 
-    public AdminController(UserService userService, MovieService movieService,  BoardService boardService) {
+    public AdminController(UserService userService, MovieService movieService, BoardService boardService, BookService bookService) {
         this.userService = userService;
         this.movieService = movieService;
         this.boardService = boardService;
+        this.bookService = bookService;
     }
 
     @GetMapping("")
@@ -88,7 +92,7 @@ public class AdminController {
         return "redirect:/admin/user";
     }
 
-    @PostMapping("/delete/{deleteId}")
+    @PostMapping("/delete-user/{deleteId}")
 //    관리자페이지 회원삭제
     public String delete(@PathVariable("deleteId") Long id) {
 //        userService.delete(id);
@@ -123,7 +127,7 @@ public class AdminController {
         return "redirect:/admin/movie";
     }
 
-    @PostMapping("/deleted/{deleteId}")
+    @PostMapping("/deleted-movie/{deleteId}")
 //    관리자페이지 영화삭제 화면
     public String deleteMovie(@PathVariable("deleteId") Long movieNo) {
         movieService.delete(movieNo);
@@ -160,12 +164,27 @@ public class AdminController {
         return "admin/board";
     }
 
-    @GetMapping("/deleted/{deleteId}")
-//    관리자페이지 영화삭제 화면
+    @PostMapping("/deleted-board/{deleteId}")
     public String deleteBoard(@PathVariable("deleteId") Long boardId) {
         boardService.delete(boardId);
         return "redirect:/admin/board";
     }
+
+    @GetMapping("ticket")
+    public String ticket(Model model) {
+        List<Ticket> ticketDtoList = bookService.viewTicketList();
+        model.addAttribute("ticketList", ticketDtoList);
+        return "admin/ticket";
+    }
+
+    @PostMapping("/deleted-book/{ticketNo}")
+    public String deleteTicket(@PathVariable("ticketNo") Long ticketNo) {
+
+        bookService.ticketCancel(ticketNo);
+
+        return "redirect:/admin/ticket";
+    }
+
 
 
 }
