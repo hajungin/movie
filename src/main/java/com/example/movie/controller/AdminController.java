@@ -55,16 +55,16 @@ public class AdminController {
 
     @GetMapping("")
 //    관리자 페이지 메인 화면
-    public String adminView(){
+    public String adminView() {
         return "admin/main";
     }
 
     @GetMapping("user")
 //    관리자페이지 회원관리 화면
-    public String userView(Model model){
+    public String userView(Model model) {
         //        레포지토리 사용
         List<UserDto> userDtoList = userService.findAll();
-        model.addAttribute("user",userDtoList);
+        model.addAttribute("user", userDtoList);
 
 //        엔티티 매니저 사용
 //        List<User> userList = userService.findAllEm();
@@ -74,24 +74,25 @@ public class AdminController {
 
     @GetMapping("update")
 //    관리자페이지 회원 수정화면
-    public String updateView(@RequestParam("updateId")Long userNo,
-                             Model model){
+    public String updateView(@RequestParam("updateId") Long userNo,
+                             Model model) {
         UserDto userDto = userService.getOneUser(userNo);
-        model.addAttribute("userDto",userDto);
+        model.addAttribute("userDto", userDto);
 
 //        User user = userService.getOneUserEm(userNo);
 //        model.addAttribute("userDto",user);
         return "admin/user_update";
     }
+
     @PostMapping("update")
-    public String updateView(@ModelAttribute("userDto") UserDto userDto){
+    public String updateView(@ModelAttribute("userDto") UserDto userDto) {
         userService.update(userDto);
         return "redirect:/admin/user";
     }
 
     @PostMapping("/delete/{deleteId}")
 //    관리자페이지 회원삭제
-    public String delete(@PathVariable("deleteId")Long id){
+    public String delete(@PathVariable("deleteId") Long id) {
 //        userService.delete(id);
 //        테이블이 foreign key 로 연결되어 있어 엔티티 매니저를 사용하여 삭제
         userService.delete(id);
@@ -110,43 +111,45 @@ public class AdminController {
 
     @GetMapping("movie_update")
 //    관리자페이지 영화수정 화면
-    public String movieUpdateView(@RequestParam("updateId")Long movieNo,
-                             Model model){
+    public String movieUpdateView(@RequestParam("updateId") Long movieNo,
+                                  Model model) {
 
         MoviesDto moviesDto = movieService.getOneMovie(movieNo);
-        model.addAttribute("movie",moviesDto);
+        model.addAttribute("movie", moviesDto);
         return "admin/movie_update";
     }
+
     @PostMapping("movie_update")
-    public String movieUpdateView(@ModelAttribute("moviesDto") MoviesDto moviesDto){
+    public String movieUpdateView(@ModelAttribute("moviesDto") MoviesDto moviesDto) {
         movieService.update(moviesDto);
         return "redirect:/admin/movie";
     }
 
     @PostMapping("/deleted/{deleteId}")
 //    관리자페이지 영화삭제 화면
-    public String deleteMovie(@PathVariable("deleteId")Long movieNo){
+    public String deleteMovie(@PathVariable("deleteId") Long movieNo) {
         movieService.delete(movieNo);
         return "redirect:/admin/movie";
     }
 
     @GetMapping("insert")
 //    관리자페이지 영화 등록 화면
-    public String insertMovie(Model model){
+    public String insertMovie(Model model) {
         model.addAttribute("movie", new MoviesDto());
         return "admin/movie_insert";
     }
+
     @PostMapping("insert")
-    public String insertMovie(@ModelAttribute("movie")MoviesDto dto){
+    public String insertMovie(@ModelAttribute("movie") MoviesDto dto) {
         movieService.insert(dto);
         return "redirect:/admin/movie";
     }
 
     @GetMapping("ticket")
-    public String ticket(Model model){
+    public String ticket(Model model) {
         List<TicketDto> ticketDtoList = ticketService.findAll();
         log.info(ticketDtoList.toString());
-        model.addAttribute("ticket",ticketDtoList);
+        model.addAttribute("ticket", ticketDtoList);
         return "admin/ticket";
     }
 
