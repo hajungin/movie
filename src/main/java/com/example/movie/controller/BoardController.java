@@ -24,44 +24,46 @@ public class BoardController {
         this.movieService = movieService;
     }
 
-    @GetMapping("board_view")
+    @GetMapping("list")
     public String viewAll(Model model) {
         List<BoardDto> boardDtoList = boardService.viewAllBoard();
         model.addAttribute("boardDto", boardDtoList);
-        return "board/board_view";
+        return "board/list";
     }
 
-    @GetMapping("/board_insert")
+    @GetMapping("/insert")
     public String showBoardInsertForm(Model model) {
         List<MoviesDto> moviesDtoList = movieService.getAllMovies();
         model.addAttribute("moviesDtoList", moviesDtoList);
         model.addAttribute("boardDto", new BoardDto());
-        return "board/board_insert";
+        return "board/insert";
     }
 
-    @PostMapping("board_insert")
+    @PostMapping("insert")
     public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
         boardService.insert(dto);
-        return "redirect:/board/board_view";
+        return "redirect:/board/list";
     }
 
     @GetMapping("update")
-    public String showBoardUpdateForm(@RequestParam("updateId")Long id,
-                              Model model) {
+    public String showBoardUpdateForm(@RequestParam("updateId") Long id,
+                                      Model model) {
         BoardDto boardDto = boardService.getOneBoard(id);
+        List<MoviesDto> moviesDtoList = movieService.getAllMovies();
         model.addAttribute("boardDto", boardDto);
-        return "board/board_update";
+        model.addAttribute("moviesDtoList", moviesDtoList);
+        return "board/update";
     }
 
     @PostMapping("update")
     public String boardUpdateView(@ModelAttribute("boardDto")BoardDto boardDto) {
         boardService.update(boardDto);
-        return "redirect:/board/board_view";
+        return "redirect:/board/list";
     }
 
     @PostMapping("/delete/{deleteId}")
     public String deleteBoard(@PathVariable("deleteId")Long id) {
         boardService.delete(id);
-        return "redirect:/board/board_view";
+        return "redirect:/board/list";
     }
 }

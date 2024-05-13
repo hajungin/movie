@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="content" layout:fragment="content">
-<form th:action="@{/board/board_insert}" method="post">
+<form th:action="@{/board/insert}" method="post">
 <!--    <div>-->
 <!--        <label for="userId">작성자</label>-->
 <!--        <input type="text" id="userId" name="userId" th:field="${boardDto.userId}">-->
@@ -44,7 +44,7 @@
     </div>
     <div align="center" class="col-12">
         <button type="submit" class="btn btn-primary">등록</button>
-        <a th:href="@{/board/board_view}">목록</a>
+        <a th:href="@{/board/list}">목록</a>
     </div>
 </form>
 </div>
