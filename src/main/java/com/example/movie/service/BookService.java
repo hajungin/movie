@@ -72,17 +72,38 @@ public class BookService {
     }
 
     @Transactional
-    public void ticketBookService(Long movieNo, Long locationNo, LocalDate date, String selectedSeats){
+    public Ticket viewReservationDetails(Long userNo){
+
+        String sql = "SELECT t FROM Ticket t WHERE t.user.userNo = :userNo";
+        TypedQuery<Ticket> query = em.createQuery(sql, Ticket.class)
+                .setParameter("userNo", userNo);
+        Ticket ticketInformation = query.getSingleResult();
+
+        return ticketInformation;
+    }
+
+    @Transactional
+    public List<Ticket> viewTicketList(){
+        String sql = "SELECT t FROM Ticket t";
+        TypedQuery<Ticket> query = em.createQuery(sql, Ticket.class);
+        List<Ticket> ticketList = query.getResultList();
+        return ticketList;
+    }
+
+
+    @Transactional
+    public void ticketBookService(Long movieNo, Long locationNo, Long userNo,LocalDate date, String selectedSeats){
 
         Movies movies = em.find(Movies.class, movieNo);
         Location location = em.find(Location.class, locationNo);
-        User user = em.find(User.class, 5L);
+        User user = em.find(User.class, userNo);
         List<SeatCoordinates> seatCoordinatesList = arrangeSeats(selectedSeats);
 
         Ticket ticket = new Ticket();
         ticket.setMovies(movies);
         ticket.setLocation(location);
         ticket.setBookDate(date);
+        ticket.setUser(user);
         ticket.setSeatList(new ArrayList<>());
 
         for (SeatCoordinates seatCoordinates : seatCoordinatesList) {
