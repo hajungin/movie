@@ -24,13 +24,13 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-//    public List<BoardDto> viewAllBoard() {
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//        return boardRepository.findAll()
-//                .stream()
-//                .map(x -> BoardDto.fromBoardEntity(x))
-//                .toList();
-//    }
+    public List<BoardDto> viewAllBoard() {
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        return boardRepository.findAll()
+                .stream()
+                .map(x -> BoardDto.fromBoardEntity(x))
+                .toList();
+    }
 
     public void insert(BoardDto dto) {
         Board board = Board.builder()
