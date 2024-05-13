@@ -82,7 +82,6 @@ public class BookService {
         return ticketInformation;
     }
 
-
     @Transactional
     public List<Ticket> viewTicketList(){
         String sql = "SELECT t FROM Ticket t";
@@ -93,17 +92,18 @@ public class BookService {
 
 
     @Transactional
-    public void ticketBookService(Long movieNo, Long locationNo, LocalDate date, String selectedSeats){
+    public void ticketBookService(Long movieNo, Long locationNo, Long userNo,LocalDate date, String selectedSeats){
 
         Movies movies = em.find(Movies.class, movieNo);
         Location location = em.find(Location.class, locationNo);
-        User user = em.find(User.class, 5L);
+        User user = em.find(User.class, userNo);
         List<SeatCoordinates> seatCoordinatesList = arrangeSeats(selectedSeats);
 
         Ticket ticket = new Ticket();
         ticket.setMovies(movies);
         ticket.setLocation(location);
         ticket.setBookDate(date);
+        ticket.setUser(user);
         ticket.setSeatList(new ArrayList<>());
 
         for (SeatCoordinates seatCoordinates : seatCoordinatesList) {
