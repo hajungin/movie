@@ -36,8 +36,4 @@ public class Board {
     @JoinColumn(name = "user_no")
     private User user;
 
-
-
-
-
 }

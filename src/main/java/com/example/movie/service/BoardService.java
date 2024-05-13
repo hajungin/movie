@@ -24,13 +24,13 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-//    public List<BoardDto> viewAllBoard() {
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//        return boardRepository.findAll()
-//                .stream()
-//                .map(x -> BoardDto.fromBoardEntity(x))
-//                .toList();
-//    }
+    public List<BoardDto> viewAllBoard() {
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        return boardRepository.findAll()
+                .stream()
+                .map(x -> BoardDto.fromBoardEntity(x))
+                .toList();
+    }
 
     public void insert(BoardDto dto) {
         Board board = Board.builder()
@@ -64,8 +64,12 @@ public class BoardService {
     }
 
 
+    @Transactional
     public void delete(Long id) {
-        boardRepository.deleteById(id);
+        Board board = em.find(Board.class, id);
+        board.setMovies(null);
+        board.setUser(null);
+        em.remove(board);
     }
 
 //        public void delete(Long id) {

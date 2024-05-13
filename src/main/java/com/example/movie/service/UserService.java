@@ -2,10 +2,14 @@ package com.example.movie.service;
 
 import com.example.movie.constant.UserRole;
 import com.example.movie.dto.UserDto;
+import com.example.movie.entity.Board;
+import com.example.movie.entity.Movies;
+import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
 import com.example.movie.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -93,11 +97,24 @@ public class UserService {
     }
 
 
-//    @Transactional
-    public void delete(Long id) {
-//        User user = em.find(User.class,id);
-//        em.remove(user);
-        userRepository.deleteById(id);
+    @Transactional
+    public void delete(Long userNo) {
+        User user = em.find(User.class, userNo);
 
+        String sql1 = "SELECT b FROM Board b WHERE b.user.userNo=:userNo";
+        TypedQuery<Board> query1 = em.createQuery(sql1, Board.class)
+                .setParameter("userNo", userNo);
+        List<Board> boardList1 = query1.getResultList();
+        for (Board board : boardList1){
+            board.setUser(null);
+        }
+        String sql2 = "SELECT t FROM Ticket t WHERE t.user.userNo=:userNo";
+        TypedQuery<Ticket> query2 = em.createQuery(sql2, Ticket.class)
+                .setParameter("userNo", userNo);
+        List<Ticket> boardList2 = query2.getResultList();
+        for (Ticket ticket : boardList2){
+            ticket.setUser(null);
+        }
+        em.remove(user);
     }
 }
