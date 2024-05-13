@@ -61,7 +61,7 @@
                        th:href="@{/admin}">관리자 페이지</a>
                     <a role="button" id="currentUser" class="btn btn-outline-primary"
                        sec:authorize="hasRole('USER')"
-                       th:href="@{/logout}">내 정보</a>
+                       th:href="@{/user/main}">내 정보</a>
 
                 </div>
             </div>
