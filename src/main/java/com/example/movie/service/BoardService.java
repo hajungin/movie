@@ -64,18 +64,18 @@ public class BoardService {
     }
 
 
-//    public void delete(Long id) {
-//        boardRepository.deleteById(id);
-//    }
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
+    }
 
-        public void delete(Long id) {
-            Board board = boardRepository.findById(id).orElse(null);
-            if (board != null) {
-                board.setMovies(null); // movies 필드를 null로 설정
-                board.setUser(null);   // user 필드를 null로 설정
-                boardRepository.deleteById(id); // board 엔티티 삭제
-            }
-        }
+//        public void delete(Long id) {
+//            Board board = boardRepository.findById(id).orElse(null);
+//            if (board != null) {
+//                board.setMovies(null); // movies 필드를 null로 설정
+//                board.setUser(null);   // user 필드를 null로 설정
+//                boardRepository.deleteById(id); // board 엔티티 삭제
+//            }
+//        }
 
 
 //    public List<BoardDto> findAll() {
