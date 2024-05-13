@@ -52,9 +52,10 @@
             </table>
         </div>
         <br>
-        <form th:action="@{/board/insert}" method="post">
-            <button type="submit" class="btn btn-primary">글 쓰기</button>
-        </form>
+<!--        <form th:href="@{/board/insert}">-->
+<!--            <button type="submit" class="btn btn-primary">글 쓰기</button>-->
+<!--        </form>-->
+        <a class="btn btn-outline-success" th:href="@{/board/insert}">글 쓰기</a>
         <br>
     </div>
 </div>

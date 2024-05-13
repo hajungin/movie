@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@RequestMapping("/board")
+@RequestMapping("board")
 public class BoardController {
     private final BoardRepository boardRepository;
     private final BoardService boardService;
@@ -29,19 +29,19 @@ public class BoardController {
         this.movieService = movieService;
     }
 
-    @GetMapping("list")
-    public String mainList(Model model,
-                           @PageableDefault(page = 0, size = 10, sort = "boardId",
-                           direction = Sort.Direction.ASC)Pageable pageable) {
-        Page<Board> boardPage = boardService.pageList(pageable);
-
-        int totalPage = boardPage.getTotalPages();
-        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
-                pageable.getPageNumber(), totalPage);
-        model.addAttribute("pagination", barNumbers);
-        model.addAttribute("paging", boardPage);
-        return "board/list";
-    }
+//    @GetMapping("list")
+//    public String mainList(Model model,
+//                           @PageableDefault(page = 0, size = 10, sort = "boardId",
+//                           direction = Sort.Direction.ASC)Pageable pageable) {
+//        Page<Board> boardPage = boardService.pageList(pageable);
+//
+//        int totalPage = boardPage.getTotalPages();
+//        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
+//                pageable.getPageNumber(), totalPage);
+//        model.addAttribute("pagination", barNumbers);
+//        model.addAttribute("paging", boardPage);
+//        return "board/list";
+//    }
 
     @GetMapping("list")
     public String mainList(Model model) {
@@ -50,7 +50,7 @@ public class BoardController {
         return "board/list";
     }
 
-    @GetMapping("/insert")
+    @GetMapping("insert")
     public String boardInsertForm(Model model) {
         List<MoviesDto> moviesDtoList = movieService.getAllMovies();
         model.addAttribute("moviesDtoList", moviesDtoList);
