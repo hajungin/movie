@@ -19,41 +19,41 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public List<BoardDto> viewAllBoard() {
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        return boardRepository.findAll()
-                .stream()
-                .map(x -> BoardDto.fromBoardEntity(x))
-                .toList();
-    }
+//    public List<BoardDto> viewAllBoard() {
+//        List<BoardDto> boardDtoList = new ArrayList<>();
+//        return boardRepository.findAll()
+//                .stream()
+//                .map(x -> BoardDto.fromBoardEntity(x))
+//                .toList();
+//    }
 
     public void insert(BoardDto dto) {
         Board board = Board.builder()
                 .boardId(dto.getBoardId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .movieNo(dto.getMovieNo())
-                .userId(dto.getUserId())
-                .goodPoint(dto.getGoodPoint())
-                .movieTitle(dto.getMovieTitle())
+//                .movies(dto.getMovieNo())
+//                .userId(dto.getUser().)
+//                .goodPoint(dto.getGoodPoint())
+//                .movieTitle(dto.getMovieTitle())
                 .build();
         boardRepository.save(board);
     }
 
-    public BoardDto getOneBoard(Long id) {
-        return boardRepository.findById(id)
-                .map(x -> BoardDto.fromBoardEntity(x))
-                .orElse(null);
-    }
+//    public BoardDto getOneBoard(Long id) {
+//        return boardRepository.findById(id)
+//                .map(x -> BoardDto.fromBoardEntity(x))
+//                .orElse(null);
+//    }
 
     public void update(BoardDto boardDto) {
         Board board = Board.builder()
                 .boardId(boardDto.getBoardId())
                 .title(boardDto.getTitle())
                 .content(boardDto.getContent())
-                .userId(boardDto.getUserId())
-                .goodPoint(boardDto.getGoodPoint())
-                .movieTitle(boardDto.getMovieTitle())
+//                .userId(boardDto.getUser())
+//                .goodPoint(boardDto.getGoodPoint())
+//                .movieTitle(boardDto.getMovieTitle())
                 .build();
         boardRepository.save(board);
     }
@@ -62,13 +62,13 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
-    public List<BoardDto> findAll() {
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        return boardRepository.findAll()
-                .stream()
-                .map(x->BoardDto.fromBoardEntity(x))
-                .toList();
-    }
+//    public List<BoardDto> findAll() {
+//        List<BoardDto> boardDtoList = new ArrayList<>();
+//        return boardRepository.findAll()
+//                .stream()
+////                .map(x->BoardDto.fromBoardEntity(x))
+//                .toList();
+//    }
 
     @Autowired
     EntityManager em;

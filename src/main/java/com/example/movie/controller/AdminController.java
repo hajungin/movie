@@ -16,6 +16,9 @@ import jakarta.validation.Valid;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
@@ -148,14 +151,16 @@ public class AdminController {
     }
 
     @GetMapping("board")
-    public String board(Model model){
+    public String board(Model model,
+                        @PageableDefault(page = 0, size = 10, sort="id",
+                        direction = Sort.Direction.DESC)Pageable pageable){
 //        List<BoardDto> boardDtoList = boardService.findAll();
 //        log.info("========="+boardDtoList.toString());
 //        model.addAttribute("board",boardDtoList);
 
-        List<Board> boardDtoListt = boardService.findAllem();
-        log.info(boardDtoListt.toString());
-        model.addAttribute("board",boardDtoListt);
+        List<Board> boardDtoList = boardService.findAllem();
+        log.info(boardDtoList.toString());
+        model.addAttribute("board",boardDtoList);
         return "admin/board";
     }
 

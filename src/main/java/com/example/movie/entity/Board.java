@@ -25,9 +25,9 @@ public class Board {
     @Column(length = 1000, nullable = false)
     private String content;
 
-//    @ManyToOne
-//    @JoinColumn(name = "movie_no")
-//    private Movies movies;
+    @ManyToOne
+    @JoinColumn(name = "movie_no")
+    private Movies movies;
 
     @ManyToOne
     @JoinColumn(name = "user_no")
@@ -36,16 +36,16 @@ public class Board {
 
 
 //    밑에 있는 거 다 빼야됨
-    @Column(name = "movie_no")
-    private Long movieNo;
+//    @Column(name = "movie_no")
+//    private Long movieNo;
 
-    @Column(name = "good_point")
-    private double goodPoint; // 별점 줄건데 소숫점까지 넣을거면 double로 수정필요
-
-    @Column(name = "movie_title")
-    private String movieTitle;
-
-    @Column(name = "user_id")
-    private Long userId;
+//    @Column(name = "good_point")
+//    private double goodPoint; // 별점 줄건데 소숫점까지 넣을거면 double로 수정필요
+//
+//    @Column(name = "movie_title")
+//    private String movieTitle;
+//
+//    @Column(name = "user_id")
+//    private Long userId;
 
 }

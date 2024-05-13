@@ -13,22 +13,22 @@ public class BoardDto {
     private Long boardId;
     private String title;
     private String content;
-    private Long movieNo;
-    private Long userId;
+    private String movieNo;
+    private String user;
 
 //    두 개 빼야됨
     private double goodPoint;
     private String movieTitle;
 
-    public static BoardDto fromBoardEntity(Board board) {
-        return new BoardDto(
-                board.getBoardId(),
-                board.getTitle(),
-                board.getContent(),
-                board.getMovieNo(),
-                board.getUserId(),
-                board.getGoodPoint(),
-                board.getMovieTitle()
-        );
-    }
+//    public static BoardDto fromBoardEntity(Board board) {
+//        return new BoardDto(
+//                board.getBoardId(),
+//                board.getTitle(),
+//                board.getContent()
+//                board.getMovies().getMovieTitle()
+//                board.getUser().getUserName()
+//                board.getGoodPoint(),
+//                board.getMovieTitle()
+//        );
+//    }
 }
