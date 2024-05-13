@@ -8,6 +8,7 @@ import com.example.movie.repository.MoviesRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +46,10 @@ public class MovieService {
                 .map(x->MoviesDto.fromMoviesEntity(x))
                 .orElse(null);
     }
-
+    @Transactional
     public void delete(Long movieNo) {
-        moviesRepository.deleteById(movieNo);
+        Movies movies = em.find(Movies.class,movieNo);
+        em.remove(movies);
     }
 
     public void update(MoviesDto moviesDto) {

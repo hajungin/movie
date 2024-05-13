@@ -13,7 +13,7 @@ public class BoardDto {
     private Long boardId;
     private String title;
     private String content;
-    private double goodPoint;
+    private int goodPoint;
     private String movieNo;
     private String user;
 

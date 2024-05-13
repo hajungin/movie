@@ -9,7 +9,6 @@ import com.example.movie.entity.Movies;
 import com.example.movie.entity.User;
 import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
-import com.example.movie.service.TicketService;
 import com.example.movie.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
@@ -44,13 +43,11 @@ public class AdminController {
     private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
-    private final TicketService ticketService;
     private final BoardService boardService;
 
-    public AdminController(UserService userService, MovieService movieService, TicketService ticketService, BoardService boardService) {
+    public AdminController(UserService userService, MovieService movieService,  BoardService boardService) {
         this.userService = userService;
         this.movieService = movieService;
-        this.ticketService = ticketService;
         this.boardService = boardService;
     }
 
@@ -144,14 +141,6 @@ public class AdminController {
     public String insertMovie(@ModelAttribute("movie") MoviesDto dto) {
         movieService.insert(dto);
         return "redirect:/admin/movie";
-    }
-
-    @GetMapping("ticket")
-    public String ticket(Model model) {
-        List<TicketDto> ticketDtoList = ticketService.findAll();
-        log.info(ticketDtoList.toString());
-        model.addAttribute("ticket", ticketDtoList);
-        return "admin/ticket";
     }
 
 

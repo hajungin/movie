@@ -64,7 +64,7 @@
                 <td th:text="*{title}"></td>
                 <td th:text="*{content}"></td>
                 <td th:text="*{user.userName}"></td>
-                <td th:text="*{}+'점'"></td>
+                <td th:text="*{goodPoint}+'점'"></td>
                 <td>
                     <form th:action="@{/admin/deleted/{deleteId}(deleteId=*{boardId})}" method="post">
                         <input type="hidden" name="deleteId" th:value="*{boardId}">
