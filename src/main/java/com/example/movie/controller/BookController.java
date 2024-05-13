@@ -1,10 +1,9 @@
 package com.example.movie.controller;
 
+import com.example.movie.config.PrincipalDetails;
 import com.example.movie.constant.SeatCoordinates;
-import com.example.movie.dto.LocationDto;
-import com.example.movie.dto.MoviesDto;
-import com.example.movie.dto.SeatDto;
-import com.example.movie.dto.TicketDto;
+import com.example.movie.dto.*;
+import com.example.movie.entity.User;
 import com.example.movie.service.BookService;
 import com.example.movie.service.LocationService;
 import com.example.movie.service.MovieService;
@@ -12,6 +11,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -100,8 +101,19 @@ public class BookController {
                              @RequestParam("selectedSeats") String selectedSeats){
 
         log.info(String.valueOf(movieNo));
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        bookService.ticketBookService(movieNo, locationNo, date, selectedSeats);
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+            bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats);
+        }
 
         return "redirect:/cnema";
     }

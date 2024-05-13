@@ -2,7 +2,9 @@ package com.example.movie.controller;
 
 import com.example.movie.config.PrincipalDetails;
 import com.example.movie.dto.UserDto;
+import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
+import com.example.movie.service.BookService;
 import com.example.movie.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
@@ -12,19 +14,20 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("user")
 @Slf4j
 public class UserController {
     private final UserService userService;
+    private final BookService bookService;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, BookService bookService) {
         this.userService = userService;
+        this.bookService = bookService;
     }
 
     @GetMapping("signup")
@@ -87,9 +90,32 @@ public class UserController {
 
 
     @GetMapping("ticket")
-    public String ticket(){
+    public String ticket(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+
+            List<Ticket> ticketList = bookService.viewReservationDetails(userNo);
+            model.addAttribute("ticketList", ticketList);
+        }
         return "user/user_ticket";
     }
+    @PostMapping("/deleted/{ticketNo}")
+//    관리자페이지 영화삭제 화면
+    public String deleteMovie(@PathVariable("ticketNo") Long ticketNo) {
 
+        bookService.ticketCancel(ticketNo);
+
+        return "redirect:/user/main";
+    }
 
 }

@@ -22,5 +22,9 @@ public class Seat {
     @JoinColumn(name = "ticketNo")
     private Ticket ticket;
 
-
+    public String getRowLabel() {
+        // Convert seatRowNo (0-based) to corresponding ASCII character
+        char rowLabel = (char) ('A' + seatRowNo);
+        return String.valueOf(rowLabel);
+    }
 }
