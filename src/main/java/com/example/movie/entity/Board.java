@@ -25,7 +25,7 @@ public class Board {
     @Column(length = 1000, nullable = false)
     private String content;
 
-    @Column(nullable = false)
+    @Column(name = "good_point",nullable = false)
     private double goodPoint;
 
     @ManyToOne

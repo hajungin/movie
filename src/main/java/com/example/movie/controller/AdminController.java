@@ -6,14 +6,17 @@ import com.example.movie.dto.TicketDto;
 import com.example.movie.dto.UserDto;
 import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
-import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
-import com.example.movie.service.*;
+import com.example.movie.service.BoardService;
+import com.example.movie.service.MovieService;
+import com.example.movie.service.TicketService;
+import com.example.movie.service.UserService;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.Valid;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -41,13 +44,13 @@ public class AdminController {
     private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
-    private final BookService bookService;
+    private final TicketService ticketService;
     private final BoardService boardService;
 
-    public AdminController(UserService userService, MovieService movieService, BookService bookService, BoardService boardService) {
+    public AdminController(UserService userService, MovieService movieService, TicketService ticketService, BoardService boardService) {
         this.userService = userService;
         this.movieService = movieService;
-        this.bookService = bookService;
+        this.ticketService = ticketService;
         this.boardService = boardService;
     }
 
@@ -143,31 +146,37 @@ public class AdminController {
         return "redirect:/admin/movie";
     }
 
+    @GetMapping("ticket")
+    public String ticket(Model model) {
+        List<TicketDto> ticketDtoList = ticketService.findAll();
+        log.info(ticketDtoList.toString());
+        model.addAttribute("ticket", ticketDtoList);
+        return "admin/ticket";
+    }
 
 
     @GetMapping("board")
     public String board(Model model,
-                        @PageableDefault(page = 0, size = 10, sort="id",
-                        direction = Sort.Direction.DESC)Pageable pageable){
-//        List<BoardDto> boardDtoList = boardService.findAll();
-//        log.info("========="+boardDtoList.toString());
-//        model.addAttribute("board",boardDtoList);
+                        @PageableDefault(page = 0, size = 10, sort = "boardId",
+                                direction = Sort.Direction.ASC) Pageable pageable) {
+        //       넘겨온 페이지 번호로 리스트 받아오기
+        Page<Board> boardPage = boardService.pageList(pageable);
 
-        List<Board> boardDtoList = boardService.findAllem();
-        log.info(boardDtoList.toString());
-        model.addAttribute("board",boardDtoList);
+        //        페이지 블럭처리
+        int totalPage = boardPage.getTotalPages();
+        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
+                pageable.getPageNumber(), totalPage);
+        model.addAttribute("pagination", barNumbers);
+        model.addAttribute("paging", boardPage);
         return "admin/board";
     }
 
-    @GetMapping("ticket")
-    public String ticket(Model model){
-
-        List<Ticket> ticketList = bookService.viewTicketList();
-        model.addAttribute("ticketList", ticketList);
-
-        return "admin/ticket";
+    @GetMapping("/deleted/{deleteId}")
+//    관리자페이지 영화삭제 화면
+    public String deleteBoard(@PathVariable("deleteId") Long boardId) {
+        boardService.delete(boardId);
+        return "redirect:/admin/board";
     }
-
 
 
 }
