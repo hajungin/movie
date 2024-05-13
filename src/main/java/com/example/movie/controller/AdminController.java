@@ -16,6 +16,7 @@ import jakarta.validation.Valid;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -153,18 +154,28 @@ public class AdminController {
         return "admin/ticket";
     }
 
+
     @GetMapping("board")
     public String board(Model model,
-                        @PageableDefault(page = 0, size = 10, sort="id",
-                        direction = Sort.Direction.DESC)Pageable pageable){
-//        List<BoardDto> boardDtoList = boardService.findAll();
-//        log.info("========="+boardDtoList.toString());
-//        model.addAttribute("board",boardDtoList);
+                        @PageableDefault(page = 0, size = 10, sort = "boardId",
+                                direction = Sort.Direction.ASC) Pageable pageable) {
+        //       넘겨온 페이지 번호로 리스트 받아오기
+        Page<Board> boardPage = boardService.pageList(pageable);
 
-        List<Board> boardDtoList = boardService.findAllem();
-        log.info(boardDtoList.toString());
-        model.addAttribute("board",boardDtoList);
+        //        페이지 블럭처리
+        int totalPage = boardPage.getTotalPages();
+        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
+                pageable.getPageNumber(), totalPage);
+        model.addAttribute("pagination", barNumbers);
+        model.addAttribute("paging", boardPage);
         return "admin/board";
+    }
+
+    @GetMapping("/deleted/{deleteId}")
+//    관리자페이지 영화삭제 화면
+    public String deleteBoard(@PathVariable("deleteId") Long boardId) {
+        boardService.delete(boardId);
+        return "redirect:/admin/board";
     }
 
 
