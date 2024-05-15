@@ -36,4 +36,9 @@ public class Board {
     @JoinColumn(name = "user_no")
     private User user;
 
+//    관람후기 페이지의 뿌릴 생성자 필요
+    public Board(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 }
