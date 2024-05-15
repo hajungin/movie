@@ -4,11 +4,71 @@
       layout:decorate="~{layouts/default_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
+    <title>영화 메인 페이지</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-<body>
+<body style="background-image: url('https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimg.freepik.com%2Ffree-vector%2Fcinema-realistic-poster-with-illuminated-bucket-of-popcorn-drink-3d-glasses-reel-tickets-on-blue-background-with-tapes-vector-illustration_1284-77070.jpg&type=sc960_832');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;">
+
 <div class="content" layout:fragment="content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">절찬 상영 중</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+<!--                <li class="nav-item active">-->
+<!--                    <a class="nav-link" href="#">홈 <span class="sr-only">(current)</span></a>-->
+<!--                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{cnema/movie}">영화 목록</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi1.ruliweb.com%2Fimg%2F23%2F11%2F05%2F18b9fea9668153b67.jpg&type=sc960_832"
+                         class="card-img-top" style="width: 235px; height: 300px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">인기영화</h5>
+                        <p class="card-text">1st</p>
+<!--                        <a href="#" class="btn btn-primary"></a>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fimgnews.naver.net%2Fimage%2F001%2F2016%2F07%2F11%2FAKR20160711071200030_01_i_99_20160711110026.jpg&type=a340"
+                         class="card-img-top" style="width: 235px; height: 300px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">인기영화</h5>
+                        <p class="card-text">2st</p>
+<!--                        <a href="#" class="btn btn-primary"></a>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card w-35">
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMzEyMjlfMTYx%2FMDAxNzAzODYwMDA3MDU2.BEnXwM80eWaGKYqIcxGs-Y63u0MJf-0xosYDl_GBCMsg.rNxYW4fEnJSX7skwAzQW-TBDXT3wQJiPe-HACgUrg6og.PNG.hrikim%2Fimage.png&type=a340"
+                         class="card-img-top" style="width: 235px; height: 300px;" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">인기영화</h5>
+                        <p class="card-text">3rd</p>
+<!--                        <a href="#" class="btn btn-primary"></a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
