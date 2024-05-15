@@ -25,10 +25,12 @@ public class MainController {
 
     private final BoardService boardService;
     private final LocationService locationService;
+    private final MovieService movieService;
 
-    public MainController(BoardService boardService, LocationService locationService) {
+    public MainController(BoardService boardService, LocationService locationService, MovieService movieService) {
         this.boardService = boardService;
         this.locationService = locationService;
+        this.movieService = movieService;
     }
 
 
@@ -38,25 +40,28 @@ public class MainController {
     }
 
     @GetMapping("movie")
+//    메인페이지에서 영화들 출력
     public String movie(Model model){
-//        List<MoviesDto> moviesDtoList = movieService.findAll();
-        //        model.addAttribute("movie",moviesDtoList);
-        List<Board> boardList = boardService.findAllem();
-        model.addAttribute("board",boardList);
+        List<MoviesDto> moviesDtoList = movieService.findAll();
+        log.info(moviesDtoList.toString());
+        model.addAttribute("movie",moviesDtoList);
         return "show_movie";
     }
 
+
     @GetMapping("board")
-    public String board(@RequestParam("boardId")Long boardId,
+//    관람후기 페이지로 이동
+    public String board(@RequestParam("movieNo")Long movieNo,
                         Model model){
-        Board board = boardService.title(boardId);
-        BoardDto boardDtoList = boardService.getOneBoard(boardId);
-        log.info(boardDtoList.toString());
+        List<Board> board = boardService.title(movieNo);
         model.addAttribute("board",board);
         return "show_board";
     }
 
+
+
     @GetMapping("location")
+//    메인페이지에서 지점페이지로 이동
     public String location(Model model){
         List<LocationDto> locationDtoList = locationService.findAll();
         model.addAttribute("location",locationDtoList);

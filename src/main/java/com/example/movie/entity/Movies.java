@@ -34,4 +34,7 @@ public class Movies {
     @Column(name = "good_point_avg")
     private double goodPointAvg; // board 엔티티 goodPoint 값 평균값으로 구할거니 double타입
 
+    @Column(length = 100000)
+    private String img;
+
 }

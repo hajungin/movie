@@ -23,7 +23,8 @@ public class MoviesDto {
 
     private double goodPointAvg;
 
-    private BoardDto boardDto;
+    private String img;
+
 
 
     public static MoviesDto fromMoviesEntity(Movies movies){
@@ -33,7 +34,8 @@ public class MoviesDto {
                 movies.getMovieDate(),
                 movies.getMovieRate(),
                 movies.getGoodPointAvg(),
-                new BoardDto()
+                movies.getImg()
+
         );
     }
 
