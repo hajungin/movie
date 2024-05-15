@@ -2,6 +2,7 @@ package com.example.movie.service;
 
 import com.example.movie.dto.BoardDto;
 import com.example.movie.entity.Board;
+import com.example.movie.entity.Movies;
 import com.example.movie.repository.BoardRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
@@ -62,6 +63,17 @@ public class BoardService {
                 .build();
         boardRepository.save(board);
     }
+
+    public void updateGoodPoint(Long movieNo){
+        String sql1 = "SELECT AVG(b.goodPoint) FROM Board b WHERE b.movies.movieNO:movieNo";
+        TypedQuery<Double> query1 = em.createQuery(sql1, Double.class).setParameter("movieNo", movieNo);
+
+        String sql2 = "SELECT m FROM Movies m WHERE m.movieNo:movieNo";
+        TypedQuery<Movies> query2 = em.createQuery(sql2, Movies.class).setParameter("movieNo", movieNo);
+        Movies movies = query2.getSingleResult();
+        movies.setGoodPointAvg(query1.getSingleResult());
+        em.persist(movies);
+            }
 
 
     @Transactional
