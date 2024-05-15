@@ -26,7 +26,11 @@ INSERT INTO movies (good_point_avg, movie_date, movie_rate, movie_title) VALUES
 (4.0, '2024-05-17', 'PG', 'The Incredibles'),
 (4.4, '2024-05-18', 'PG-13', 'The Godfather'),
 (3.7, '2024-05-19', 'PG-13', 'Gladiator'),
-(4.2, '2024-05-20', 'PG-13', 'Braveheart');
+(4.2, '2024-05-20', 'PG-13', 'Braveheart'),
+(4.6, '2024-05-21', 'PG-13', '기생충'),
+(4.0, '2024-05-22', 'PG', '반지의 제왕'),
+(4.2, '2024-05-23', 'PG-13', '명량');
+
 
 
 insert into location (location_name) values ('서울');

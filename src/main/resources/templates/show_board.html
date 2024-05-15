@@ -5,27 +5,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
 <div class="content" layout:fragment="content">
-<h4>*** 관람 후기 ***</h4>
-    <div class="table-responsive">
-        <table class="table table-bordered border-primary">
-            <thead class="table-primary">
-            <tr>
-                <th>제목</th>
-                <th>내용</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="board : ${board}" th:object="${board}">
-                <td th:text="*{title}"></td>
-                <td th:text="*{content}"></td>
-            </tr>
-            </tbody>
-        </table>
+    <h4 class="text-center my-4">관람 후기</h4>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">영화</th>
+                            <th scope="col">제목</th>
+                            <th scope="col">내용</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="board : ${board}" th:object="${board}">
+                            <td th:text="*{movies.movieTitle}"></td>
+                            <td th:text="*{title}"></td>
+                            <td th:text="*{content}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>

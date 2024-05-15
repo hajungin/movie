@@ -11,18 +11,18 @@
 <div class="content" layout:fragment="content">
     <h1 align="center">*** Movie ***</h1>
     <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4" th:each="movie : ${movie}" th:object="${movie}">
+        <div class="col-lg-4 col-md-6 mb-4" th:each="board : ${board}" th:object="${board}">
             <div class="card">
-                <!-- <img src="..." class="card-img-top" alt="..."> -->
+<!--                 <img src="..." class="card-img-top" alt="..."> -->
                 <div class="card-body">
-                    <h5 class="card-title" th:text="*{movieTitle}"></h5>
-                    <p class="card-text" th:text="'개봉일 : ' + *{movieDate}"></p>
-                    <p class="card-text" th:text="'관람 등급 : ' + *{movieRate}"></p>
-                    <p class="card-text" th:text="'평점 : ' + *{goodPointAvg}"></p>
+                    <h5 class="card-title" th:text="*{movies.movieTitle}"></h5>
+                    <p class="card-text" th:text="'개봉일 : ' + *{movies.movieDate}"></p>
+                    <p class="card-text" th:text="'관람 등급 : ' + *{movies.movieRate}"></p>
+                    <p class="card-text" th:text="'평점 : ' + *{movies.goodPointAvg}"></p>
 <!--                    <p class="card-text" th:text="'줄거리 : ' + *{board}"></p>-->
 
                     <form th:action="@{/cnema/board}" method="get">
-                        <input type="hidden" name="movieNo" th:value="${movie.movieNo}" />
+                        <input type="hidden" name="boardId" th:value="*{boardId}">
                         <button type="submit" class="btn btn-primary">관람후기</button>
                     </form>
 
