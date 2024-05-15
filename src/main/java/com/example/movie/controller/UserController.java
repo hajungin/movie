@@ -118,4 +118,46 @@ public class UserController {
         return "redirect:/user/main";
     }
 
+    @GetMapping("delete")
+    public String deleteUser(Model model){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+
+            UserDto userDto = userService.getOneUser(userNo);
+            model.addAttribute("userDto", userDto);
+        }
+        return "user/user_delete";
+    }
+
+    @PostMapping("delete")
+    public String delete(){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+
+            userService.delete(userNo);
+        }
+
+        return "redirect:/logout";
+    }
+
 }

@@ -2,25 +2,34 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layouts/default_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>로그인</title>
+    <title>회원탈퇴</title>
     <!-- 부트스트랩 CSS 링크 추가 -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="content" layout:fragment="content">
     <div class="container">
-        <form id="frm" name="frm" th:action="@{/user/login}" method="post" class="container">
-            <div th:if="${param.error}" class="alert alert-danger">
-                 비밀번호를 확인해주세요.
-            </div>
-
-
+        <form id="frm" name="frm" th:action="@{/user/delete}" method="post" class="container" onsubmit="return validatePassword()">
             <div class="mb-3">
                 <label for="password" class="form-label">비밀번호</label>
-                <input id="password" name="password" type="password" class="form-control">
+                <input type="password" id="password" name="password" class="form-control">
+                <input type="hidden" id="hiddenPassword" th:value="${userDto.password1}">
             </div>
+            <button type="submit" class="btn btn-primary">회원탈퇴</button>
         </form>
     </div>
 </div>
+<script th:inline="javascript">
+    function validatePassword() {
+        var enteredPassword = document.getElementById('password').value;
+        var hiddenPassword = document.getElementById('hiddenPassword').value;
+
+        if (enteredPassword !== hiddenPassword) {
+            alert('비밀번호가 올바르지 않습니다.');
+            return false; // 폼 제출 중단
+        }
+        return true; // 폼 제출 진행
+    }
+</script>
 </body>
 </html>
