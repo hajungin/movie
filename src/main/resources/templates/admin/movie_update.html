@@ -56,12 +56,18 @@
 
             <div class="col-md-6">
                 <label for="movieDate" class="form-label">개봉일</label>
-                <input type="text" class="form-control" th:field="*{movieDate}">
+                <input type="date" class="form-control" th:field="*{movieDate}">
             </div>
 
             <div class="col-md-6">
                 <label for="movieRate" class="form-label">영화 등급</label>
-                <input type="text" class="form-control" th:field="*{movieRate}">
+                <select id="movieRate" class="form-select" th:field="*{movieRate}">
+                    <option value="G">전체 관람가</option>
+                    <option value="PG">7세 이상 관람가</option>
+                    <option value="PG-13">13세 이상 관람가</option>
+                    <option value="R">청소년 관람불가</option>
+                    <option value="NC-17">18세 이상 관람가</option>
+                </select>
             </div>
 
             <div class="col-md-6">
