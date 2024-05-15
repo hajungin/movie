@@ -61,6 +61,7 @@ public class BoardController {
     @PostMapping("insert")
     public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
         boardService.insert(dto);
+        boardService.updateGoodPoint(dto.getMovieNo());
         return "redirect:/board/list";
     }
 

@@ -37,7 +37,7 @@ public class MovieService {
     }
 
     public List<Movies> findAllEm(){
-        List<Movies> moviesList = em.createQuery("SELECT m FROM Movies m", Movies.class).getResultList();
+        List<Movies> moviesList = em.createQuery("SELECT m FROM Movies m ORDER BY m.movieNo", Movies.class).getResultList();
 //        Long result = em.createQuery("SELECT AVG(b.good_point) Board b", Long.class);
 //        moviesList.set(boardList.)
         return moviesList;

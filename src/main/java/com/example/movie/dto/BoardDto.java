@@ -14,8 +14,8 @@ public class BoardDto {
     private String title;
     private String content;
     private int goodPoint;
-    private String movieNo;
-    private String userNo;
+    private Long movieNo;
+    private Long userNo;
 
 
     public static BoardDto fromBoardEntity(Board board) {
@@ -24,8 +24,8 @@ public class BoardDto {
                 board.getTitle(),
                 board.getContent(),
                 board.getGoodPoint(),
-                board.getMovies().getMovieTitle(),
-                board.getUser().getUserName()
+                board.getMovies().getMovieNo(),
+                board.getUser().getUserNo()
         );
     }
 }
