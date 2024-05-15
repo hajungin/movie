@@ -22,5 +22,6 @@ public class TicketService {
                 .stream()
                 .map(x->TicketDto.fromTicketEntity(x))
                 .toList();
+
     }
 }
