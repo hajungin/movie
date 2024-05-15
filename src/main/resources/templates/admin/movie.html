@@ -62,8 +62,8 @@
                 <td th:text="*{movieNo}"></td>
                 <td th:text="*{movieTitle}"></td>
                 <td th:text="*{#strings.substring(movieDate,0,4)} + '년' +
-                    *{#strings.substring(movieDate,4,6)} + '월' +
-                    *{#strings.substring(movieDate,6,8)} + '일'">
+                    *{#strings.substring(movieDate,5,7)} + '월' +
+                    *{#strings.substring(movieDate,8,10)} + '일'">
                 </td>
                 <td th:text="*{movieRate}"></td>
                 <td th:text="*{goodPointAvg}"></td>
@@ -75,7 +75,7 @@
                 </td>
                 <td>
                     <!--PathVariable 로 전달해서 삭제처리-->
-                    <form th:action="@{/admin/deleted/{deleteId}(deleteId=*{movieNo})}" method="post">
+                    <form th:action="@{/admin/deleted-movie/{deleteId}(deleteId=*{movieNo})}" method="post">
                         <input type="hidden" name="deleteId" th:value="*{movieNo}">
                         <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                     </form>

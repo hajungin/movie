@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <!-- Header Fragment -->
 <div th:fragment="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -12,51 +12,60 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">영화</a>
+                        <a class="nav-link" th:href="@{/cnema/movie}">영화</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">지점</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cnema/theater">예매</a>
+                        <a class="nav-link" href="/cnema/theater"
+                           sec:authorize="isAuthenticated()"
+                        >예매</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             메뉴
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" th:href="@{/board/board_view}">자유게시판</a></li>
+                            <li><a class="dropdown-item" th:href="@{/board/list}">자유게시판</a></li>
                             <li><a class="dropdown-item" href="#">메뉴 항목 2</a></li>
                             <li><a class="dropdown-item" href="#">메뉴 항목 3</a></li>
                         </ul>
                     </li>
                 </ul>
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" th:href="@{/user/signup}">회원가입</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/user/login}">로그인</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/logout}">로그아웃</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" th:href="@{/admin}">관리자페이지</a>
-                    </li>
+<!--                <ul class="navbar-nav">-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link active" th:href="@{/user/signup}">회원가입</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="@{/user/login}">로그인</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="@{/logout}">로그아웃</a>-->
+<!--                    </li>-->
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" th:href="@{/admin}">관리자페이지</a>-->
+<!--                    </li>-->
 
-                </ul>
-<!--                <div class="text-end">-->
-<!--                    <a role="button" id="signup" class="btn btn-outline-primary"-->
-<!--                       sec:authorize="isAnonymous()"-->
-<!--                       th:href="@{/user/signup}">회원가입</a>-->
-<!--                    <a role="button" id="login" class="btn btn-outline-primary"-->
-<!--                       sec:authorize="isAnonymous()"-->
-<!--                       th:href="@{/user/login}">Login</a>-->
-<!--                    <a role="button" id="logout" class="btn btn-outline-primary"-->
-<!--                       sec:authorize="isAuthenticated()"-->
-<!--                       th:href="@{/logout}">Logout</a>-->
-<!--                </div>-->
+<!--                </ul>-->
+                <div class="text-end">
+                    <a role="button" id="signup" class="btn btn-outline-primary"
+                       sec:authorize="isAnonymous()"
+                       th:href="@{/user/signup}">회원가입</a>
+                    <a role="button" id="login" class="btn btn-outline-primary"
+                       sec:authorize="isAnonymous()"
+                       th:href="@{/user/login}">Login</a>
+                    <a role="button" id="logout" class="btn btn-outline-primary"
+                       sec:authorize="isAuthenticated()"
+                       th:href="@{/logout}">Logout</a>
+                    <a role="button" id="admin" class="btn btn-outline-primary"
+                       sec:authorize="hasRole('ADMIN')"
+                       th:href="@{/admin}">관리자 페이지</a>
+                    <a role="button" id="currentUser" class="btn btn-outline-primary"
+                       sec:authorize="hasRole('USER')"
+                       th:href="@{/user/main}">내 정보</a>
+
+                </div>
             </div>
         </div>
     </nav>

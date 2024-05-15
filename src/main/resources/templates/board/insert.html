@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default_layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content" layout:fragment="content">
+    <div class="container">
+        <form th:action="@{/board/insert}" method="post">
+            <div class="mb-3">
+                <label for="movieTitle">영화제목</label>
+                <select id="movieTitle" name="movieTitle" class="form-select">
+                    <option value="">영화를 선택하세요</option>
+                    <!-- Movies 엔티티에서 영화 제목 가져오기 -->
+                    <option th:each="movie: ${moviesDtoList}" th:value="${movie.movieTitle}"
+                            th:text="${movie.movieTitle}"></option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="title">제목</label>
+                <input type="text" id="title" name="title" class="form-control" required>
+                <span th:errors="${boardDto.title}"></span>
+            </div>
+            <div class="mb-3">
+                <label for="content">내용</label>
+                <textarea id="content" name="content" class="form-control" required></textarea>
+                <span th:errors="${boardDto.content}"></span>
+            </div>
+            <div>
+                <label for="userNo">작성자</label>
+                <input type="text" id="userNo" name="userNo" th:value="${#authentication.principal.username}" readonly>
+            </div>
+            <div>
+                <label for="goodPoint">별점</label>
+                <select id="goodPoint" name="goodPoint" th:field="${boardDto.goodPoint}">
+                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}"
+                            th:text="${i}"></option>
+                </select>
+                <span th:errors="${boardDto.goodPoint}"></span>
+            </div>
+            <div align="center" class="col-12">
+                <button type="submit" class="btn btn-primary">등록</button>
+                <a th:href="@{/board/list}">목록</a>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

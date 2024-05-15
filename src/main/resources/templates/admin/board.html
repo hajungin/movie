@@ -52,20 +52,47 @@
                 <th>제목</th>
                 <th>내용</th>
                 <th>작성자</th>
+                <th>평점</th>
+                <th>삭제</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr th:each="board : ${board}" th:object="${board}">
-<!--                <td th:text="*{boardId}"></td>-->
-<!--                <td th:text="*{movieTitle}"></td>-->
-<!--                <td th:text="*{movieNo}"</td>-->
-<!--                <td th:text="*{userNo}"></td>-->
-<!--                <td th:text="*{bookDate}"></td>-->
-<!--                <td th:text="*{seatId}"></td>-->
+            <tr th:each="board : ${paging}" th:object="${board}">
+                <td th:text="*{boardId}"></td>
+                <td th:text="*{movies.movieTitle}"></td>
+                <td th:text="*{title}"></td>
+                <td th:text="*{content}"></td>
+                <td th:text="*{user.userName}"></td>
+                <td th:text="*{goodPoint}+'점'"></td>
+                <td>
+                    <form th:action="@{/admin/deleted-board/{deleteId}(deleteId=*{boardId})}" method="post">
+                        <input type="hidden" name="deleteId" th:value="*{boardId}">
+                        <button type="submit" class="btn btn-danger btn-sm">삭제</button>
+                    </form>
+                </td>
             </tr>
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item" th:classappend="${paging.number} <= 0 ? 'disabled'">
+                    <a class="page-link"
+                       th:href="@{/admin/board(page=${paging.number-1})}">
+                        Previous
+                    </a>
+                </li>
+                <th:block th:each="pageNumber : ${pagination}">
+                    <li class="page-item"><a class="page-link"
+                                             th:href="@{/admin/board(page=${pageNumber})}"
+                                             th:text="${pageNumber+1}">1</a></li>
+                </th:block>
+
+                <li class="page-item" th:classappend="${paging.number + 1} == ${paging.totalPages} ? 'disabled'"><a class="page-link"
+                                                                                                                    th:href="@{/admin/board(page=${paging.number + 1})}">Next</a></li>
+            </ul>
+        </nav>
     </div>
     </div>
 </div>
