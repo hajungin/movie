@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -36,23 +37,43 @@ public class UserController {
     }
 
     @PostMapping("signup")
-    public String singup(@Valid UserDto userDto,
-                         BindingResult bindingResult){
-        try{
-            userService.createUser(userDto);
-        } catch (DataIntegrityViolationException e){
-            // 데이터베이스 관련 예외 처리
-            e.printStackTrace(); // 예외 정보 로깅
-            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다");
-            return "user/signup"; // 사용자에게 보여줄 화면 반환
-        } catch (Exception e){
-            // 다른 예외 처리
-            e.printStackTrace(); // 예외 정보 로깅
-            bindingResult.reject("signupFailed" ,e.getMessage());
-            return "user/signup"; // 사용자에게 보여줄 화면 반환
+    public String signup(@RequestParam("userCheck") String userId, RedirectAttributes redirectAttributes) {
+        boolean check = userService.checkId(userId);
+        if (check) {
+            // 중복된 사용자 ID가 있을 경우
+            redirectAttributes.addFlashAttribute("errorMessage", "이미 사용 중인 사용자 ID입니다.");
+            return "redirect:/user/signup";
+        } else {
+            // 중복된 사용자 ID가 없을 경우
+            redirectAttributes.addFlashAttribute("successMessage", "사용자 ID 중복 확인이 완료되었습니다.");
+            return "user/cnema";
         }
-        return "redirect:/cnema";
+//            return "redirect:/cnema";
+
     }
+
+
+
+//    @PostMapping("signup")
+//    public String singup(@Valid UserDto userDto,
+//                         BindingResult bindingResult){
+//        try {
+//            userService.createUser(userDto);
+//        } catch (DataIntegrityViolationException e) {
+//            // 데이터베이스 관련 예외 처리
+//            e.printStackTrace(); // 예외 정보 로깅
+//            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다");
+//            return "user/signup"; // 사용자에게 보여줄 화면 반환
+//        } catch (Exception e) {
+//            // 다른 예외 처리
+//            e.printStackTrace(); // 예외 정보 로깅
+//            bindingResult.reject("signupFailed", e.getMessage());
+//            return "user/signup"; // 사용자에게 보여줄 화면 반환
+//        }
+//        return "redirect:/cnema";
+//    }
+
+
 
     @GetMapping("login")
     public String login(){

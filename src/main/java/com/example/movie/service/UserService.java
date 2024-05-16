@@ -117,4 +117,13 @@ public class UserService {
         }
         em.remove(user);
     }
+    @Transactional
+    public boolean checkId(String userId) {
+        List<UserDto> userDtoList = new ArrayList<>();
+        List<User> userList = userRepository.findAll();
+        String sql = "SELECT u FROM  User u WHERE u.userId=:userId";
+        TypedQuery<User> query = em.createQuery(sql, User.class).setParameter("userId",userId);
+        userList = query.getResultList();
+        return userList.size() > 0;
+    }
 }

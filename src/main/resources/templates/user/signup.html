@@ -23,6 +23,8 @@
                 <label for="userId" class="form-label">사용자 ID</label>
                 <input id="userId" name="userId" type="text" class="form-control" th:field="*{userId}">
                 <div class="invalid-feedback" th:errors="*{userId}"></div>
+                <button type="button" id="userCheck" th:value="*{userId}" class="btn btn-info" onclick="checkUserId()">ID 중복 확인</button>
+
             </div>
 
             <div class="mb-3">
