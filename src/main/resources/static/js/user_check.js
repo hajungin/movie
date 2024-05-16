@@ -57,6 +57,9 @@ function check() {
         document.getElementById("email").focus();
         return false;
     }
+//    checkUserId();
+//    return true
+
     alert("입력이 완료되었습니다.");
     document.getElementById("frm").submit();
     return true;
@@ -67,3 +70,33 @@ function res(){
     document.getElementById("frm").reset();
     document.getElementById("userId").focus();
 }
+
+//var userId = [];
+//// 중복 확인 함수
+//function checkUserId() {
+//    var userIdInput = document.getElementById("userId").value;
+//    var messageElement = document.getElementById("message");
+//
+//    // 입력된 아이디가 이미 존재하는지 확인
+//    if (userId.includes(userIdInput)) {
+//        messageElement.innerText = "이미 사용 중인 아이디입니다.";
+//    } else {
+//        messageElement.innerText = "사용 가능한 아이디입니다.";
+//        // 아이디를 배열에 추가
+//        userId.push(userIdInput);
+//    }
+//}
+
+function checkUserId() {
+    function checkUserId() {
+
+
+    }
+
+}
+
+
+
+
+
+
