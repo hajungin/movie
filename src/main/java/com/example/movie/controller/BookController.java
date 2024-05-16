@@ -3,10 +3,12 @@ package com.example.movie.controller;
 import com.example.movie.config.PrincipalDetails;
 import com.example.movie.constant.SeatCoordinates;
 import com.example.movie.dto.*;
+import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
 import com.example.movie.service.BookService;
 import com.example.movie.service.LocationService;
 import com.example.movie.service.MovieService;
+import com.example.movie.service.UserService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpSession;
@@ -18,6 +20,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +29,13 @@ import java.util.List;
 @Slf4j
 public class BookController {
 
+    private final UserService userService;
     private final LocationService locationService;
     private final MovieService movieService;
     private final BookService bookService;
 
-    public BookController(LocationService locationService, MovieService movieService, BookService bookService) {
+    public BookController(UserService userService, LocationService locationService, MovieService movieService, BookService bookService) {
+        this.userService = userService;
         this.locationService = locationService;
         this.movieService = movieService;
         this.bookService = bookService;
@@ -46,6 +51,39 @@ public class BookController {
             dateList.add(date);
         }
         model.addAttribute("dateList", dateList);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+            UserDto userDto = userService.getOneUser(userNo);
+            LocalDate birthDate = LocalDate.parse(userDto.getBirth());
+
+            if (birthDate != null && today != null) {
+                int years = Period.between(birthDate, today).getYears();
+                int birthMonth = birthDate.getMonthValue();
+                int currentMonth = today.getMonthValue();
+                int birthDay = birthDate.getDayOfMonth();
+                int currentDay = today.getDayOfMonth();
+
+                // 생일이 지났는지 여부 확인
+                if (currentMonth < birthMonth || (currentMonth == birthMonth && currentDay < birthDay)) {
+                    years--; // 아직 생일이 오지 않았으면 한 살을 빼줌
+                }
+                model.addAttribute("years", years);
+                log.info("=====================================");
+                log.info(String.valueOf(years));
+
+            }
+        }
+
 
         List<LocationDto> locationDtoList = locationService.findAll();
         model.addAttribute("locationDtoList", locationDtoList);
