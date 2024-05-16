@@ -1,5 +1,6 @@
 package com.example.movie.service;
 
+import com.example.movie.config.PrincipalDetails;
 import com.example.movie.dto.BoardDto;
 import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
@@ -14,6 +15,8 @@ import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -43,12 +46,21 @@ public class BoardService {
     }
 
     public void insert(BoardDto dto) {
+        Movies movies = em.find(Movies.class, dto.getMovieNo());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        User user1 = userDetails.getUser();
+        Long userNo = user1.getUserNo();
+        User user = em.find(User.class, userNo);
+
+
         Board board = Board.builder()
                 .boardId(dto.getBoardId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .movies(Movies.builder().movieNo(dto.getMovieNo()).build())
-                .user(User.builder().userNo(dto.getUserNo()).build())
+                .movies(movies)
+                .user(user)
                 .build();
         boardRepository.save(board);
     }

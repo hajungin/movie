@@ -1,8 +1,10 @@
 package com.example.movie.controller;
 
+import com.example.movie.config.PrincipalDetails;
 import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.entity.Board;
+import com.example.movie.entity.User;
 import com.example.movie.repository.BoardRepository;
 import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
