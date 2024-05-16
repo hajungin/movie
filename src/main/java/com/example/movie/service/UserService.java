@@ -10,6 +10,7 @@ import com.example.movie.repository.UserRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class UserService {
 
 //    @Autowired
@@ -127,6 +129,7 @@ public class UserService {
                 .setParameter("userId", userId)
                 .getSingleResult();
 
+        log.info(String.valueOf(count));
         if (count > 0) {
             System.out.println("이미 존재하는 아이디입니다");
             return true;

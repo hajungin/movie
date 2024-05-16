@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 8080
 
 
 #spring:
@@ -8,12 +8,12 @@ server:
 #    url: jdbc:postgresql://localhost:5432/cnema
 #    username: postgres
 #    password: 1111
-
-#  sql:
-#    init:
-#      mode: always
-
-
+#
+##  sql:
+##    init:
+##      mode: always
+#
+#
 #  jpa:
 #    defer-datasource-initialization: true
 #    hibernate:

@@ -1,4 +1,4 @@
-INSERT INTO users (`birth`, `user_id`, `password`, `phone`, `user_name`, `user_role`, `email`)
+INSERT INTO `users` (`birth`, `user_id`, `password`, `phone`, `user_name`, `user_role`, `email`)
 VALUES
 ('1990-01-01', 'john_doe', 'password123', '010-1234-5678', 'John Doe', 'ADMIN', 'john@example.com'),
 ('1985-05-15', 'jame_amith', 'abc123', '010-9876-5432', 'Jane Smith', 'USER', 'qwer@example.com'),
