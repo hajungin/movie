@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -35,6 +36,24 @@ public class UserController {
         return "user/signup";
     }
 
+//    @PostMapping("signup")
+//    public String signup(@RequestParam("userCheck") String userId, RedirectAttributes redirectAttributes) {
+//        boolean check = userService.checkId(userId);
+//        if (check) {
+//            // 중복된 사용자 ID가 있을 경우
+//            redirectAttributes.addFlashAttribute("errorMessage", "이미 사용 중인 사용자 ID입니다.");
+//            return "redirect:/user/signup";
+//        } else {
+//            // 중복된 사용자 ID가 없을 경우
+//            redirectAttributes.addFlashAttribute("successMessage", "사용자 ID 중복 확인이 완료되었습니다.");
+//            UserDto userDto = new UserDto();
+//            userService.createUser(userDto);
+//            return "redirect:/cnema";
+//        }
+//    }
+
+
+
     @PostMapping("signup")
     public String singup(@Valid UserDto userDto,
                          BindingResult bindingResult){
@@ -53,6 +72,21 @@ public class UserController {
         }
         return "redirect:/cnema";
     }
+
+    @GetMapping("check")
+    public String check(@RequestParam(name = "userCheck", required = false) String userId,RedirectAttributes redirectAttributes) {
+        boolean check = userService.checkId(userId);
+        if (check) {
+//            // 중복된 사용자 ID가 있을 경우
+            redirectAttributes.addFlashAttribute("errorMessage", "이미 사용 중인 사용자 ID입니다.");
+        } else {
+//            // 중복된 사용자 ID가 없을 경우
+            redirectAttributes.addFlashAttribute("successMessage", "사용자 ID 중복 확인이 완료되었습니다.");
+        }
+        return "user/signup";
+    }
+
+
 
     @GetMapping("login")
     public String login(){
