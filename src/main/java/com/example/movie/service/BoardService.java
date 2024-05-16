@@ -47,8 +47,8 @@ public class BoardService {
                 .boardId(dto.getBoardId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
-                .movies()
-                .user()
+                .movies(Movies.builder().movieNo(dto.getMovieNo()).build())
+                .user(User.builder().userNo(dto.getUserNo()).build())
                 .build();
         boardRepository.save(board);
     }
