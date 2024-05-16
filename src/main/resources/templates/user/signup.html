@@ -14,23 +14,26 @@
     <div class="container">
         <h4 class="text-center">회원가입</h4>
 
-        <form th:action="@{/user/check}" method="get">
-            <div class="input-group">
-                <input type="text" class="form-control" id="userId" name="userCheck" th:value="${userId}" placeholder="사용자 ID를 입력하세요" aria-describedby="checkButton">
-                <button type="submit" class="btn btn-info" id="checkButton" onclick="checkUserId()">ID 중복 확인</button>
-            </div>
-            <p id="message"></p>
-        </form>
+<!--        <form th:action="@{/user/check}" method="get" id="checkForm">-->
+<!--            <div class="input-group">-->
+<!--                <input type="text" class="form-control" id="userId" name="userCheck" th:value="${userId}" placeholder="사용자 ID를 입력하세요" aria-describedby="checkButton">-->
+<!--                <button type="submit" class="btn btn-info">ID 중복 확인</button>-->
+<!--            </div>-->
 
-        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
-            <p th:text="${errorMessage}"></p>
-        </div>
+<!--            <div th:if="${successMessage}" class="alert alert-success" role="alert">-->
+<!--                <p th:text="${successMessage}"></p>-->
+<!--                <input type="hidden" th:value="${checkUser}" id="check">-->
+<!--                <button type="button" onclick="captureUserId()">확인</button>-->
+<!--            </div>-->
+<!--        </form>-->
 
         <!-- 성공 메시지 표시 영역 -->
-        <div th:if="${successMessage}" class="alert alert-success" role="alert">
-            <p th:text="${successMessage}"></p>
-        </div>
-        </form>
+
+<!--        <div th:if="${errorMessage}" class="alert alert-danger" role="alert">-->
+<!--            <p th:text="${errorMessage}"></p>-->
+<!--        </div>-->
+
+
 
 
         <form id="frm" th:action="@{/user/signup}" method="post" th:object="${userDto}">
@@ -41,7 +44,7 @@
 
             <div class="mb-3">
                 <label for="userId" class="form-label">사용자 ID</label>
-                <input id="userId" name="userId" type="text" class="form-control" th:field="*{userId}">
+                <input id="userIdForSignUp" name="userId" type="text" class="form-control" th:field="*{userId}">
                 <div class="invalid-feedback" th:errors="*{userId}"></div>
 
 

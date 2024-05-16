@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -74,18 +75,26 @@ public class UserController {
     }
 
     @GetMapping("check")
-    public String check(@RequestParam(name = "userCheck", required = false) String userId,RedirectAttributes redirectAttributes) {
+    public String check(@RequestParam(name = "userCheck", required = false) String userId,
+                        Model model,RedirectAttributes redirectAttributes) {
         boolean check = userService.checkId(userId);
         if (check) {
 //            // 중복된 사용자 ID가 있을 경우
             redirectAttributes.addFlashAttribute("errorMessage", "이미 사용 중인 사용자 ID입니다.");
+            return "redirect:/user/signup";
         } else {
 //            // 중복된 사용자 ID가 없을 경우
             redirectAttributes.addFlashAttribute("successMessage", "사용자 ID 중복 확인이 완료되었습니다.");
+            model.addAttribute("checkUser",userId);
+            return "redirect:/user/signup";
         }
-        return "user/signup";
     }
 
+//    @PostMapping("check")
+//    public String check(String userId,Model model){
+//        model.addAttribute("checkUser",userId);
+//        return "user/signup";
+//    }
 
 
     @GetMapping("login")
