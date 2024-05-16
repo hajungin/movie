@@ -36,9 +36,11 @@ public class UserDto {
 
     private String phone;
 
+    private int money;
+
     private UserRole userRole;
 
-    public UserDto(Long userNo, String userId, String password1, String userName, String birth,String email, String phone, UserRole userRole) {
+    public UserDto(Long userNo, String userId, String password1, String userName, String birth,String email, String phone, int money,UserRole userRole) {
         this.userNo = userNo;
         this.userId = userId;
         this.password1 = password1;
@@ -46,6 +48,7 @@ public class UserDto {
         this.birth = birth;
         this.email = email;
         this.phone = phone;
+        this.money = money;
         this.userRole = userRole;
     }
 
@@ -58,6 +61,7 @@ public class UserDto {
                 user.getBirth(),
                 user.getEmail(),
                 user.getPhone(),
+                user.getMoney(),
                 user.getUserRole()
         );
     }

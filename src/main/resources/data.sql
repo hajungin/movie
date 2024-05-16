@@ -1,4 +1,13 @@
---INSERT INTO `user` (`birth`, `user_id`, `password`, `phone`, `user_name`, `user_role`, `email`)
+INSERT INTO `users` (`birth`, `user_id`, `password`, `phone`, `user_name`, `user_role`, `email`,money)
+VALUES
+('1990-01-01', 'john_doe', 'password123', '010-1234-5678', 'John Doe', 'ADMIN', 'john@example.com',0),
+('1985-05-15', 'jame_amith', 'abc123', '010-9876-5432', 'Jane Smith', 'USER', 'qwer@example.com',0),
+('1985-03-15', 'sane_gsih', 'abc12314', '010-5556-5432', 'Sane Gsih', 'USER', 'asdf@example.com',0),
+('1985-04-15', 'gane_vmith', 'abc1231234', '010-5555-5432', 'Gane Smizh', 'USER', 'zxcv@example.com',0),
+('1985-04-11', '1', '1', '010-5555-5432', 'Gane Smizh', 'ADMIN', 'zxcv@ezen.com',0),
+('1978-12-30', 'bob_johnson', 'bobpass', NULL, 'Bob Johnson', 'USER', 'bob@example.com',0);
+
+--INSERT INTO "users" ("birth", "user_id", "password", "phone", "user_name", "user_role", "email")
 --VALUES
 --('1990-01-01', 'john_doe', 'password123', '010-1234-5678', 'John Doe', 'ADMIN', 'john@example.com'),
 --('1985-05-15', 'jame_amith', 'abc123', '010-9876-5432', 'Jane Smith', 'USER', 'qwer@example.com'),
@@ -6,14 +15,6 @@
 --('1985-04-15', 'gane_vmith', 'abc1231234', '010-5555-5432', 'Gane Smizh', 'USER', 'zxcv@example.com'),
 --('1985-04-11', '1', '1', '010-5555-5432', 'Gane Smizh', 'ADMIN', 'zxcv@ezen.com'),
 --('1978-12-30', 'bob_johnson', 'bobpass', NULL, 'Bob Johnson', 'USER', 'bob@example.com');
-INSERT INTO "users" ("birth", "user_id", "password", "phone", "user_name", "user_role", "email")
-VALUES
-('1990-01-01', 'john_doe', 'password123', '010-1234-5678', 'John Doe', 'ADMIN', 'john@example.com'),
-('1985-05-15', 'jame_amith', 'abc123', '010-9876-5432', 'Jane Smith', 'USER', 'qwer@example.com'),
-('1985-03-15', 'sane_gsih', 'abc12314', '010-5556-5432', 'Sane Gsih', 'USER', 'asdf@example.com'),
-('1985-04-15', 'gane_vmith', 'abc1231234', '010-5555-5432', 'Gane Smizh', 'USER', 'zxcv@example.com'),
-('1985-04-11', '1', '1', '010-5555-5432', 'Gane Smizh', 'ADMIN', 'zxcv@ezen.com'),
-('1978-12-30', 'bob_johnson', 'bobpass', NULL, 'Bob Johnson', 'USER', 'bob@example.com');
 
 
 INSERT INTO movies (good_point_avg, movie_date, movie_rate, movie_title, img) VALUES

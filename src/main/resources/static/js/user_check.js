@@ -60,7 +60,7 @@ function check() {
 //    checkUserId();
 //    return true
 
-    alert("입력이 완료되었습니다.");
+//    alert("입력이 완료되었습니다.");
     document.getElementById("frm").submit();
     return true;
 }
@@ -87,13 +87,18 @@ function res(){
 //    }
 //}
 
-function checkUserId() {
-    function checkUserId() {
+function captureUserId() {
+    var checkUser = new URLSearchParams(window.location.search).get('checkUser');
 
-
+    if (checkUser) {
+        console.log("사용자 ID 값:", checkUser);
+        document.getElementById("userIdForSignUp").value = checkUser;
+    } else {
+        alert("사용자 ID를 입력하세요.");
     }
-
 }
+
+
 
 
 
