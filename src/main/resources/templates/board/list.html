@@ -30,19 +30,22 @@
                 <tbody>
                 <tr th:each="board : ${paging.content}" th:object="${board}">
                     <td th:text="*{boardId}"></td>
-                    <td th:text="*{movieNo}"></td>
+                    <td th:text="${board.movies.movieNo}"></td>
                     <td th:text="*{title}"></td>
                     <td th:text="*{content}"></td>
-                    <td th:text="*{userNo}"></td>
+                    <td th:text="${board.user.userName}" th:value="${board.user.userNo}"></td>
                     <td th:text="*{goodPoint}"></td>
-                    <td>
-                        <form th:action="@{/board/update}" method="get">
+
+                    <td th:if="${userNo != null}">
+                        <form th:if="${board.user.userNo == userNo}"
+                              th:action="@{/board/update}" method="get">
                             <input type="hidden" name="updateId" th:value="*{boardId}">
                             <button type="submit" class="btn btn-primary btn-sm">수정</button>
                         </form>
                     </td>
-                    <td>
-                        <form th:action="@{/board/delete/{deleteId}(deleteId=*{boardId})}" method="post">
+                    <td th:if="${userNo != null}">
+                        <form th:if="${board.user.userNo == userNo}"
+                              th:action="@{/board/delete/{deleteId}(deleteId=*{boardId})}" method="post">
                             <input type="hidden" name="deleteId" th:value="*{boardId}">
                             <button type="submit" class="btn btn-danger btn-sm">삭제</button>
                         </form>

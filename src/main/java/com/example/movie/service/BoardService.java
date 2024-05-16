@@ -45,6 +45,10 @@ public class BoardService {
                 .map(BoardDto::fromBoardEntity);
     }
 
+    public Page<Board> viewBoard(Pageable pageable) {
+        return boardRepository.findAll(pageable);
+    }
+
     public void insert(BoardDto dto) {
         Movies movies = em.find(Movies.class, dto.getMovieNo());
 
