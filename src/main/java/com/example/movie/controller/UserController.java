@@ -222,4 +222,51 @@ public class UserController {
         return "redirect:/logout";
     }
 
+    @GetMapping("money")
+    public String moneyView(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+
+            UserDto userDto = userService.getOneUser(userNo);
+            log.info(userDto.toString());
+            model.addAttribute("userDto", userDto);
+        }
+        return "user/money";
+    }
+
+    @PostMapping("money")
+    public String moneyInsert(@ModelAttribute("user") UserDto dto){
+        log.info(dto.toString());
+        userService.money(dto);
+        return "redirect:/user/show";
+    }
+    @GetMapping("show")
+    public String show(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            // 사용자의 이름 또는 ID 가져오기
+            String username = authentication.getName();
+            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
+            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+
+            // 여기서 userDetails에서 사용자 정보 추출
+            User user = userDetails.getUser();
+            Long userNo = user.getUserNo();
+
+            UserDto userDto = userService.getOneUser(userNo);
+            log.info(userDto.toString());
+            model.addAttribute("userDto", userDto);
+        }
+        return "user/showOne";
+    }
 }
