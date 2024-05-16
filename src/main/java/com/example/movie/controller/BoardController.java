@@ -56,12 +56,10 @@ public class BoardController {
 
     @GetMapping("insert")
     public String boardInsertForm(Model model) {
-        // 현재 인증된 사용자의 이름을 가져옵니다.
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
-        // 이 이름을 모델에 추가합니다.
-//        model.addAttribute("username", username);
+        model.addAttribute("username", username);
 
         List<MoviesDto> moviesDtoList = movieService.getAllMovies();
         model.addAttribute("moviesDtoList", moviesDtoList);
@@ -69,8 +67,8 @@ public class BoardController {
         return "board/insert";
     }
 
-    @PostMapping("insert")
-    public String boardInsertView(@ModelAttribute("board")BoardDto dto) {
+    @PostMapping("/insert")
+    public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
         boardService.insert(dto);
         return "redirect:/board/list";
     }
