@@ -3,8 +3,12 @@ package com.example.movie.service;
 import com.example.movie.dto.BoardDto;
 import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
+import com.example.movie.entity.User;
 import com.example.movie.repository.BoardRepository;
+import com.example.movie.repository.MoviesRepository;
+import com.example.movie.repository.UserRepository;
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +29,17 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-    public List<BoardDto> viewAllBoard() {
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        return boardRepository.findAll()
-                .stream()
-                .map(x -> BoardDto.fromBoardEntity(x))
-                .toList();
+//    public List<BoardDto> viewAllBoard(Pageable pageable) {
+//        List<BoardDto> boardDtoList = new ArrayList<>();
+//        return boardRepository.findAll(pageable)
+//                .stream()
+//                .map(x -> BoardDto.fromBoardEntity(x))
+//                .toList();
+//    }
+
+    public Page<BoardDto> viewAllBoard(Pageable pageable) {
+        return boardRepository.findAll(pageable)
+                .map(BoardDto::fromBoardEntity);
     }
 
     public void insert(BoardDto dto) {
@@ -38,28 +47,19 @@ public class BoardService {
                 .boardId(dto.getBoardId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
-//                .movies(dto.getMovieNo())
-//                .userId(dto.getUser().)
-//                .goodPoint(dto.getGoodPoint())
-//                .movieTitle(dto.getMovieTitle())
+                .movies(Movies.builder().movieNo(dto.getMovieNo()).build())
+                .user(User.builder().userNo(dto.getUserNo()).build())
                 .build();
         boardRepository.save(board);
     }
-
-//    public BoardDto getOneBoard(Long id) {
-//        return boardRepository.findById(id)
-//                .map(x -> BoardDto.fromBoardEntity(x))
-//                .orElse(null);
-//    }
 
     public void update(BoardDto boardDto) {
         Board board = Board.builder()
                 .boardId(boardDto.getBoardId())
                 .title(boardDto.getTitle())
                 .content(boardDto.getContent())
-//                .userId(boardDto.getUser())
-//                .goodPoint(boardDto.getGoodPoint())
-//                .movieTitle(boardDto.getMovieTitle())
+                .movies(Movies.builder().movieNo(boardDto.getMovieNo()).build())
+                .user(User.builder().userNo(boardDto.getUserNo()).build())
                 .build();
         boardRepository.save(board);
     }
@@ -83,16 +83,6 @@ public class BoardService {
         board.setUser(null);
         em.remove(board);
     }
-
-//        public void delete(Long id) {
-//            Board board = boardRepository.findById(id).orElse(null);
-//            if (board != null) {
-//                board.setMovies(null); // movies 필드를 null로 설정
-//                board.setUser(null);   // user 필드를 null로 설정
-//                boardRepository.deleteById(id); // board 엔티티 삭제
-//            }
-//        }
-
 
     public List<BoardDto> findAll() {
         List<BoardDto> boardDtoList = new ArrayList<>();
@@ -137,7 +127,6 @@ public class BoardService {
         List<Board> movie = query.getResultList();
         return movie;
     }
-
 
     public List<Board> title(Long movieNo) {
         String sql = "SELECT b FROM Board b WHERE b.movies.movieNo = :movieNo";

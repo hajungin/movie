@@ -1,6 +1,7 @@
 package com.example.movie.dto;
 
 import com.example.movie.entity.Board;
+import com.example.movie.entity.User;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 

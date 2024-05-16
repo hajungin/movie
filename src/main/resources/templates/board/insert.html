@@ -4,46 +4,42 @@
       layout:decorate="~{layouts/default_layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>게시글 등록</title>
 </head>
 <body>
 <div class="content" layout:fragment="content">
     <div class="container">
-        <form th:action="@{/board/insert}" method="post">
+        <form th:action="@{/board/insert}" method="post" th:object="${boardDto}">
             <div class="mb-3">
-                <label for="movieTitle">영화제목</label>
-                <select id="movieTitle" name="movieTitle" class="form-select">
+                <label for="movieNo">영화</label>
+                <select id="movieNo" name="movieNo" class="form-select" th:field="*{movieNo}">
                     <option value="">영화를 선택하세요</option>
-                    <!-- Movies 엔티티에서 영화 제목 가져오기 -->
+                    <!-- 영화 번호 선택 -->
                     <option th:each="movie: ${moviesDtoList}" th:value="${movie.movieTitle}"
                             th:text="${movie.movieTitle}"></option>
                 </select>
             </div>
             <div class="mb-3">
                 <label for="title">제목</label>
-                <input type="text" id="title" name="title" class="form-control" required>
-                <span th:errors="${boardDto.title}"></span>
+                <input type="text" id="title" name="title" class="form-control" th:field="*{title}">
             </div>
             <div class="mb-3">
                 <label for="content">내용</label>
-                <textarea id="content" name="content" class="form-control" required></textarea>
-                <span th:errors="${boardDto.content}"></span>
+                <textarea id="content" name="content" class="form-control" th:field="*{content}"></textarea>
             </div>
-            <div>
-                <label for="userNo">작성자</label>
-                <input type="text" id="userNo" name="userNo" th:value="${#authentication.principal.username}" readonly>
-            </div>
-            <div>
+            <!-- 작성자는 컨트롤러에서 이미 추가된 사용자 이름 사용 -->
+            <input type="text" id="userNo" name="userNo" th:field="*{userNo}">
+            <div class="mb-3">
                 <label for="goodPoint">별점</label>
-                <select id="goodPoint" name="goodPoint" th:field="${boardDto.goodPoint}">
+                <select id="goodPoint" name="goodPoint" class="form-select" th:field="*{goodPoint}">
+                    <option value="">별점을 선택하세요</option>
                     <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}"
                             th:text="${i}"></option>
                 </select>
-                <span th:errors="${boardDto.goodPoint}"></span>
             </div>
             <div align="center" class="col-12">
                 <button type="submit" class="btn btn-primary">등록</button>
-                <a th:href="@{/board/list}">목록</a>
+                <a th:href="@{/board/list}" class="btn btn-secondary">목록</a>
             </div>
         </form>
     </div>

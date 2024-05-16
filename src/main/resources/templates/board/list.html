@@ -17,8 +17,8 @@
             <table class="table table-bordered border-primary">
                 <thead class="table-primary">
                 <tr>
-                    <th>번호</th>
-                    <th>영화제목</th>
+                    <th>게시판 번호</th>
+                    <th>영화</th>
                     <th>제목</th>
                     <th>내용</th>
                     <th>작성자</th>
@@ -28,7 +28,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="board : ${boardDto}" th:object="${board}">
+                <tr th:each="board : ${paging.content}" th:object="${board}">
                     <td th:text="*{boardId}"></td>
                     <td th:text="*{movieNo}"></td>
                     <td th:text="*{title}"></td>
@@ -50,6 +50,27 @@
                 </tr>
                 </tbody>
             </table>
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${paging.number} <= 0 ? 'disabled'">
+                        <a class="page-link"
+                           th:href="@{/board/list(page=${paging.number-1})}">
+                            Previous
+                        </a>
+                    </li>
+                    <th:block th:each="pageNumber : ${pagination}">
+                        <li class="page-item">
+                            <a class="page-link"
+                               th:href="@{/board/list(page=${pageNumber})}"
+                               th:text="${pageNumber+1}">1</a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${paging.number + 1} == ${paging.totalPages} ? 'disabled'">
+                        <a class="page-link" th:href="@{/board/list(page=${paging.number + 1})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
         <br>
 <!--        <form th:href="@{/board/insert}">-->
