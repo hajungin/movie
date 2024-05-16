@@ -12,11 +12,9 @@
         <form th:action="@{/board/insert}" method="post" th:object="${boardDto}">
             <div class="mb-3">
                 <label for="movieNo">영화</label>
-                <select id="movieNo" name="movieNo" class="form-select" th:field="*{movieNo}">
+                <select id="movieNo" name="movieNo" class="form-select">
                     <option value="">영화를 선택하세요</option>
-                    <!-- 영화 번호 선택 -->
-                    <option th:each="movie: ${moviesDtoList}" th:value="${movie.movieTitle}"
-                            th:text="${movie.movieTitle}"></option>
+                    <option th:each="movie: ${moviesDtoList}" th:value="${movie.movieNo}" th:text="${movie.movieTitle}"></option>
                 </select>
             </div>
             <div class="mb-3">
@@ -28,13 +26,22 @@
                 <textarea id="content" name="content" class="form-control" th:field="*{content}"></textarea>
             </div>
             <!-- 작성자는 컨트롤러에서 이미 추가된 사용자 이름 사용 -->
-            <input type="text" id="userNo" name="userNo" th:field="*{userNo}">
+            <div class="mb-3">
+                <label for="userNo">작성자</label>
+                <input type="text" id="userNo"  class="form-control" name="userNo" th:field="*{userNo}">
+            </div>
+
             <div class="mb-3">
                 <label for="goodPoint">별점</label>
                 <select id="goodPoint" name="goodPoint" class="form-select" th:field="*{goodPoint}">
-                    <option value="">별점을 선택하세요</option>
-                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}"
-                            th:text="${i}"></option>
+                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}" th:text="${i}"></option>
+                    <!--                    <option th:each="i : ${#numbers.sequence(1, 5)}" th:attr="value=${i}" th:text="${i}"></option>-->
+<!--                    <option value="1">1</option>-->
+<!--                    <option value="2">2</option>-->
+<!--                    <option value="3">3</option>-->
+<!--                    <option value="4">4</option>-->
+<!--                    <option value="5">5</option>-->
+
                 </select>
             </div>
             <div align="center" class="col-12">

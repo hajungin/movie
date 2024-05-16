@@ -57,6 +57,9 @@ function check() {
         document.getElementById("email").focus();
         return false;
     }
+//    checkUserId();
+//    return true
+
     alert("입력이 완료되었습니다.");
     document.getElementById("frm").submit();
     return true;
@@ -68,69 +71,30 @@ function res(){
     document.getElementById("userId").focus();
 }
 
+//var userId = [];
+//// 중복 확인 함수
+//function checkUserId() {
+//    var userIdInput = document.getElementById("userId").value;
+//    var messageElement = document.getElementById("message");
+//
+//    // 입력된 아이디가 이미 존재하는지 확인
+//    if (userId.includes(userIdInput)) {
+//        messageElement.innerText = "이미 사용 중인 아이디입니다.";
+//    } else {
+//        messageElement.innerText = "사용 가능한 아이디입니다.";
+//        // 아이디를 배열에 추가
+//        userId.push(userIdInput);
+//    }
+//}
+
 function checkUserId() {
-    var userId = document.getElementById("userId").value;
+    function checkUserId() {
 
-    // AJAX 요청을 생성합니다.
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "/user/signup", true); // 서버의 실제 URL로 변경해야 합니다.
-    xhr.setRequestHeader("Content-Type", "application/json");
 
-    // 요청이 완료되었을 때 실행되는 콜백 함수
-    xhr.onload = function() {
-        if (xhr.status == 200) {
-            var response = JSON.parse(xhr.responseText);
-            if (response.duplicate) {
-                alert("이미 사용 중인 ID입니다.");
-            } else {
-                alert("사용 가능한 ID입니다.");
-            }
-        } else {
-            alert("서버 오류가 발생하였습니다."); // 서버 오류 메시지 표시
-        }
-    };
+    }
 
-    // 요청이 실패한 경우에 대한 처리
-    xhr.onerror = function() {
-        alert("네트워크 오류가 발생하였습니다."); // 네트워크 오류 메시지 표시
-    };
-
-    // 요청을 보냅니다.
-    xhr.send(JSON.stringify({ userId: userId }));
 }
 
-
-$(function(){
-
-
-
-    $("#checkId").click(function(){
-
-        let member_id = $("#member_id").val();
-
-        $.ajax({
-            type:'post', //post 형식으로 controller 에 보내기위함!!
-            url:"/spring/checkId.do", // 컨트롤러로 가는 mapping 입력
-            data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
-            success: function(data){
-                if(data == "N"){ // 만약 성공할시
-                    result = "사용 가능한 아이디입니다.";
-                    $("#result_checkId").html(result).css("color", "green");
-                    $("#member_pw").trigger("focus");
-
-             }else{ // 만약 실패할시
-                 result="이미 사용중인 아이디입니다.";
-                     $("#result_checkId").html(result).css("color","red");
-                     $("#member_id").val("").trigger("focus");
-             }
-
-         },
-            error : function(error){alert(error);}
-        });
-
-    });
-
-});
 
 
 
