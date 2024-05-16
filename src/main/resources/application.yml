@@ -9,15 +9,15 @@ spring:
     username: postgres
     password: 1111
 
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
 
 
   jpa:
     defer-datasource-initialization: true
     hibernate:
-      ddl-auto: create  # 데이터베이스 스키마를 자동으로 생성할 때 사용합니다.
+      ddl-auto: validate  # 데이터베이스 스키마를 자동으로 생성할 때 사용합니다.
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect  # PostgreSQL용 Hibernate 방언
