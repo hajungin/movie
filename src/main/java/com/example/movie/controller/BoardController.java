@@ -3,11 +3,14 @@ package com.example.movie.controller;
 import com.example.movie.config.PrincipalDetails;
 import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
+import com.example.movie.dto.UserDto;
 import com.example.movie.entity.Board;
+import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
 import com.example.movie.repository.BoardRepository;
 import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
+import com.example.movie.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -29,32 +32,62 @@ import java.util.List;
 public class BoardController {
     private final BoardService boardService;
     private final MovieService movieService;
+    private final UserService userService;
 
-    public BoardController(BoardService boardService, MovieService movieService) {
+    public BoardController(BoardService boardService, MovieService movieService, UserService userService) {
         this.boardService = boardService;
         this.movieService = movieService;
+        this.userService = userService;
     }
 
-    @GetMapping("list")
-    public String mainList(Model model,
-                           @PageableDefault(page = 0, size = 10, sort = "boardId",
-                                   direction = Sort.Direction.ASC) Pageable pageable) {
-        Page<BoardDto> boardPage = boardService.viewAllBoard(pageable);
+//    @GetMapping("list")
+//    public String mainList(Model model,
+//                           @PageableDefault(page = 0, size = 10, sort = "boardId",
+//                                   direction = Sort.Direction.ASC) Pageable pageable) {
+//        Page<BoardDto> boardPage = boardService.viewAllBoard(pageable);
+//        int totalPage = boardPage.getTotalPages();
+//        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
+//                pageable.getPageNumber(), totalPage);
+//        model.addAttribute("pagination", barNumbers);
+//        model.addAttribute("paging", boardPage);
+//
+//
+//        return "board/list";
+//    }
 
+    @GetMapping("list")
+    public String boardMainList(Model model,
+                                @PageableDefault(page = 0, size = 10, sort = "boardId",
+                                direction = Sort.Direction.DESC) Pageable pageable){
+        Page<Board> boardPage = boardService.viewBoard(pageable);
         int totalPage = boardPage.getTotalPages();
         List<Integer> barNumbers = boardService.getPaginationBarNumbers(
                 pageable.getPageNumber(), totalPage);
         model.addAttribute("pagination", barNumbers);
         model.addAttribute("paging", boardPage);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName(); // 사용자 이름 가져오기
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof PrincipalDetails) {
+                PrincipalDetails userDetails = (PrincipalDetails) principal;
+                User user = userDetails.getUser();
+                Long userNo = user.getUserNo();
+                model.addAttribute("userNo", userNo);
+            } else {
+                // 사용자 정보가 PrincipalDetails가 아닌 경우에 대한 처리
+                // 예: 다른 방식으로 사용자 정보 추출
+                model.addAttribute("userNo", null);
+            }
+        } else {
+            model.addAttribute("userNo", null);
+        }
+
         return "board/list";
     }
-
-//    @GetMapping("list")
-//    public String mainList(Model model) {
-//        List<BoardDto> boardDtoList = boardService.viewAllBoard();
-//        model.addAttribute("boardDto", boardDtoList);
-//        return "board/list";
-//    }
 
     @GetMapping("insert")
     public String boardInsertForm(Model model) {
