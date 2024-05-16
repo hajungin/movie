@@ -1,6 +1,29 @@
 server:
   port: 8080
 
+
+#spring:
+#  datasource:
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/cnema   # Update JDBC URL for PostgreSQL
+#    username: postgres                             # PostgreSQL username
+#    password: 1111                                 # PostgreSQL password
+#
+#  sql:
+#    init:
+#      mode: always
+#
+#
+#  jpa:
+#    defer-datasource-initialization: true
+#    hibernate:
+#      ddl-auto: create
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect  # Set Hibernate dialect for PostgreSQL
+#        show_sql: true
+#        format_sql: true
+
 #MySQL 연결하기
 spring:
   datasource:
@@ -9,16 +32,16 @@ spring:
     username: root
     password: 1111
 
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
 
 
   jpa:
     defer-datasource-initialization: true
     hibernate:
 
-      ddl-auto: create
+      ddl-auto: validate
 
     properties:
       hibernate:

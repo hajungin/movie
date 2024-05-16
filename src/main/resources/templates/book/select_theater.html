@@ -21,6 +21,7 @@
                     th:value="${locationDto.locationNo}"
                     th:text="${locationDto.locationName}"></option>
             </select>
+
         </div>
         <br>
         <div class="movie-container">
@@ -28,12 +29,15 @@
                 Pick a Movie :
             </label>
             <br>
-            <select name="movie" id="movie">
+            <select name="movie" id="movie" onchange="checkMovieRating()">
                 <option disabled selected value="">영화를 선택해주세요</option>
                 <option th:each="moviesDto : ${moviesDtoList}"
                         th:value="${moviesDto.movieNo}"
-                        th:text="${moviesDto.movieTitle}"></option>
+                        th:text="${moviesDto.movieTitle}"
+                        th:attr="data-rate=${moviesDto.movieRate}"
+                ></option>
             </select>
+            <input type="hidden" id="userYears" th:value="${years}" />
         </div>
         <br>
         <div class="select-container">
@@ -79,6 +83,33 @@
             // 폼을 제출 (선택한 영화, 지점, 날짜 정보가 서버로 전송됨)
             document.getElementById('selectionForm').submit();
         }
+
+        function checkMovieRating() {
+            var selectedMovie = document.getElementById("movie");
+            var selectedOption = selectedMovie.options[selectedMovie.selectedIndex];
+            var selectedMovieRate = selectedOption.getAttribute("data-rate");
+            var years = parseInt(document.getElementById("userYears").value);
+
+            if (selectedMovieRate === "PG-13") {
+                if (years < 15) {
+                    alert("이 영화는 15세 이용가입니다.");
+                    selectedMovie.selectedIndex = 0;
+                    selectedMovie.focus();
+                    return; // Stop further execution
+                }
+            } else if (selectedMovieRate === "PG-17") {
+                if (years < 19) {
+                    alert("이 영화는 19세 이용가입니다.");
+                    selectedMovie.selectedIndex = 0;
+                    selectedMovie.focus();
+                    return; // Stop further execution
+                }
+            }
+
+            // If no alert is shown or conditions are not met, continue with form submission
+            document.getElementById('selectionForm').submit();
+        }
+
     </script>
 </body>
 </html>
