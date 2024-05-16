@@ -26,9 +26,9 @@
                 <label for="content">내용</label>
                 <textarea id="content" name="content" class="form-control" th:field="*{content}"></textarea>
             </div>
-            <div>
-                <label for="userName">작성자</label>
-                <input type="text" id="userName" class="form-control" name="userName" th:field="*{userName}">
+            <div class="mb-3">
+                <label for="username">작성자</label>
+                <input type="text" id="username" name="content" class="form-control" th:value="${username}">
             </div>
             <br>
             <div class="mb-3">
