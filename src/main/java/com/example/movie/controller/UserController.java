@@ -54,24 +54,43 @@ public class UserController {
 
 
 
+//    @PostMapping("signup")
+//    public String singup(@Valid UserDto userDto,
+//                         BindingResult bindingResult){
+//        try{
+//            userService.createUser(userDto);
+//        } catch (DataIntegrityViolationException e){
+//            // 데이터베이스 관련 예외 처리
+//            e.printStackTrace(); // 예외 정보 로깅
+//            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다");
+//            return "user/signup"; // 사용자에게 보여줄 화면 반환
+//        } catch (Exception e){
+//            // 다른 예외 처리
+//            e.printStackTrace(); // 예외 정보 로깅
+//            bindingResult.reject("signupFailed" ,e.getMessage());
+//            return "user/signup"; // 사용자에게 보여줄 화면 반환
+//        }
+//        return "redirect:/cnema";
+//    }
     @PostMapping("signup")
     public String singup(@Valid UserDto userDto,
-                         BindingResult bindingResult){
-        try{
-            userService.createUser(userDto);
-        } catch (DataIntegrityViolationException e){
-            // 데이터베이스 관련 예외 처리
-            e.printStackTrace(); // 예외 정보 로깅
+                     BindingResult bindingResult){
+
+        boolean checkUser = userService.checkId(userDto.getUserId());
+        if (checkUser) {
             bindingResult.reject("signupFailed", "이미 등록된 사용자입니다");
             return "user/signup"; // 사용자에게 보여줄 화면 반환
-        } catch (Exception e){
-            // 다른 예외 처리
-            e.printStackTrace(); // 예외 정보 로깅
-            bindingResult.reject("signupFailed" ,e.getMessage());
-            return "user/signup"; // 사용자에게 보여줄 화면 반환
         }
+        if(!userDto.getPassword1().equals(userDto.getPassword2())){
+            bindingResult.rejectValue("userPassword2", "passwordIncorrect",
+                    "2개의 패스워드가 일치하지 않습니다.");
+            return "signup";
+        }
+
+        userService.createUser(userDto);
         return "redirect:/cnema";
     }
+
 
     @GetMapping("check")
     public String check(@RequestParam(name = "userCheck", required = false) String userId,RedirectAttributes redirectAttributes) {
