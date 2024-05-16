@@ -29,16 +29,19 @@ public class Board {
     private int goodPoint;
 
     @ManyToOne
-    @JoinColumn(name = "movie_no")
+    @JoinColumn(name = "movie_no", nullable = false)
     private Movies movies;
 
     @ManyToOne
-    @JoinColumn(name = "user_no")
+    @JoinColumn(name = "user_no", nullable = false)
     private User user;
 
 //    관람후기 페이지의 뿌릴 생성자 필요
-    public Board(String title, String content) {
+    public Board(String title, String content, int goodPoint, Movies movies, User user) {
         this.title = title;
         this.content = content;
+        this.goodPoint = goodPoint;
+        this.movies = movies;
+        this.user = user;
     }
 }
