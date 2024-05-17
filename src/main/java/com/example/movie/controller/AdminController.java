@@ -158,7 +158,7 @@ public class AdminController {
     @GetMapping("board")
     public String board(Model model,
                         @PageableDefault(page = 0, size = 10, sort = "boardId",
-                                direction = Sort.Direction.ASC) Pageable pageable) {
+                                direction = Sort.Direction.DESC) Pageable pageable) {
         //       넘겨온 페이지 번호로 리스트 받아오기
         Page<Board> boardPage = boardService.pageList(pageable);
 
