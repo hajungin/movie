@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -38,7 +39,9 @@ public class UserController {
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("signup")
-    public String singup(UserDto userDto){
+    public String singup(UserDto userDto,
+                         Model model){
+        model.addAttribute("maxDate", LocalDate.now().toString());
         return "user/signup";
     }
 

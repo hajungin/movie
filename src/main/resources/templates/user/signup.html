@@ -63,9 +63,10 @@
 
             <div class="mb-3">
                 <label for="birth" class="form-label">생년월일</label>
-                <input id="birth" name="birth" type="date" class="form-control" th:field="*{birth}">
+                <input id="birth" name="birth" type="date" class="form-control" th:field="*{birth}" th:max="${maxDate}">
                 <div class="invalid-feedback" th:errors="*{birth}"></div>
             </div>
+
 
             <div class="mb-3">
                 <label for="phone" class="form-label">전화번호</label>
