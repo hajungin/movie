@@ -151,4 +151,11 @@ public class UserService {
         // 엔티티 저장
         userRepository.save(user);
     }
+
+    @Transactional
+    public void leftMonet(Long userNo, int leftMoney) {
+        User user = em.find(User.class, userNo);
+        user.setMoney(leftMoney);
+        em.persist(user);
+    }
 }

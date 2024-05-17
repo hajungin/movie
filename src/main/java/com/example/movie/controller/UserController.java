@@ -128,11 +128,6 @@ public class UserController {
         return "user/login";
     }
 
-    @GetMapping("main")
-    public String userMain(){
-        return "user/user_main";
-    }
-
     @GetMapping("information")
     public String information(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -179,8 +174,8 @@ public class UserController {
         return "user/user_ticket";
     }
     @PostMapping("/deleted/{ticketNo}")
-//    관리자페이지 영화삭제 화면
     public String deleteMovie(@PathVariable("ticketNo") Long ticketNo) {
+
 
         bookService.ticketCancel(ticketNo);
 
@@ -283,10 +278,10 @@ public class UserController {
             // 중복된 사용자 ID가 없을 경우
             userService.money(userDto);
             redirectAttributes.addFlashAttribute("successMessage", "충전 되었습니다.");
-            return "redirect:/user/show";
+            return "redirect:/user/main";
         }
     }
-    @GetMapping("show")
+    @GetMapping("main")
     public String show(Model model){
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -304,6 +299,6 @@ public class UserController {
             log.info(userDto.toString());
             model.addAttribute("userDto", userDto);
         }
-        return "user/showOne";
+        return "user/user_main";
     }
 }
