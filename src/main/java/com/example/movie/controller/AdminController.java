@@ -1,5 +1,6 @@
 package com.example.movie.controller;
 
+import com.example.movie.constant.TotalPrice;
 import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.TicketDto;
@@ -188,6 +189,43 @@ public class AdminController {
 
         return "redirect:/admin/ticket";
     }
+
+    @GetMapping("total")
+    public String totalMoney(Model model){
+//        List<MoviesDto> moviesDtoList = movieService.findAll();
+        List<TicketDto> ticketDtoList = bookService.findAll();
+        log.info(ticketDtoList.toString());
+        model.addAttribute("ticket",ticketDtoList);
+        return "admin/total_money";
+    }
+    @GetMapping("total_movie")
+    public String totalMovie(Model model){
+        List<TotalPrice> ticketName = bookService.findMovie();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/movie";
+    }
+
+    @GetMapping("total_name")
+    public String totalName(Model model){
+        List<TotalPrice> ticketName = bookService.findUser();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/name";
+    }
+
+    @GetMapping("total_location")
+    public String totalLocation(Model model){
+        List<TotalPrice> ticketName = bookService.findLocation();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/location";
+    }
+
+    @GetMapping("total_date")
+    public String totalDate(Model model){
+        List<TotalPrice> ticketName = bookService.findDate();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/date";
+    }
+
 
 
 

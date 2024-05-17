@@ -1,7 +1,9 @@
 package com.example.movie.service;
 
 import com.example.movie.constant.SeatCoordinates;
+import com.example.movie.constant.TotalPrice;
 import com.example.movie.dto.SeatDto;
+import com.example.movie.dto.TicketDto;
 import com.example.movie.entity.*;
 import com.example.movie.repository.SeatRepository;
 import com.example.movie.repository.TicketRepository;
@@ -57,7 +59,7 @@ public class BookService {
     }
 
     //JPQL
-    public List<SeatDto> searchSeatByMovieLocationAndDate(Long movieNo, Long locationNo, LocalDate date){
+    public List<SeatDto> searchSeatByMovieLocationAndDate(Long movieNo, Long locationNo, LocalDate date) {
         String sql = "SELECT s FROM Seat s WHERE s.ticket.movies.movieNo = :movieNo " +
                 "AND s.ticket.location.locationNo = :locationNo AND s.ticket.bookDate = :date";
         TypedQuery<Seat> query = em.createQuery(sql, Seat.class)
@@ -67,12 +69,12 @@ public class BookService {
         List<Seat> seatList = query.getResultList();
 
         return seatList.stream()
-                .map(x->SeatDto.fromSeatEntity(x))
+                .map(x -> SeatDto.fromSeatEntity(x))
                 .toList();
     }
 
     @Transactional
-    public List<Ticket> viewReservationDetails(Long userNo){
+    public List<Ticket> viewReservationDetails(Long userNo) {
 
         String sql = "SELECT t FROM Ticket t WHERE t.user.userNo = :userNo";
         TypedQuery<Ticket> query = em.createQuery(sql, Ticket.class)
@@ -83,7 +85,7 @@ public class BookService {
     }
 
     @Transactional
-    public List<Ticket> viewTicketList(){
+    public List<Ticket> viewTicketList() {
         String sql = "SELECT t FROM Ticket t";
         TypedQuery<Ticket> query = em.createQuery(sql, Ticket.class);
         List<Ticket> ticketList = query.getResultList();
@@ -91,7 +93,7 @@ public class BookService {
     }
 
     @Transactional
-    public void ticketCancel(Long ticketNo){
+    public void ticketCancel(Long ticketNo) {
         Ticket ticket = em.find(Ticket.class, ticketNo);
         int cancel = ticket.getUser().getMoney() + ticket.getTotalPrice();
         User user = em.find(User.class, ticket.getUser().getUserNo());
@@ -101,7 +103,7 @@ public class BookService {
     }
 
     @Transactional
-    public void ticketBookService(Long movieNo, Long locationNo, Long userNo,LocalDate date, String selectedSeats, int totalPrice){
+    public void ticketBookService(Long movieNo, Long locationNo, Long userNo, LocalDate date, String selectedSeats, int totalPrice) {
 
         Movies movies = em.find(Movies.class, movieNo);
         Location location = em.find(Location.class, locationNo);
@@ -129,8 +131,9 @@ public class BookService {
 
 
     }
-//JSON을 사용하지 못 해서 어거지로 문자열로 form 받고 그 form 받은 String 문자열을 분리해서 다시 int로 전환 후 row, column 값에 넣어줌
-    public List<SeatCoordinates>  arrangeSeats (String selectedSeats) {
+
+    //JSON을 사용하지 못 해서 어거지로 문자열로 form 받고 그 form 받은 String 문자열을 분리해서 다시 int로 전환 후 row, column 값에 넣어줌
+    public List<SeatCoordinates> arrangeSeats(String selectedSeats) {
         // 쉼표를 기준으로 문자열을 분리
         String[] parts = selectedSeats.split(",");
 
@@ -152,7 +155,48 @@ public class BookService {
         }
         return seatList;
     }
+
+    public List<TicketDto> findAll() {
+        List<TicketDto> ticketDtoList = ticketRepository.findAll()
+                .stream()
+                .map(x -> TicketDto.fromTicketEntity(x))
+                .toList();
+        return ticketDtoList;
+
+    }
+
+    public List<TotalPrice> findMovie() {
+        String sql = "SELECT t.movies.movieTitle, SUM(t.totalPrice)  FROM Ticket t GROUP BY t.movies.movieTitle ";
+        TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
+        return query.getResultList();
+    }
+
+    public List<TotalPrice> findUser() {
+        String sql = "SELECT t.user.userName, SUM(t.totalPrice)  FROM Ticket t GROUP BY t.user.userName ";
+        TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
+        return query.getResultList();
+    }
+
+    public List<TotalPrice> findLocation() {
+        String sql = "SELECT t.location.locationName, SUM(t.totalPrice)  FROM Ticket t GROUP BY t.location.locationName ";
+        TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
+        return query.getResultList();
+    }
+
+    public List<TotalPrice> findDate() {
+        String sql = "SELECT t.bookDate, SUM(t.totalPrice)  FROM Ticket t GROUP BY t.bookDate ";
+        TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
+        return query.getResultList();
+    }
+
+
 }
+
+//    public List<Ticket> findSum() {
+//        String sql = "SELECT SUM(t.totalPrice) FROM Ticket t ORDER BY t.movies.movieNo";
+//        TypedQuery<Ticket>
+//    }
+//}
 
 
 //JPQL 사용 전 짠 쿼리

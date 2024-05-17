@@ -18,17 +18,25 @@ import java.util.List;
 @Builder
 public class TicketDto {
     private Long ticketNo;
-    private Long movieNo;
-    private Long userNo;
+    private String  movieNo;
+    private String userNo;
     private Long seatId;
-    private Long locationNo;
+    private String locationNo;
     private LocalDate bookDate; //예약 날짜 (영화보는 날짜)
     private int totalPrice;
 
 
 
 
-    public TicketDto(Long ticketNo, String movieTitle, String userName, String locationName, LocalDate bookDate) {
+
+
+    public TicketDto(Long ticketNo, String movieTitle, String userName, String locationName, LocalDate bookDate, int totalPrice) {
+        this.ticketNo = ticketNo;
+        this.movieNo = movieTitle;
+        this.userNo = userName;
+        this.locationNo = locationName;
+        this.bookDate = bookDate;
+        this.totalPrice = totalPrice;
     }
 
     public static TicketDto fromTicketEntity(Ticket ticket){
@@ -37,7 +45,8 @@ public class TicketDto {
                 ticket.getMovies().getMovieTitle(),
                 ticket.getUser().getUserName(),
                 ticket.getLocation().getLocationName(),
-                ticket.getBookDate()
+                ticket.getBookDate(),
+                ticket.getTotalPrice()
         );
     }
 }
