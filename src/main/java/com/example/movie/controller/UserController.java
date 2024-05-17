@@ -18,6 +18,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -33,7 +34,9 @@ public class UserController {
     }
 
     @GetMapping("signup")
-    public String singup(UserDto userDto){
+    public String singup(UserDto userDto,
+                         Model model){
+        model.addAttribute("maxDate", LocalDate.now().toString());
         return "user/signup";
     }
 
@@ -91,7 +94,6 @@ public class UserController {
         userService.createUser(userDto);
         return "redirect:/cnema";
     }
-
 
     @GetMapping("check")
     public String check(@RequestParam(name = "userCheck", required = false) String userId,

@@ -56,7 +56,7 @@
 
             <div class="col-md-6">
                 <label for="movieDate" class="form-label">개봉일</label>
-                <input type="date" class="form-control" th:field="*{movieDate}">
+                <input id="movieDate" name="movieDate" type="date" class="form-control" th:field="*{movieDate}" th:max="${maxDate}">
             </div>
 
             <div class="col-md-6">

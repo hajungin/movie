@@ -70,15 +70,27 @@ public class BoardService {
     }
 
     public void update(BoardDto boardDto) {
-        Board board = Board.builder()
-                .boardId(boardDto.getBoardId())
-                .title(boardDto.getTitle())
-                .content(boardDto.getContent())
-//                .movies(Movies.builder().movieNo(boardDto.getMovieNo()).build())
-//                .user(User.builder().userNo(boardDto.getUserNo()).build())
-                .build();
-        boardRepository.save(board);
+        // 주어진 boardDto의 id로 기존의 board 객체를 조회합니다.
+        Board board = boardRepository.findById(boardDto.getBoardId()).orElse(null);
+
+        // board가 null이 아닌 경우에만 업데이트를 진행합니다.
+        if (board != null) {
+            // boardDto의 필드들을 사용하여 기존의 board 객체를 업데이트합니다.
+            board.setTitle(boardDto.getTitle());
+            board.setContent(boardDto.getContent());
+
+            // movies와 user는 별도의 엔티티이므로 다른 방식으로 업데이트해야 합니다.
+            // 현재 코드는 Movies와 User 객체를 새로 생성하여 board에 설정하고 있습니다.
+            // 따라서 이 부분은 해당 엔티티를 업데이트하는 방법에 따라 적절하게 수정되어야 합니다.
+            // 예를 들어, movies와 user의 id를 사용하여 엔티티를 조회하고 업데이트할 수 있습니다.
+            // 또는 boardDto에 movies와 user의 id를 전달하여 업데이트하는 방식도 가능합니다.
+
+            // 업데이트된 board 객체를 저장합니다.
+            boardRepository.save(board);
+        }
     }
+
+
 
     public void updateGoodPoint(Long movieNo){
         String sql1 = "SELECT AVG(b.goodPoint) FROM Board b WHERE b.movies.movieNO:movieNo";

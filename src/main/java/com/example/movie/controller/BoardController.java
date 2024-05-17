@@ -12,6 +12,7 @@ import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -27,8 +28,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+
 @Controller
 @RequestMapping("board")
+@Slf4j
 public class BoardController {
     private final BoardService boardService;
     private final MovieService movieService;
@@ -104,6 +107,7 @@ public class BoardController {
 
     @PostMapping("/insert")
     public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
+        log.info(dto.toString());
         boardService.insert(dto);
         return "redirect:/board/list";
     }
