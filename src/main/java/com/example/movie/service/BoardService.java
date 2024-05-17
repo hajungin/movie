@@ -48,6 +48,14 @@ public class BoardService {
     public Page<Board> viewBoard(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
+    public Page<Board> viewBoard1(String keyword, Pageable pageable) {
+        return boardRepository.searchMovieTitle(keyword, pageable);
+    }
+    public Page<Board> viewBoard2(String keyword, Pageable pageable) {
+        return boardRepository.searchUser1(keyword, pageable);
+    }
+
+
 
     public void insert(BoardDto dto) {
         Movies movies = em.find(Movies.class, dto.getMovieNo());
@@ -101,7 +109,7 @@ public class BoardService {
         Movies movies = query2.getSingleResult();
         movies.setGoodPointAvg(query1.getSingleResult());
         em.persist(movies);
-            }
+    }
 
 
     @Transactional
@@ -166,31 +174,4 @@ public class BoardService {
         List<BoardDto> boardDtoList = new ArrayList<>();
     }
 
-    public List<BoardDto> searchAll(String type, String keyword) {
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        switch (type) {
-            case "movieNo":
-                // 영화제목 DB 검색
-                boardDtoList = boardRepository.searchMovieTitle(keyword)
-                        .stream()
-                        .map(x->BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-            case "userNo":
-                // 작성자로 DB 검색
-                boardDtoList = boardRepository.searchUser(keyword)
-                        .stream()
-                        .map(x->BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-            default:
-                // 전체 검색
-                boardDtoList = boardRepository.searchQuery()
-                        .stream()
-                        .map(x->BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-        }
-        return boardDtoList;
-    }
 }

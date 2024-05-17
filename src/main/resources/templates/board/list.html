@@ -63,7 +63,8 @@
                 <input type="submit" value="검색">
             </form>
             <br>
-            <nav aria-label="Page navigation example">
+
+            <nav aria-label="Page navigation example" th:if="${flag}">
                 <ul class="pagination">
                     <li class="page-item" th:classappend="${paging != null and paging.number <= 0 ? 'disabled' : ''}">
                         <a class="page-link"
@@ -83,6 +84,32 @@
                     </li>
                 </ul>
             </nav>
+
+
+            <nav aria-label="Page navigation example" th:unless="${flag}">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${paging != null and paging.number <= 0 ? 'disabled' : ''}">
+                        <a class="page-link"
+                           th:href="@{/board/search(type=${type}, keyword=${keyword}, page=${paging != null ? paging.number - 1 : 0})}">
+                            Previous
+                        </a>
+                    </li>
+                    <th:block th:each="pageNumber : ${pagination}">
+                        <li class="page-item">
+                            <a class="page-link"
+                               th:href="@{/board/search(type=${type},keyword=${keyword}, page=${pageNumber})}"
+                               th:text="${pageNumber+1}"></a>
+                        </li>
+                    </th:block>
+                    <li class="page-item" th:classappend="${paging != null and paging.number + 1 == paging.totalPages ? 'disabled' : ''}">
+                        <a class="page-link" th:href="@{/board/search(type=${type},keyword=${keyword},
+                                    page=${paging != null ? paging.number + 1 : 0})}">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
+
+
         </div>
         <br>
         <a class="btn btn-outline-success" th:href="@{/board/insert}"
@@ -92,3 +119,4 @@
 </div>
 </body>
 </html>
+
