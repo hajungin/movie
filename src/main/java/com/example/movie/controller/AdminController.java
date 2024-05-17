@@ -60,8 +60,8 @@ public class AdminController {
     @GetMapping("")
 //    관리자 페이지 메인 화면
     public String adminView(Model model) {
-        List<Movies> moviesList = movieService.GoodMovie();
-        model.addAttribute("movie",moviesList);
+//        List<Movies> moviesList = movieService.GoodMovie();
+//        model.addAttribute("movie",moviesList);
         return "admin/main";
     }
 
