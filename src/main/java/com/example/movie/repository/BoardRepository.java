@@ -1,6 +1,8 @@
 package com.example.movie.repository;
 
 import com.example.movie.entity.Board;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,20 +17,27 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     List<Board> searchQuery();
 
     // 영화제목 검색
-    @Query(value = "select * \n" +
-            "from board \n" +
-            "where movie_no in (\n" +
-            "    select movie_no\n" +
-            "    from movies \n" +
-            "    where movie_title like '%:keyword%'\n" +
-            ") \n" +
-            "order by board_id;\n", nativeQuery = true)
-    List<Board> searchMovieTitle(@Param("keyword")String keyword);
+    @Query(value = "SELECT * FROM board WHERE movie_no IN " +
+            "(SELECT movie_no FROM movies WHERE movie_title LIKE CONCAT('%', :keyword, '%')) " +
+            "ORDER BY board_id",
+            countQuery = "SELECT count(*) FROM board WHERE movie_no IN " +
+                    "(SELECT movie_no FROM movies WHERE movie_title LIKE CONCAT('%', :keyword, '%'))",
+            nativeQuery = true)
+    Page<Board> searchMovieTitle(@Param("keyword") String keyword, Pageable pageable);
+
+    @Query(value = "SELECT * FROM board WHERE user_no IN " +
+            "(SELECT user_no FROM users WHERE user_name LIKE CONCAT('%', :keyword, '%')) " +
+            "ORDER BY board_id",
+            countQuery = "SELECT count(*) FROM board WHERE user_no IN " +
+                    "(SELECT user_no FROM users WHERE user_name LIKE CONCAT('%', :keyword, '%'))",
+            nativeQuery = true)
+    Page<Board> searchUser1(@Param("keyword") String keyword, Pageable pageable);
+
 
     // 유저정보 검색
-    @Query(value = "select * from board where user_no in " +
-            "(select user_no from user where username like %:keyword%) " +
-            "order by board_id", nativeQuery = true)
-    List<Board> searchUser(@Param("keyword") String keyword);
+//    @Query(value = "select * from board where user_no in " +
+//            "(select user_no from user where username like %:keyword%) " +
+//            "order by board_id", nativeQuery = true)
+//    List<Board> searchUser(@Param("keyword") String keyword);
 
 }

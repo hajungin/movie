@@ -48,6 +48,14 @@ public class BoardService {
     public Page<Board> viewBoard(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
+    public Page<Board> viewBoard1(String keyword, Pageable pageable) {
+        return boardRepository.searchMovieTitle(keyword, pageable);
+    }
+    public Page<Board> viewBoard2(String keyword, Pageable pageable) {
+        return boardRepository.searchUser1(keyword, pageable);
+    }
+
+
 
     public void insert(BoardDto dto) {
         Movies movies = em.find(Movies.class, dto.getMovieNo());
@@ -165,4 +173,5 @@ public class BoardService {
     public void search() {
         List<BoardDto> boardDtoList = new ArrayList<>();
     }
+
 }
