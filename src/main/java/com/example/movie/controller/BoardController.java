@@ -71,6 +71,8 @@ public class BoardController {
                 pageable.getPageNumber(), totalPage);
         model.addAttribute("pagination", barNumbers);
         model.addAttribute("paging", boardPage);
+        boolean flag = true;
+        model.addAttribute("flag", flag);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -140,10 +142,73 @@ public class BoardController {
     @GetMapping("/search")
     public String searchBoard(@RequestParam("type")String type,
                               @RequestParam("keyword")String keyword,
+                              @PageableDefault(page = 0, size = 10, sort = "board_id",
+                                      direction = Sort.Direction.DESC) Pageable pageable,
                               Model model) {
-        List<BoardDto> boardDtoList = boardService.searchAll(type, keyword);
-        log.info(boardDtoList.toString());
-        model.addAttribute("boardDto", boardDtoList);
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        boolean flag = false;
+
+        System.out.println(pageable);
+
+        switch (type) {
+            case "movieNo":
+                // 영화제목 DB 검색
+                Page<Board> boardPage = boardService.viewBoard1(keyword,pageable);
+                int totalPage = boardPage.getTotalPages();
+                List<Integer> barNumbers = boardService.getPaginationBarNumbers(
+                        pageable.getPageNumber(), totalPage);
+                model.addAttribute("pagination", barNumbers);
+                model.addAttribute("paging", boardPage);
+                model.addAttribute("flag", flag);
+                model.addAttribute("type", type);
+                model.addAttribute("keyword", keyword);
+                break;
+            case "userNo":
+                // 작성자로 DB 검색
+                Page<Board> boardPage1 = boardService.viewBoard2(keyword,pageable);
+                int totalPage1 = boardPage1.getTotalPages();
+                List<Integer> barNumbers1 = boardService.getPaginationBarNumbers(
+                        pageable.getPageNumber(), totalPage1);
+                model.addAttribute("pagination", barNumbers1);
+                model.addAttribute("paging", boardPage1);
+                model.addAttribute("flag", flag);
+                model.addAttribute("type", type);
+                model.addAttribute("keyword", keyword);
+                String l =keyword;
+
+                break;
+            default:
+                // 전체 검색
+                boardDtoList = boardRepository.searchQuery()
+                        .stream()
+                        .map(x -> BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+        }
+        System.out.println(boardDtoList);
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            String username = authentication.getName(); // 사용자 이름 가져오기
+            Object principal = authentication.getPrincipal();
+
+            if (principal instanceof PrincipalDetails) {
+                PrincipalDetails userDetails = (PrincipalDetails) principal;
+                User user = userDetails.getUser();
+                Long userNo = user.getUserNo();
+                model.addAttribute("userNo", userNo);
+            } else {
+                // 사용자 정보가 PrincipalDetails가 아닌 경우에 대한 처리
+                // 예: 다른 방식으로 사용자 정보 추출
+                model.addAttribute("userNo", null);
+            }
+        } else {
+            model.addAttribute("userNo", null);
+        }
+
+
         return "board/list";
     }
+
 }
