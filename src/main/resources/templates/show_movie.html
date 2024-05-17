@@ -20,15 +20,10 @@
                     <p class="card-text" th:text="'관람 등급 : ' + *{movieRate}"></p>
                     <p class="card-text" th:text="'평점 : ' + *{goodPointAvg}"></p>
 
-                    <form th:action="@{/cnema/board}" method="get">
+                    <form th:action="@{/cinema/board}" method="get">
                         <input type="hidden" name="movieNo" th:value="*{movieNo}">
                         <button type="submit" class="btn btn-primary">관람후기</button>
                     </form>
-
-                    <!--                    <form th:action="@{/cnema/board}" method="get">-->
-                    <!--                        <input type="hidden" name="boardId" th:value="${movie.board.boardId}" />-->
-                    <!--                        <button type="submit" class="btn btn-primary">게시판 정보 보기</button>-->
-                    <!--                    </form>-->
 
                 </div>
             </div>
