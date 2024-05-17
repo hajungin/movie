@@ -8,27 +8,28 @@
 </head>
 <body>
 <div class="content" layout:fragment="content">
-    <div class="container">
-        <form id="frm" name="frm" th:action="@{/user/delete}" method="post" class="container" onsubmit="return validatePassword()">
-            <div class="mb-3">
-                <label for="password" class="form-label">비밀번호</label>
-                <input type="password" id="password" name="password" class="form-control">
-                <input type="hidden" id="hiddenPassword" th:value="${userDto.password1}">
+    <br><br><br>
+            <div th:if="${errorMessage}" class="alert alert-danger" role="alert">
+                <p th:text="${errorMessage}"></p>
             </div>
-            <button type="submit" class="btn btn-primary">회원탈퇴</button>
+
+    <div class="container">
+        <form id="frm" name="frm" th:action="@{/user/delete}" method="post" class="container">
+            <div class="mb-3">
+                <label for="inputPassword" class="form-label">비밀번호</label>
+                <input type="password" id="inputPassword" name="inputPassword" class="form-control">
+            </div>
+            <input type="hidden" id="hiddenPassword" th:field="${userDto.password1}">
+            <input type="hidden" id="userNo" th:field="${userDto.userNo}">
+            <button class="next" type="submit" onclick="validatePassword()">회원탈퇴</button>
         </form>
     </div>
 </div>
-<script th:inline="javascript">
+<script>
     function validatePassword() {
-        var enteredPassword = document.getElementById('password').value;
-        var hiddenPassword = document.getElementById('hiddenPassword').value;
-
-        if (enteredPassword !== hiddenPassword) {
-            alert('비밀번호가 올바르지 않습니다.');
-            return false; // 폼 제출 중단
-        }
-        return true; // 폼 제출 진행
+        const userNo = document.getElementById('userNo').value;
+        const inputPassword = document.getElementById('inputPassword').value;
+        document.getElementById('frm').submit();
     }
 </script>
 </body>
