@@ -36,7 +36,7 @@ public class MainController {
 
     @GetMapping("")
     public String mainView(){
-        return "cnema/cnema_main";
+        return "cnema/cinema_main";
     }
 
     @GetMapping("movie")
