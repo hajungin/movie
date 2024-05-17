@@ -12,6 +12,7 @@ import com.example.movie.service.BoardService;
 import com.example.movie.service.MovieService;
 import com.example.movie.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -25,16 +26,21 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Controller
 @RequestMapping("board")
+@Slf4j
 public class BoardController {
+    private final BoardRepository boardRepository;
     private final BoardService boardService;
     private final MovieService movieService;
     private final UserService userService;
 
-    public BoardController(BoardService boardService, MovieService movieService, UserService userService) {
+    public BoardController(BoardRepository boardRepository, BoardService boardService, MovieService movieService, UserService userService) {
+        this.boardRepository = boardRepository;
         this.boardService = boardService;
         this.movieService = movieService;
         this.userService = userService;
@@ -104,6 +110,7 @@ public class BoardController {
 
     @PostMapping("/insert")
     public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
+        log.info(dto.toString());
         boardService.insert(dto);
         return "redirect:/board/list";
     }
@@ -128,5 +135,15 @@ public class BoardController {
     public String deleteBoard(@PathVariable("deleteId")Long id) {
         boardService.delete(id);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/search")
+    public String searchBoard(@RequestParam("type")String type,
+                              @RequestParam("keyword")String keyword,
+                              Model model) {
+        List<BoardDto> boardDtoList = boardService.searchAll(type, keyword);
+        log.info(boardDtoList.toString());
+        model.addAttribute("boardDto", boardDtoList);
+        return "board/list";
     }
 }

@@ -30,10 +30,10 @@ public class SecurityConfig {
                         .loginPage("/user/login")
                         .loginProcessingUrl("/user/login") //security 가 처리하는 곳
                         .usernameParameter("userId") //userId로 세팅되어있는 걸로도 로그인을 시도하겠다.
-                        .defaultSuccessUrl("/cnema",true)) //로그인 성공했을 때 들어갈 url
+                        .defaultSuccessUrl("/cinema",true)) //로그인 성공했을 때 들어갈 url
 
                 .logout((out)->out
-                        .logoutSuccessUrl("/cnema")
+                        .logoutSuccessUrl("/cinema")
                         .logoutUrl("/logout"))
                 .csrf(csrf -> csrf.disable());
 

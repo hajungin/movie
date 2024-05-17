@@ -1,5 +1,6 @@
 package com.example.movie.controller;
 
+import com.example.movie.constant.TotalPrice;
 import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.TicketDto;
@@ -32,6 +33,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
@@ -80,6 +82,7 @@ public class AdminController {
                              Model model) {
         UserDto userDto = userService.getOneUser(userNo);
         model.addAttribute("userDto", userDto);
+        model.addAttribute("maxDate", LocalDate.now().toString());
 
 //        User user = userService.getOneUserEm(userNo);
 //        model.addAttribute("userDto",user);
@@ -118,6 +121,7 @@ public class AdminController {
 
         MoviesDto moviesDto = movieService.getOneMovie(movieNo);
         model.addAttribute("movie", moviesDto);
+        model.addAttribute("maxDate", LocalDate.now().toString());
         return "admin/movie_update";
     }
 
@@ -138,6 +142,7 @@ public class AdminController {
 //    관리자페이지 영화 등록 화면
     public String insertMovie(Model model) {
         model.addAttribute("movie", new MoviesDto());
+        model.addAttribute("maxDate", LocalDate.now().toString());
         return "admin/movie_insert";
     }
 
@@ -184,6 +189,43 @@ public class AdminController {
 
         return "redirect:/admin/ticket";
     }
+
+    @GetMapping("total")
+    public String totalMoney(Model model){
+//        List<MoviesDto> moviesDtoList = movieService.findAll();
+        List<TicketDto> ticketDtoList = bookService.findAll();
+        log.info(ticketDtoList.toString());
+        model.addAttribute("ticket",ticketDtoList);
+        return "admin/total_money";
+    }
+    @GetMapping("total_movie")
+    public String totalMovie(Model model){
+        List<TotalPrice> ticketName = bookService.findMovie();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/movie";
+    }
+
+    @GetMapping("total_name")
+    public String totalName(Model model){
+        List<TotalPrice> ticketName = bookService.findUser();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/name";
+    }
+
+    @GetMapping("total_location")
+    public String totalLocation(Model model){
+        List<TotalPrice> ticketName = bookService.findLocation();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/location";
+    }
+
+    @GetMapping("total_date")
+    public String totalDate(Model model){
+        List<TotalPrice> ticketName = bookService.findDate();
+        model.addAttribute("ticket",ticketName);
+        return "admin/total/date";
+    }
+
 
 
 
