@@ -71,7 +71,8 @@ public class BoardController {
                 pageable.getPageNumber(), totalPage);
         model.addAttribute("pagination", barNumbers);
         model.addAttribute("paging", boardPage);
-
+        boolean flag = true;
+        model.addAttribute("flag", flag);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
