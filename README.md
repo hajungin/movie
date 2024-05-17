@@ -45,4 +45,9 @@
 ### 게시판
 
 # 🧩 ERD
+![ERD_1](https://github.com/hajungin/movie/blob/master/cinemaERD_1.png)
+
+![ERD_2](https://github.com/hajungin/movie/blob/master/cinemaERD_2.png))
+
+![ERD_3](https://github.com/hajungin/movie/blob/master/cinemaERD_3.png))
 
