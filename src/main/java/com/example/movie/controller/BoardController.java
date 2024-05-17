@@ -73,7 +73,6 @@ public class BoardController {
         model.addAttribute("paging", boardPage);
         boolean flag = true;
         model.addAttribute("flag", flag);
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
         if (authentication != null && authentication.isAuthenticated()) {
@@ -210,5 +209,4 @@ public class BoardController {
 
         return "board/list";
     }
-
 }
