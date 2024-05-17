@@ -15,14 +15,14 @@
         <form id="frm" th:action="@{/board/insert}" method="post" th:object="${boardDto}">
             <div class="mb-3">
                 <label for="username" class="form-label">작성자 ID</label>
-                <input type="text" id="username" name="content" class="form-control" th:value="${username}" readonly>
+                <input type="text" id="username" name="username" class="form-control" th:value="${username}" readonly>
             </div>
             <div class="mb-3">
                 <label for="movieNo" class="form-label">영화</label>
                 <select id="movieNo" name="movieNo" class="form-select" th:field="*{movieNo}">
                     <option value="">영화를 선택하세요</option>
                     <option th:each="movie: ${moviesDtoList}" th:value="${movie.movieNo}"
-                            th:text="${movie.movieTitle}"></option>
+                            th:text="${movie.movieTitle}" ></option>
                 </select>
             </div>
             <div class="mb-3">
@@ -37,7 +37,7 @@
                 <label for="goodPoint" class="form-label">별점</label>
                 <select id="goodPoint" name="goodPoint" class="form-select" th:field="*{goodPoint}">
                     <option th:each="i : ${#numbers.sequence(1, 5)}" th:value="${i}"
-                            th:text="${i}"></option>
+                            th:text="${i}" th:field="*{goodPoint}"></option>
                 </select>
             </div>
             <div class="text-center">
