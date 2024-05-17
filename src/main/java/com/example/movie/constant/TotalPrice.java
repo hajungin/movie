@@ -19,7 +19,6 @@ public class TotalPrice {
         this.price = price;
     }
 
-    // Another constructor for title and price
     public TotalPrice(String title, Long price) {
         this.title = title;
         this.price = price;
