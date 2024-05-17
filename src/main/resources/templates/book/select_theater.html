@@ -31,7 +31,7 @@
             <p th:text="${errorMessage}"></p>
         </div>
 
-        <div class="location-container">
+        <div class="location-container"  style="margin-top: 105px;">
             <label for="location">지점 선택:</label>
             <br><br>
             <select id="location" name="location">
@@ -40,9 +40,10 @@
                     th:value="${locationDto.locationNo}"
                     th:text="${locationDto.locationName}"></option>
             </select>
-
         </div>
+
         <br>
+
         <div class="movie-container">
             <label for="movie">
                 Pick a Movie :

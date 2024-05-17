@@ -100,5 +100,9 @@ public class MovieService {
                 .build();
         moviesRepository.save(movies);
     }
+
+//    public List<Movies> GoodMovie() {
+//        String sql = "SELECT m FROM Movie m "
+//    }
     // 게시판에 영화제목 선택을 위해 추가함
 }
