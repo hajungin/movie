@@ -57,7 +57,7 @@ public class UserController {
 //            redirectAttributes.addFlashAttribute("successMessage", "사용자 ID 중복 확인이 완료되었습니다.");
 //            UserDto userDto = new UserDto();
 //            userService.createUser(userDto);
-//            return "redirect:/cnema";
+//            return "redirect:/cinema";
 //        }
 //    }
 
@@ -79,7 +79,7 @@ public class UserController {
 //            bindingResult.reject("signupFailed" ,e.getMessage());
 //            return "user/signup"; // 사용자에게 보여줄 화면 반환
 //        }
-//        return "redirect:/cnema";
+//        return "redirect:/cinema";
 //    }
     @PostMapping("signup")
     public String singup(@Valid UserDto userDto,
@@ -97,7 +97,7 @@ public class UserController {
         }
 
         userService.createUser(userDto);
-        return "redirect:/cnema";
+        return "redirect:/cinema";
     }
 
     @GetMapping("check")
@@ -154,7 +154,7 @@ public class UserController {
     @PostMapping("information")
     public String informationEdit(@ModelAttribute("userDto") UserDto userDto){
         userService.update(userDto);
-        return "redirect:/cnema";
+        return "redirect:/cinema";
     }
 
 
@@ -264,10 +264,27 @@ public class UserController {
     }
 
     @PostMapping("money")
-    public String moneyInsert(@ModelAttribute("user") UserDto dto){
-        log.info(dto.toString());
-        userService.money(dto);
-        return "redirect:/user/show";
+    public String moneyInsert(@RequestParam("userNo") Long userNo,
+                              @RequestParam("inputPassword") String inputPassword,
+                              @RequestParam("money") int money,
+                              RedirectAttributes redirectAttributes){
+
+        UserDto userDto = userService.getOneUser(userNo);
+        userDto.setMoney(money);
+
+
+
+        String encodedInputPassword = passwordEncoder.encode(inputPassword);
+
+        if (!passwordEncoder.matches(inputPassword, userDto.getPassword1())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "비밀번호를 틀리셨습니다.");
+            return "redirect:/user/money";
+        } else {
+            // 중복된 사용자 ID가 없을 경우
+            userService.money(userDto);
+            redirectAttributes.addFlashAttribute("successMessage", "충전 되었습니다.");
+            return "redirect:/user/show";
+        }
     }
     @GetMapping("show")
     public String show(Model model){
