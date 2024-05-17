@@ -18,7 +18,6 @@ public class BoardDto {
     private Long movieNo;
     private Long userNo;
 
-
     public static BoardDto fromBoardEntity(Board board) {
         return new BoardDto(
                 board.getBoardId(),

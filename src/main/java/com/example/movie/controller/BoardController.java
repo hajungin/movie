@@ -26,6 +26,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -33,11 +34,13 @@ import java.util.List;
 @RequestMapping("board")
 @Slf4j
 public class BoardController {
+    private final BoardRepository boardRepository;
     private final BoardService boardService;
     private final MovieService movieService;
     private final UserService userService;
 
-    public BoardController(BoardService boardService, MovieService movieService, UserService userService) {
+    public BoardController(BoardRepository boardRepository, BoardService boardService, MovieService movieService, UserService userService) {
+        this.boardRepository = boardRepository;
         this.boardService = boardService;
         this.movieService = movieService;
         this.userService = userService;
@@ -132,5 +135,38 @@ public class BoardController {
     public String deleteBoard(@PathVariable("deleteId")Long id) {
         boardService.delete(id);
         return "redirect:/board/list";
+    }
+
+    @GetMapping("/search")
+    public String searchBoard(@RequestParam("type")String type,
+                              @RequestParam("keyword")String keyword,
+                              Model model) {
+//        boardService.search();
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        switch (type) {
+            case "movieNo":
+                // 영화제목 DB 검색
+                boardDtoList = boardRepository.searchMovieTitle(keyword)
+                        .stream()
+                        .map(x -> BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+            case "userNo":
+                // 작성자로 DB 검색
+                boardDtoList = boardRepository.searchUser(keyword)
+                        .stream()
+                        .map(x -> BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+            default:
+                // 전체 검색
+                boardDtoList = boardRepository.searchQuery()
+                        .stream()
+                        .map(x -> BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+        }
+        model.addAttribute("boardDto", boardDtoList);
+        return "board/list";
     }
 }
