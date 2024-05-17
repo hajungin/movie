@@ -162,4 +162,7 @@ public class BoardService {
         return query.getResultList();
     }
 
+    public void search() {
+        List<BoardDto> boardDtoList = new ArrayList<>();
+    }
 }
