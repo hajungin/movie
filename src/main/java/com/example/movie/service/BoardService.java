@@ -109,7 +109,7 @@ public class BoardService {
         Movies movies = query2.getSingleResult();
         movies.setGoodPointAvg(query1.getSingleResult());
         em.persist(movies);
-            }
+    }
 
 
     @Transactional
