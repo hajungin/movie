@@ -14,13 +14,6 @@ body{
 
 }
 
-.location-container{
-    position: absolute;
-    top: 43%; /* 화면 상단에서 세로 중앙에 위치 */
-    left: 50%; /* 화면 왼쪽에서 가로 중앙에 위치 */
-    transform: translate(-50%, -50%); /* 요소의 중앙을 화면의 정확한 중앙으로 이동 */
-
-}
 .location-container select {
     width: 100%; /* 부모 요소에 맞게 너비를 100%로 설정 */
     height: 50px;
