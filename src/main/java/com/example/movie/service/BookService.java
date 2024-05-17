@@ -95,9 +95,12 @@ public class BookService {
     @Transactional
     public void ticketCancel(Long ticketNo) {
         Ticket ticket = em.find(Ticket.class, ticketNo);
+        int cancel = ticket.getUser().getMoney() + ticket.getTotalPrice();
+        User user = em.find(User.class, ticket.getUser().getUserNo());
+        user.setMoney(cancel);
+        em.persist(user);
         em.remove(ticket);
     }
-
 
     @Transactional
     public void ticketBookService(Long movieNo, Long locationNo, Long userNo, LocalDate date, String selectedSeats, int totalPrice) {

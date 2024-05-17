@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -25,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("cnema")
+@RequestMapping("cinema")
 @Slf4j
 public class BookController {
 
@@ -84,7 +85,6 @@ public class BookController {
             }
         }
 
-
         List<LocationDto> locationDtoList = locationService.findAll();
         model.addAttribute("locationDtoList", locationDtoList);
 
@@ -103,7 +103,7 @@ public class BookController {
         session.setAttribute("locationNo", locationNo);
         session.setAttribute("date", date);
 
-        return "redirect:/cnema/seat";
+        return "redirect:/cinema/seat";
     }
 
     @GetMapping("/seat")
@@ -139,7 +139,8 @@ public class BookController {
                              @RequestParam("locationNo") Long locationNo,
                              @RequestParam("date") LocalDate date,
                              @RequestParam("selectedSeats") String selectedSeats,
-                             @RequestParam("totalPrice") int totalPrice){
+                             @RequestParam("totalPrice") int totalPrice,
+                             RedirectAttributes redirectAttributes){
 
         log.info(String.valueOf(movieNo));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -151,12 +152,21 @@ public class BookController {
             PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
 
             // 여기서 userDetails에서 사용자 정보 추출
-            User user = userDetails.getUser();
-            Long userNo = user.getUserNo();
-            bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats, totalPrice);
+            User user1 = userDetails.getUser();
+            Long userNo = user1.getUserNo();
+            User user = userService.getOneUserEm(userNo);
+            if (user.getMoney() < totalPrice) {
+                redirectAttributes.addFlashAttribute("errorMessage"
+                        , "잔액이 부족합니다. 현재 충전 금액은: " + user.getMoney() + "입니다." );
+                return "redirect:/cinema/theater";
+            } else {
+                int leftMoney = user.getMoney() - totalPrice;
+                userService.leftMonet(userNo, leftMoney);
+                bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats, totalPrice);
+            }
         }
-
-        return "redirect:/cnema";
+        redirectAttributes.addFlashAttribute("successMessage", "예매되었습니다.");
+        return "redirect:/cinema";
     }
 
 }
