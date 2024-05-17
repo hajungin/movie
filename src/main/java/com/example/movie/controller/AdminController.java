@@ -32,6 +32,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.UUID;
@@ -80,6 +81,7 @@ public class AdminController {
                              Model model) {
         UserDto userDto = userService.getOneUser(userNo);
         model.addAttribute("userDto", userDto);
+        model.addAttribute("maxDate", LocalDate.now().toString());
 
 //        User user = userService.getOneUserEm(userNo);
 //        model.addAttribute("userDto",user);
@@ -118,6 +120,7 @@ public class AdminController {
 
         MoviesDto moviesDto = movieService.getOneMovie(movieNo);
         model.addAttribute("movie", moviesDto);
+        model.addAttribute("maxDate", LocalDate.now().toString());
         return "admin/movie_update";
     }
 
@@ -138,6 +141,7 @@ public class AdminController {
 //    관리자페이지 영화 등록 화면
     public String insertMovie(Model model) {
         model.addAttribute("movie", new MoviesDto());
+        model.addAttribute("maxDate", LocalDate.now().toString());
         return "admin/movie_insert";
     }
 
