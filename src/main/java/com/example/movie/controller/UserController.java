@@ -92,7 +92,6 @@ public class UserController {
         return "redirect:/cnema";
     }
 
-
     @GetMapping("check")
     public String check(@RequestParam(name = "userCheck", required = false) String userId,
                         Model model,RedirectAttributes redirectAttributes) {
