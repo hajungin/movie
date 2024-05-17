@@ -53,10 +53,12 @@ public class UserService {
                 .userId(userDto.getUserId())
                 .userName(userDto.getUserName())
                 .password(userDto.getPassword1())
-                .password(userDto.getPassword2())
+//                .password(userDto.getPassword2())
+//                금액 충전때문에 잠시 비활 문제 없으면 삭제해도 무관
                 .birth(userDto.getBirth())
                 .phone(userDto.getPhone())
                 .email(userDto.getEmail())
+                .money(userDto.getMoney())
                 .userRole(userDto.getUserRole())
                 .build();
         userRepository.save(user);
@@ -137,5 +139,16 @@ public class UserService {
             System.out.println("사용가능한 아이디입니다.");
             return false;
         }
+    }
+
+    public void money(UserDto dto) {
+        // 기존 사용자 정보 조회
+        User user = userRepository.findById(dto.getUserNo()).orElse(null);
+        // 기존 금액에 추가할 금액을 더함
+        int newMoney = user.getMoney() + dto.getMoney();
+        // 엔티티에 새로운 금액 설정
+        user.setMoney(newMoney);
+        // 엔티티 저장
+        userRepository.save(user);
     }
 }
