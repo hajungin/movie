@@ -165,4 +165,32 @@ public class BoardService {
     public void search() {
         List<BoardDto> boardDtoList = new ArrayList<>();
     }
+
+    public List<BoardDto> searchAll(String type, String keyword) {
+        List<BoardDto> boardDtoList = new ArrayList<>();
+        switch (type) {
+            case "movieNo":
+                // 영화제목 DB 검색
+                boardDtoList = boardRepository.searchMovieTitle(keyword)
+                        .stream()
+                        .map(x->BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+            case "userNo":
+                // 작성자로 DB 검색
+                boardDtoList = boardRepository.searchUser(keyword)
+                        .stream()
+                        .map(x->BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+            default:
+                // 전체 검색
+                boardDtoList = boardRepository.searchQuery()
+                        .stream()
+                        .map(x->BoardDto.fromBoardEntity(x))
+                        .toList();
+                break;
+        }
+        return boardDtoList;
+    }
 }
