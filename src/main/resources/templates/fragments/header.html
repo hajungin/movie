@@ -4,7 +4,7 @@
 <div th:fragment="header">
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand mb-0 h1" th:href="@{/cnema}">CINEMA</a>
+            <a class="navbar-brand mb-0 h1" th:href="@{/cinema}">CINEMA</a>
             <span class="navbar-brand mb-0 h4">CULTUREPLEX</span>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -12,13 +12,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/cnema/movie}">영화</a>
+                        <a class="nav-link" th:href="@{/cinema/movie}">영화</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" th:href="@{/cnema/location}">지점</a>
+                        <a class="nav-link" th:href="@{/cinema/location}">지점</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cnema/theater"
+                        <a class="nav-link" href="/cinema/theater"
                            sec:authorize="isAuthenticated()"
                         >예매</a>
                     </li>
