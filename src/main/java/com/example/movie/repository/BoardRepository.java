@@ -14,6 +14,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query(value = "select * from board order by board_id", nativeQuery = true)
     List<Board> searchQuery();
 
+
     // 영화제목 검색
     @Query(value = "select * \n" +
             "from board \n" +
