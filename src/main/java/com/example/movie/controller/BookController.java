@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping("cnema")
+@RequestMapping("cinema")
 @Slf4j
 public class BookController {
 
@@ -84,7 +84,6 @@ public class BookController {
             }
         }
 
-
         List<LocationDto> locationDtoList = locationService.findAll();
         model.addAttribute("locationDtoList", locationDtoList);
 
@@ -103,7 +102,7 @@ public class BookController {
         session.setAttribute("locationNo", locationNo);
         session.setAttribute("date", date);
 
-        return "redirect:/cnema/seat";
+        return "redirect:/cinema/seat";
     }
 
     @GetMapping("/seat")
@@ -156,7 +155,7 @@ public class BookController {
             bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats, totalPrice);
         }
 
-        return "redirect:/cnema";
+        return "redirect:/cinema";
     }
 
 }

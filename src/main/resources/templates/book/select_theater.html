@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/select_seat_css.css">
 </head>
 <body>
-    <form th:action="@{/cnema/theater}" method="post" id="selectionForm">
+    <form th:action="@{/cinema/theater}" method="post" id="selectionForm">
         <div class="location-container">
             <label for="location">지점 선택:</label>
             <br><br>
@@ -56,7 +56,7 @@
         <button class="next" type="button" onclick="submitSelection()">다음</button>
     </form>
     <br><br>
-        <a href="/cnema">
+        <a href="/cinema">
             <input type="button" value="메인으로" class="back">
         </a>
     <script>

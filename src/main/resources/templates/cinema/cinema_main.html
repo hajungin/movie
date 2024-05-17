@@ -14,6 +14,10 @@
 
 <div class="content" layout:fragment="content">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div th:if="${successMessage}" class="alert alert-success" role="alert">
+                    <p th:text="${successMessage}"></p>
+                </div>
+
         <a class="navbar-brand" href="#">절찬 상영 중</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,7 +30,7 @@
 <!--                    <a class="nav-link" href="#">홈 <span class="sr-only">(current)</span></a>-->
 <!--                </li>-->
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{cnema/movie}">영화 목록</a>
+                    <a class="nav-link" th:href="@{cinema/movie}">영화 목록</a>
                 </li>
             </ul>
         </div>

@@ -8,10 +8,12 @@ import com.example.movie.service.BookService;
 import com.example.movie.service.UserService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,6 +35,9 @@ public class UserController {
         this.bookService = bookService;
     }
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @GetMapping("signup")
     public String singup(UserDto userDto,
                          Model model){
@@ -52,7 +57,7 @@ public class UserController {
 //            redirectAttributes.addFlashAttribute("successMessage", "사용자 ID 중복 확인이 완료되었습니다.");
 //            UserDto userDto = new UserDto();
 //            userService.createUser(userDto);
-//            return "redirect:/cnema";
+//            return "redirect:/cinema";
 //        }
 //    }
 
@@ -74,7 +79,7 @@ public class UserController {
 //            bindingResult.reject("signupFailed" ,e.getMessage());
 //            return "user/signup"; // 사용자에게 보여줄 화면 반환
 //        }
-//        return "redirect:/cnema";
+//        return "redirect:/cinema";
 //    }
     @PostMapping("signup")
     public String singup(@Valid UserDto userDto,
@@ -92,7 +97,7 @@ public class UserController {
         }
 
         userService.createUser(userDto);
-        return "redirect:/cnema";
+        return "redirect:/cinema";
     }
 
     @GetMapping("check")
@@ -149,7 +154,7 @@ public class UserController {
     @PostMapping("information")
     public String informationEdit(@ModelAttribute("userDto") UserDto userDto){
         userService.update(userDto);
-        return "redirect:/cnema";
+        return "redirect:/cinema";
     }
 
 
@@ -198,31 +203,44 @@ public class UserController {
             Long userNo = user.getUserNo();
 
             UserDto userDto = userService.getOneUser(userNo);
+            log.info("=========================================");
+            log.info(userDto.toString());
             model.addAttribute("userDto", userDto);
         }
         return "user/user_delete";
     }
 
-    @PostMapping("delete")
-    public String delete(){
+        @PostMapping("delete")
+        public String signup(@RequestParam("userNo") Long userNo,
+                             @RequestParam("inputPassword") String inputPassword,
+                             RedirectAttributes redirectAttributes) {
 
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            // 사용자의 이름 또는 ID 가져오기
-            String username = authentication.getName();
-            // 또는 PrincipalDetails로 형변환 후 사용자 정보 가져오기
-            PrincipalDetails userDetails = (PrincipalDetails) authentication.getPrincipal();
+        UserDto userDto = userService.getOneUser(userNo);
+        String encodedInputPassword = passwordEncoder.encode(inputPassword);
 
-            // 여기서 userDetails에서 사용자 정보 추출
-            User user = userDetails.getUser();
-            Long userNo = user.getUserNo();
-
+            if (!passwordEncoder.matches(inputPassword, userDto.getPassword1())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "비밀번호를 틀리셨습니다.");
+            return "redirect:/user/delete";
+        } else {
+            // 중복된 사용자 ID가 없을 경우
             userService.delete(userNo);
+            redirectAttributes.addFlashAttribute("successMessage", "삭제 되었습니다.");
+            return "redirect:/logout";
         }
-
-        return "redirect:/logout";
     }
+
+
+//    @PostMapping("delete")
+//    public String delete(@RequestParam("userNo") Long userNo){
+//
+//        log.info("=========================================");
+//        log.info("=========================================");
+//        log.info(userNo.toString());
+//        userService.delete(userNo);
+//
+//        return "redirect:/logout";
+//    }
 
     @GetMapping("money")
     public String moneyView(Model model) {
@@ -246,10 +264,27 @@ public class UserController {
     }
 
     @PostMapping("money")
-    public String moneyInsert(@ModelAttribute("user") UserDto dto){
-        log.info(dto.toString());
-        userService.money(dto);
-        return "redirect:/user/show";
+    public String moneyInsert(@RequestParam("userNo") Long userNo,
+                              @RequestParam("inputPassword") String inputPassword,
+                              @RequestParam("money") int money,
+                              RedirectAttributes redirectAttributes){
+
+        UserDto userDto = userService.getOneUser(userNo);
+        userDto.setMoney(money);
+
+
+
+        String encodedInputPassword = passwordEncoder.encode(inputPassword);
+
+        if (!passwordEncoder.matches(inputPassword, userDto.getPassword1())) {
+            redirectAttributes.addFlashAttribute("errorMessage", "비밀번호를 틀리셨습니다.");
+            return "redirect:/user/money";
+        } else {
+            // 중복된 사용자 ID가 없을 경우
+            userService.money(userDto);
+            redirectAttributes.addFlashAttribute("successMessage", "충전 되었습니다.");
+            return "redirect:/user/show";
+        }
     }
     @GetMapping("show")
     public String show(Model model){

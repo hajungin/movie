@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/css/select_seat_css.css">
 </head>
 <body>
-<form th:action="@{/cnema/seat}" method="post" id="seatForm">
+<form th:action="@{/cinema/seat}" method="post" id="seatForm">
     <div id="container">
         <ul class="showcase">
             <li>
@@ -46,8 +46,13 @@
         <input type="hidden" id="locationNo" name="locationNo" th:value="${locationNo}">
         <input type="hidden" id="date" name="date" th:value="${date}">
 
+        <div>
+            <h1>Total Price: <span id="totalPriceDisplay">0.00</span>krw</h1>
+        </div>
+
+
         <input type="button" value="예매" class="next" onclick="submitForm()">
-        <a href="/cnema">
+        <a href="/cinema">
             <input type="button" value="메인으로" class="back">
         </a>
 
@@ -97,7 +102,10 @@
 function updateTotalPrice() {
     const pricePerSeat = parseFloat(document.getElementById('moviePrice').value);
     const totalPrice = selectedSeats.length * pricePerSeat;
+    document.getElementById('totalPriceDisplay').textContent = totalPrice; // Display the total price
     document.getElementById('totalPriceInput').value = totalPrice; // Ensure it's formatted to two decimal places
+
+
 }
 
 function submitForm() {

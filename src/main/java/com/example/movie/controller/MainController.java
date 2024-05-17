@@ -20,7 +20,7 @@ import java.util.List;
 
 @Controller
 @Slf4j
-@RequestMapping("cnema")
+@RequestMapping("cinema")
 public class MainController {
 
     private final BoardService boardService;
@@ -36,7 +36,7 @@ public class MainController {
 
     @GetMapping("")
     public String mainView(){
-        return "cnema/cnema_main";
+        return "cinema/cinema_main";
     }
 
     @GetMapping("movie")
