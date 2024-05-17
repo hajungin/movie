@@ -109,10 +109,12 @@ public class BookController {
     @GetMapping("/seat")
     public String selectSeatView(Model model, HttpSession session){
         Long movieNo = (Long) session.getAttribute("movieNo");
+        MoviesDto moviesDto = movieService.getOneMovie(movieNo);
+
         Long locationNo = (Long) session.getAttribute("locationNo");
         LocalDate date = (LocalDate) session.getAttribute("date");
 
-        model.addAttribute("movieNo", movieNo);
+        model.addAttribute("moviesDto", moviesDto);
         model.addAttribute("locationNo", locationNo);
         model.addAttribute("date", date);
 
@@ -136,7 +138,8 @@ public class BookController {
     public String selectSeat(@RequestParam("movieNo") Long movieNo,
                              @RequestParam("locationNo") Long locationNo,
                              @RequestParam("date") LocalDate date,
-                             @RequestParam("selectedSeats") String selectedSeats){
+                             @RequestParam("selectedSeats") String selectedSeats,
+                             @RequestParam("totalPrice") int totalPrice){
 
         log.info(String.valueOf(movieNo));
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -150,7 +153,7 @@ public class BookController {
             // 여기서 userDetails에서 사용자 정보 추출
             User user = userDetails.getUser();
             Long userNo = user.getUserNo();
-            bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats);
+            bookService.ticketBookService(movieNo, locationNo, userNo,date, selectedSeats, totalPrice);
         }
 
         return "redirect:/cnema";

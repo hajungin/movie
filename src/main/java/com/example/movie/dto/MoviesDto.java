@@ -25,6 +25,9 @@ public class MoviesDto {
 
     private String img;
 
+    private int price;
+
+
 
 
     public static MoviesDto fromMoviesEntity(Movies movies){
@@ -34,8 +37,8 @@ public class MoviesDto {
                 movies.getMovieDate(),
                 movies.getMovieRate(),
                 movies.getGoodPointAvg(),
-                movies.getImg()
-
+                movies.getImg(),
+                movies.getPrice()
         );
     }
 

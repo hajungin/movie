@@ -39,4 +39,7 @@ public class Ticket {
     @Column
     private LocalDate bookDate; //예약 날짜 (영화보는 날짜)
 
+    private int totalPrice;
+
+
 }

@@ -98,7 +98,7 @@ public class BookService {
 
 
     @Transactional
-    public void ticketBookService(Long movieNo, Long locationNo, Long userNo,LocalDate date, String selectedSeats){
+    public void ticketBookService(Long movieNo, Long locationNo, Long userNo,LocalDate date, String selectedSeats, int totalPrice){
 
         Movies movies = em.find(Movies.class, movieNo);
         Location location = em.find(Location.class, locationNo);
@@ -111,6 +111,7 @@ public class BookService {
         ticket.setBookDate(date);
         ticket.setUser(user);
         ticket.setSeatList(new ArrayList<>());
+        ticket.setTotalPrice(totalPrice);
 
         for (SeatCoordinates seatCoordinates : seatCoordinatesList) {
             Seat seat = new Seat();
