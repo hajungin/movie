@@ -141,31 +141,8 @@ public class BoardController {
     public String searchBoard(@RequestParam("type")String type,
                               @RequestParam("keyword")String keyword,
                               Model model) {
-//        boardService.search();
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        switch (type) {
-            case "movieNo":
-                // 영화제목 DB 검색
-                boardDtoList = boardRepository.searchMovieTitle(keyword)
-                        .stream()
-                        .map(x -> BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-            case "userNo":
-                // 작성자로 DB 검색
-                boardDtoList = boardRepository.searchUser(keyword)
-                        .stream()
-                        .map(x -> BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-            default:
-                // 전체 검색
-                boardDtoList = boardRepository.searchQuery()
-                        .stream()
-                        .map(x -> BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-        }
+        List<BoardDto> boardDtoList = boardService.searchAll(type, keyword);
+        log.info(boardDtoList.toString());
         model.addAttribute("boardDto", boardDtoList);
         return "board/list";
     }
