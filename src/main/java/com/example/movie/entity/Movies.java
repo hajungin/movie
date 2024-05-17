@@ -37,4 +37,6 @@ public class Movies {
     @Column(length = 100000)
     private String img;
 
+    private int price;
+
 }
