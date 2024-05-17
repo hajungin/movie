@@ -16,7 +16,7 @@ body{
 
 .location-container{
     position: absolute;
-    top: 43%; /* 화면 상단에서 세로 중앙에 위치 */
+    top: 290px; /* 화면 상단에서 세로 중앙에 위치 */
     left: 50%; /* 화면 왼쪽에서 가로 중앙에 위치 */
     transform: translate(-50%, -50%); /* 요소의 중앙을 화면의 정확한 중앙으로 이동 */
 
@@ -34,7 +34,7 @@ body{
 
 .select-container {
     position: absolute;
-    top: 60%; /* 화면 상단에서 세로 중앙에 위치 */
+    top: 400px; /* 화면 상단에서 세로 중앙에 위치 */
     left: 50%; /* 화면 왼쪽에서 가로 중앙에 위치 */
     transform: translate(-50%, -50%); /* 요소의 중앙을 화면의 정확한 중앙으로 이동 */
 
@@ -43,7 +43,7 @@ body{
     align-items: center;
     justify-content: center;
     width: 2000px; /* 너비 조정 (예: 200px로 설정) */
-    height: 200px; /* 높이 조정 (예: 100px로 설정) */
+    height: auto; /* 높이 조정 (예: 100px로 설정) */
     margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 auto로 설정 */
     padding: 10px; /* 내부 여백 조정 */
     box-sizing: border-box; /* padding 값이 요소의 크기에 포함되도록 box-sizing 설정 */
@@ -82,40 +82,35 @@ body{
 
 .next{
     position: absolute;
-    top: 80%; /* 화면 상단에서 세로 중앙에 위치 */
-    left: 47%; /* 화면 왼쪽에서 가로 중앙에 위치 */
-    transform: translate(-50%, -50%); /* 요소의 중앙을 화면의 정확한 중앙으로 이동 */
-
+    top: 560px;
+    left: 680px;
+    transform: translate(-50%, -50%);
     font-size: 23px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 70px; /* 너비 조정 (예: 200px로 설정) */
-    height: 60px; /* 높이 조정 (예: 100px로 설정) */
-    margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 auto로 설정 */
-    padding: 10px; /* 내부 여백 조정 */
-    box-sizing: border-box; /* padding 값이 요소의 크기에 포함되도록 box-sizing 설정 */
-
+    width: 121px;
+    height: 60px;
+    margin: 0 auto;
+    padding: 10px;
+    box-sizing: border-box;
 }
-.back{
+
+.back {
     position: absolute;
-    top: 80%; /* 화면 상단에서 세로 중앙에 위치 */
-    left: 54%; /* 화면 왼쪽에서 가로 중앙에 위치 */
-    transform: translate(-50%, -50%); /* 요소의 중앙을 화면의 정확한 중앙으로 이동 */
-
+    top: 560px;
+    left: 830px;
+    transform: translate(-50%, -50%);
     font-size: 23px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90px; /* 너비 조정 (예: 200px로 설정) */
-    height: 60px; /* 높이 조정 (예: 100px로 설정) */
-    margin: 0 auto; /* 가운데 정렬을 위해 좌우 마진을 auto로 설정 */
-    padding: 10px; /* 내부 여백 조정 */
-    box-sizing: border-box; /* padding 값이 요소의 크기에 포함되도록 box-sizing 설정 */
+    margin: 0 auto;
+    padding: 13px;
+    box-sizing: border-box;
 }
-
 
 /* .movieContainer{
     margin: 20px 0px;
