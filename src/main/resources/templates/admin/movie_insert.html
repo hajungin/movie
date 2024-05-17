@@ -50,7 +50,7 @@
 
 		<div class="mb-3">
 			<label for="movieDate" class="form-label">영화 개봉일</label>
-			<input id="movieDate" type="date" class="form-control" th:field="*{movieDate}">
+			<input id="movieDate" name="movieDate" type="date" class="form-control" th:field="*{movieDate}" th:max="${maxDate}">
 		</div>
 
 		<div class="mb-3">
