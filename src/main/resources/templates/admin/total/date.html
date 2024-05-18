@@ -30,6 +30,9 @@
             </li>
         </ul>
         <div class="table-responsive">
+            <br>
+            <h5 class="text-center">🗓 날짜 매출 🗓</h5>
+            <br>
             <table class="table table-bordered table-striped">
                 <thead class="table-primary">
                 <tr>
@@ -43,7 +46,18 @@
                     <td th:text="${ticket.price}"></td>
                 </tr>
                 </tbody>
+                <thead class="table-secondary">
+                <tr>
+                    <th>총합</th>
+                    <th th:text="${formattedSum}"></th>
+                </tr>
+                </thead>
             </table>
+            <div class="text-center">
+                <a class="btn btn-outline-success" th:href="@{/admin/total_movie}">영화별</a>
+                <a class="btn btn-outline-success" th:href="@{/admin/total_name}">회원별</a>
+                <a class="btn btn-outline-success" th:href="@{/admin/total_location}">지점별</a>
+            </div>
         </div>
     </div>
 </div>

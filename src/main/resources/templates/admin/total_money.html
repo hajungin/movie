@@ -41,11 +41,11 @@
 			<span class="nav-link">|</span>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" th:href="@{/admin/total}">총 매출 확인</a>
+			<a class="nav-link active" th:href="@{/admin/total}">총 매출 확인</a>
 		</li>
 	</ul>
 		<br>
-		<h4 class="text-center">$$$ 총 매출 $$$</h4>
+		<h4 class="text-center">📃 총 매출 📃</h4>
 		<br>
 
 	<div class="table-responsive">
@@ -65,34 +65,18 @@
 			<tr th:each="ticket : ${ticket}" th:object="${ticket}">
 				<td th:text="*{ticketNo}"></td>
 				<td th:text="*{movieNo}"></td>
-
-<!--				<td th:text="*{#strings.substring(movieDate,0,4)} + '년' +-->
-<!--                    *{#strings.substring(movieDate,5,7)} + '월' +-->
-<!--                    *{#strings.substring(movieDate,8,10)} + '일'">-->
-<!--				</td>-->
-
 				<td th:text="*{userNo}"></td>
 				<td th:text="*{locationNo}"></td>
 				<td th:text="*{bookDate}"></td>
 				<td th:text="*{totalPrice}"></td>
 			</tr>
 			</tbody>
-
-<!--			<tr>-->
-<!--				<th>영화별</th>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<th>이름별</th>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<th>위치별</th>-->
-<!--			</tr>-->
-
-<!--			<tr>-->
-<!--				<th>날짜별</th>-->
-<!--			</tr>-->
+			<thead class="table-secondary">
+			<tr>
+				<th class="text-center" colspan="5">총합</th>
+				<th th:text="${formattedSum}"></th>
+			</tr>
+			</thead>
 
 		</table>
 	</div>

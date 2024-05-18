@@ -2,7 +2,7 @@ function check() {
     var movieTitle = document.getElementById("movieTitle").value.trim();
     var movieDate = document.getElementById("movieDate").value.trim();
     var movieRate = document.getElementById("movieRate").value;
-    var goodPointAvg = document.getElementById("goodPointAvg").value;
+
 
 
 //    if (movieTitle.length == 0) {
@@ -24,11 +24,6 @@ function check() {
             alert("영화 등급이 입력되지 않았습니다.");
             document.getElementById("movieRate").focus();
             return false;
-    }
-    if (goodPointAvg.length == 0) {
-                alert("영화 평점이 입력되지 않았습니다.");
-                document.getElementById("goodPointAvg").focus();
-                return false;
     }
     alert("입력이 완료되었습니다.");
     document.getElementById("frm").submit();
