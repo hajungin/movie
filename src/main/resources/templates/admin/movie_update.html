@@ -26,7 +26,7 @@
                 <span class="nav-link">|</span>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
+                <a class="nav-link active" th:href="@{/admin/movie}">영화관리</a>
             </li>
             <li class="nav-item">
                 <span class="nav-link">|</span>
@@ -47,22 +47,23 @@
                 <a class="nav-link" th:href="@{/admin/total}">총 매출 확인</a>
             </li>
         </ul>
-
+        <br>
+        <h4 class="text-center">🎥🔨 영화 수정 🎥🔨</h4>
         <br>
 
         <form id="frm" th:action="@{/admin/movie_update}" method="post" th:object="${movie}" class="row g-3">
             <div align="center" class="col-md-6 offset-md-3">
-                <label for="id" class="form-label text-center">ID : [[*{movieNo}]]</label>
+                <label class="form-label text-center">ID : [[*{movieNo}]]</label>
             </div>
 
             <div class="col-md-6">
                 <label for="movieTitle" class="form-label">영화제목</label>
-                <input type="text" class="form-control" th:field="*{movieTitle}">
+                <input id="movieTitle" type="text" class="form-control" th:field="*{movieTitle}">
             </div>
 
             <div class="col-md-6">
                 <label for="movieDate" class="form-label">개봉일</label>
-                <input id="movieDate" name="movieDate" type="date" class="form-control" th:field="*{movieDate}" th:max="${maxDate}">
+                <input id="movieDate" name="movieDate" type="date" class="form-control" th:field="*{movieDate}">
             </div>
 
             <div class="col-md-6">
@@ -78,10 +79,11 @@
 
             <div class="col-md-6">
                 <label for="goodPointAvg" class="form-label">영화 평점</label>
-                <input type="text" class="form-control" th:field="*{goodPointAvg}">
+                <input id="goodPointAvg" type="text" class="form-control" th:field="*{goodPointAvg}" readonly>
             </div>
 
             <input type="hidden" th:field="*{movieNo}">
+            <input type="hidden" th:field="*{img}">
 
             <div align="center" class="col-12">
                 <button type="button" class="btn btn-primary" onclick="check()">수정</button>

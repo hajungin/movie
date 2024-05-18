@@ -9,10 +9,12 @@
 </head>
 <body>
 <div class="content" layout:fragment="content">
-    <h1 align="center">*** Movie ***</h1>
+    <br>
+    <h1 align="center">🎬 Movie 🎬</h1>
+    <br>
     <div class="row">
         <div class="col-lg-4 col-md-6 mb-4 px-3" th:each="movie : ${movie}" th:object="${movie}">
-            <div class="card">
+            <div class="card h-100 bg-light">
                 <img th:src="@{*{img}}" class="card-img-top" alt="..." width="150" height="350">
                 <div class="card-body">
                     <h5 class="card-title" th:text="*{movieTitle}"></h5>

@@ -25,7 +25,7 @@
                 <span class="nav-link">|</span>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/movie}">영화관리</a>
+                <a class="nav-link active" th:href="@{/admin/movie}">영화관리</a>
             </li>
             <li class="nav-item">
                 <span class="nav-link">|</span>
@@ -46,18 +46,22 @@
                 <a class="nav-link" th:href="@{/admin/total}">총 매출 확인</a>
             </li>
         </ul>
-            <h4 class="text-center">*** 영화관리 ***</h4>
-
-    <br>
+        <br>
+            <h4 class="text-center">📽 영화관리 📽</h4>
+        <br>
+        <div class="text-end">
+            <a class="btn btn-outline-success" th:href="@{/admin/insert}">등록</a>
+        </div>
+        <br>
     <div class="table-responsive">
         <table class="table table-bordered border-primary">
             <thead class="table-primary">
             <tr>
                 <th>영화번호</th>
                 <th>영화제목</th>
-                <th>영화 날짜</th>
-                <th>영화 등급</th>
-                <th>영화 평점</th>
+                <th>개봉일</th>
+                <th>등급</th>
+                <th>평점</th>
                 <th>수정</th>
                 <th>삭제</th>
                 <th>상세페이지</th>
@@ -92,9 +96,7 @@
             </tr>
             </tbody>
         </table>
-        <div class="text-end">
-            <a class="btn btn-outline-success" th:href="@{/admin/insert}">등록</a>
-        </div>
+
     </div>
     </div>
 </div>

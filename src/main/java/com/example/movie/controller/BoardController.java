@@ -5,6 +5,7 @@ import com.example.movie.dto.BoardDto;
 import com.example.movie.dto.MoviesDto;
 import com.example.movie.dto.UserDto;
 import com.example.movie.entity.Board;
+import com.example.movie.entity.Movies;
 import com.example.movie.entity.Ticket;
 import com.example.movie.entity.User;
 import com.example.movie.repository.BoardRepository;
@@ -110,8 +111,11 @@ public class BoardController {
     }
 
     @PostMapping("/insert")
-    public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto) {
+    public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto,
+                                  @RequestParam("movieNo") Long movieNo,
+                                  @RequestParam("goodPoint") double goodPoint) {
         log.info(dto.toString());
+        movieService.updateGoodPoint(movieNo,goodPoint);
         boardService.insert(dto);
         return "redirect:/board/list";
     }
@@ -127,7 +131,10 @@ public class BoardController {
     }
 
     @PostMapping("update")
-    public String boardUpdateView(@ModelAttribute("boardDto")BoardDto boardDto) {
+    public String boardUpdateView(@ModelAttribute("boardDto")BoardDto boardDto,
+                                  @RequestParam("movieNo") Long movieNo,
+                                  @RequestParam("goodPoint") double goodPoint) {
+        movieService.updateGoodPoint(movieNo,goodPoint);
         boardService.update(boardDto);
         return "redirect:/board/list";
     }
