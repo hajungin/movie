@@ -118,24 +118,8 @@
 
 # 🎬 화면구성
 ### 메인화면
-<head>
-    <meta charset="UTF-8">
-    <title>영화 메인 페이지</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body style="background-image: url('https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimg.freepik.com%2Ffree-vector%2Fcinema-realistic-poster-with-illuminated-bucket-of-popcorn-drink-3d-glasses-reel-tickets-on-blue-background-with-tapes-vector-illustration_1284-77070.jpg&type=sc960_832');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-position: center;">
-
-<div class="content" layout:fragment="content">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" th:href="@{/cinema}">절찬 상영 중</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
+  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></head>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -146,7 +130,7 @@
     </nav>
     <br>
 
-    <div class="row">
+  <div class="row">
         <div class="col-lg-4 col-md-6 mb-4" th:each="movie : ${movie}" th:object="${movie}">
             <div class="card h-100 bg-light"> <!-- 여기에서 bg-light 클래스 추가 -->
                 <img th:src="@{*{img}}" class="card-img-top" alt="영화 포스터" style="height: 350px; object-fit: cover;">
@@ -160,8 +144,6 @@
         </div>
     </div>
 </div>
-</body>
-</html>
 ![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
 
 
