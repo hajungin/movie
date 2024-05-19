@@ -11,43 +11,9 @@
 
 
 # 🧑‍🤝‍🧑 맴버구성
-<div style="display: flex; gap: 10px;">
-
-  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; width: 30%;">
-    <h3>팀원 1 : 하정인</h3>
-    <ul>
-      <li>메인페이지 구현</li>
-      <li>영화 및 지점 목록 관리</li>
-      <li>관리자 페이지(CRUD) 관리
-         - (회원, 영화, 티켓, 게시판, 매출)관리</li>
-      <li>회원가입</li>
-      <li>PPT 제작</li>
-    </ul>
-  </div>
-
-  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; width: 30%;">
-    <h3>팀원 2 : 이정민</h3>
-    <ul>
-      <li>좌석 기능 구현</li>
-      <li>티켓 예약 관리</li>
-      <li>로그인</li>
-      <li>마이 페이지(CRUD)</li>
-      <li>예매 내역</li>
-      <li>발표</li>
-    </ul>
-  </div>
-
-  <div style="border: 1px solid #ddd; border-radius: 8px; padding: 16px; width: 30%;">
-    <h3>팀원 3 : 이호중</h3>
-    <ul>
-      <li>게시판 페이징 처리</li>
-      <li>게시판 (CRUD) 검색 기능</li>
-      <li>영화 평점</li>
-      <li>PPT 제작</li>
-    </ul>
-  </div>
-
-</div>
+- 팀원 1 : 하정인 - 메인페이지 구현, 영화 및 지점 목록관리, 관리자페이지(CRUD) (회원, 영화, 티켓, 게시판, 매출)관리 및 회원가입, ppt 제작
+- 팀원 2 : 이정민 - 좌석 기능 구현, 티켓 예약 관리, 로그인, 마이 페이지(CRUD), 예매 내역, 발표
+- 팀원 3 : 이호중 - 게시판 페이징 처리, 게시판 (CRUD) 검색 기능,영화 평점, ppt 제작
 
 
 ---
