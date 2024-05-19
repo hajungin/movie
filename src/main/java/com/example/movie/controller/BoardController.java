@@ -47,21 +47,6 @@ public class BoardController {
         this.userService = userService;
     }
 
-//    @GetMapping("list")
-//    public String mainList(Model model,
-//                           @PageableDefault(page = 0, size = 10, sort = "boardId",
-//                                   direction = Sort.Direction.ASC) Pageable pageable) {
-//        Page<BoardDto> boardPage = boardService.viewAllBoard(pageable);
-//        int totalPage = boardPage.getTotalPages();
-//        List<Integer> barNumbers = boardService.getPaginationBarNumbers(
-//                pageable.getPageNumber(), totalPage);
-//        model.addAttribute("pagination", barNumbers);
-//        model.addAttribute("paging", boardPage);
-//
-//
-//        return "board/list";
-//    }
-
     @GetMapping("list")
     public String boardMainList(Model model,
                                 @PageableDefault(page = 0, size = 10, sort = "boardId",

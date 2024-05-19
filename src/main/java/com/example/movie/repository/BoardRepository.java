@@ -16,7 +16,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     @Query(value = "select * from board order by board_id", nativeQuery = true)
     List<Board> searchQuery();
 
-
     // 영화제목 검색
     @Query(value = "SELECT * FROM board WHERE movie_no IN " +
             "(SELECT movie_no FROM movies WHERE movie_title LIKE CONCAT('%', :keyword, '%')) " +
@@ -26,6 +25,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
             nativeQuery = true)
     Page<Board> searchMovieTitle(@Param("keyword") String keyword, Pageable pageable);
 
+    // 작성자 검색
     @Query(value = "SELECT * FROM board WHERE user_no IN " +
             "(SELECT user_no FROM users WHERE user_name LIKE CONCAT('%', :keyword, '%')) " +
             "ORDER BY board_id",
@@ -33,12 +33,4 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
                     "(SELECT user_no FROM users WHERE user_name LIKE CONCAT('%', :keyword, '%'))",
             nativeQuery = true)
     Page<Board> searchUser1(@Param("keyword") String keyword, Pageable pageable);
-
-
-    // 유저정보 검색
-//    @Query(value = "select * from board where user_no in " +
-//            "(select user_no from user where username like %:keyword%) " +
-//            "order by board_id", nativeQuery = true)
-//    List<Board> searchUser(@Param("keyword") String keyword);
-
 }
