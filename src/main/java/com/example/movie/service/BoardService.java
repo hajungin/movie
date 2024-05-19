@@ -32,14 +32,6 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-//    public List<BoardDto> viewAllBoard(Pageable pageable) {
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//        return boardRepository.findAll(pageable)
-//                .stream()
-//                .map(x -> BoardDto.fromBoardEntity(x))
-//                .toList();
-//    }
-
     public Page<BoardDto> viewAllBoard(Pageable pageable) {
         return boardRepository.findAll(pageable)
                 .map(BoardDto::fromBoardEntity);
@@ -48,14 +40,14 @@ public class BoardService {
     public Page<Board> viewBoard(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
+
     public Page<Board> viewBoard1(String keyword, Pageable pageable) {
         return boardRepository.searchMovieTitle(keyword, pageable);
     }
+
     public Page<Board> viewBoard2(String keyword, Pageable pageable) {
         return boardRepository.searchUser1(keyword, pageable);
     }
-
-
 
     public void insert(BoardDto dto) {
         Movies movies = em.find(Movies.class, dto.getMovieNo());
@@ -65,7 +57,6 @@ public class BoardService {
         User user1 = userDetails.getUser();
         Long userNo = user1.getUserNo();
         User user = em.find(User.class, userNo);
-
 
         Board board = Board.builder()
                 .boardId(dto.getBoardId())
@@ -120,6 +111,7 @@ public class BoardService {
     }
 
     private static final int BAR_LENGTH=5;
+
     public List<Integer> getPaginationBarNumbers(int pageNumber, int totalPage) {
         int startNumber = Math.max(pageNumber-(BAR_LENGTH/2),0);
 
@@ -151,5 +143,4 @@ public class BoardService {
     public void search() {
         List<BoardDto> boardDtoList = new ArrayList<>();
     }
-
 }

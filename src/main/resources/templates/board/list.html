@@ -35,7 +35,6 @@
                     <td th:text="*{content}"></td>
                     <td th:text="${board.user != null ? board.user.userName : ''}" th:value="${board.user != null ? board.user.userNo : ''}"></td>
                     <td th:text="*{goodPoint}"></td>
-
                     <td th:if="${userNo != null and board.user != null and board.user.userNo == userNo}">
                         <form th:action="@{/board/update}" method="get">
                             <input type="hidden" name="updateId" th:value="*{boardId}">
@@ -85,7 +84,6 @@
                 </ul>
             </nav>
 
-
             <nav aria-label="Page navigation example" th:unless="${flag}">
                 <ul class="pagination">
                     <li class="page-item" th:classappend="${paging != null and paging.number <= 0 ? 'disabled' : ''}">
@@ -107,9 +105,6 @@
                     </li>
                 </ul>
             </nav>
-
-
-
         </div>
         <br>
         <a class="btn btn-outline-success" th:href="@{/board/insert}"

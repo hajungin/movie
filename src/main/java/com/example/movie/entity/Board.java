@@ -12,8 +12,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Board {
-
-//  게시판 board_id(pk),title,content, movie_no,user_id, good_point
     @Id
     @Column(name = "board_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서  나중에 AUTO로 전환
@@ -36,7 +34,7 @@ public class Board {
     @JoinColumn(name = "user_no", nullable = false)
     private User user;
 
-//    관람후기 페이지의 뿌릴 생성자 필요
+    // 관람후기 페이지의 뿌릴 생성자 필요
     public Board(String title, String content, int goodPoint, Movies movies, User user) {
         this.title = title;
         this.content = content;
