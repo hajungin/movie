@@ -117,34 +117,26 @@
 ---
 
 # 🎬 화면구성
-### 메인화면
-  
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"></head>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{cinema/movie}">영화 목록</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-    <br>
-
-  <div class="row">
-        <div class="col-lg-4 col-md-6 mb-4" th:each="movie : ${movie}" th:object="${movie}">
-            <div class="card h-100 bg-light"> <!-- 여기에서 bg-light 클래스 추가 -->
-                <img th:src="@{*{img}}" class="card-img-top" alt="영화 포스터" style="height: 350px; object-fit: cover;">
-                <div class="card-body">
-                    <h5 class="card-title" th:text="*{movieTitle}"></h5>
-                    <p class="card-text" th:text="'개봉일 : ' + *{movieDate}"></p>
-                    <p class="card-text" th:text="'관람 등급 : ' + *{movieRate}"></p>
-                    <p class="card-text" th:text="'평점 : ' + *{goodPointAvg}"></p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+### 영화 메인 화면
 ![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
+
+
+### 로그인 및 내 정보 화면
+![image](https://github.com/hajungin/movie/assets/162389696/b1e9e446-45a5-4b48-9e1a-9e55f40dfad2)
+
+
+### 영화 예매 화면 
+![image](https://github.com/hajungin/movie/assets/162389696/67f37aee-59c9-4e7f-b8b2-b61b49431b75)
+
+
+### 영화 게시판 화면
+![image](https://github.com/hajungin/movie/assets/162389696/d232dc3d-c39c-410c-8751-9c141b812605)
+
+
+### 영화 관리자 메인 화면
+![image](https://github.com/hajungin/movie/assets/162389696/ba14c7f0-5902-4745-a7b3-ea9aed727b2f)
+
+
 
 
   
