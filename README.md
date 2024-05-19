@@ -118,44 +118,50 @@
 
 # 🎬 화면구성
 ### 메인화면
-<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+<head>
+    <meta charset="UTF-8">
+    <title>영화 메인 페이지</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body style="background-image: url('https://search.pstatic.net/sunny/?src=https%3A%2F%2Fimg.freepik.com%2Ffree-vector%2Fcinema-realistic-poster-with-illuminated-bucket-of-popcorn-drink-3d-glasses-reel-tickets-on-blue-background-with-tapes-vector-illustration_1284-77070.jpg&type=sc960_832');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;">
 
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/main_page.png" alt="메인 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>메인 페이지</p>
-  </div>
+<div class="content" layout:fragment="content">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" th:href="@{/cinema}">절찬 상영 중</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/login.png" alt="로그인" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>로그인</p>
-  </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{cinema/movie}">영화 목록</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <br>
 
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/signup.png" alt="회원가입" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>회원가입</p>
-  </div>
-
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/profile.png" alt="프로필 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>프로필 페이지</p>
-  </div>
-
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/movie_detail.png" alt="영화 상세 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>영화 상세 페이지</p>
-  </div>
-
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/review.png" alt="리뷰 작성 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>리뷰 작성 페이지</p>
-  </div>
-
-  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
-    <img src="https://github.com/yourusername/yourrepo/blob/master/images/search.png" alt="영화 / 해시태그 검색 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
-    <p>영화 / 해시태그 검색 페이지</p>
-  </div>
-
+    <div class="row">
+        <div class="col-lg-4 col-md-6 mb-4" th:each="movie : ${movie}" th:object="${movie}">
+            <div class="card h-100 bg-light"> <!-- 여기에서 bg-light 클래스 추가 -->
+                <img th:src="@{*{img}}" class="card-img-top" alt="영화 포스터" style="height: 350px; object-fit: cover;">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="*{movieTitle}"></h5>
+                    <p class="card-text" th:text="'개봉일 : ' + *{movieDate}"></p>
+                    <p class="card-text" th:text="'관람 등급 : ' + *{movieRate}"></p>
+                    <p class="card-text" th:text="'평점 : ' + *{goodPointAvg}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+</body>
+</html>
 ![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
 
 
