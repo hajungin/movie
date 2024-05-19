@@ -85,6 +85,8 @@
 
 # 🎬 화면구성
 ### 메인화면
+![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
+
 
   
 # 🧩 ERD
