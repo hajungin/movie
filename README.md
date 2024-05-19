@@ -83,6 +83,9 @@
 
 ---
 
+# 🎬 화면구성
+### 메인화면
+
   
 # 🧩 ERD
 ![ERD_1](https://github.com/hajungin/movie/blob/master/cinemaERD_1.png)
