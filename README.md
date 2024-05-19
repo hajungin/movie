@@ -135,7 +135,8 @@
 
 
 ### 영화 관리자 메인 화면
-![image](https://github.com/hajungin/movie/assets/162389696/ba14c7f0-5902-4745-a7b3-ea9aed727b2f)
+![image](https://github.com/hajungin/movie/assets/162389696/f49b0c3e-3c01-4482-b33a-822195eccf54)
+
 
 
 
