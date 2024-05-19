@@ -118,6 +118,44 @@
 
 # 🎬 화면구성
 ### 메인화면
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/main_page.png" alt="메인 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>메인 페이지</p>
+  </div>
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/login.png" alt="로그인" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>로그인</p>
+  </div>
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/signup.png" alt="회원가입" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>회원가입</p>
+  </div>
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/profile.png" alt="프로필 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>프로필 페이지</p>
+  </div>
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/movie_detail.png" alt="영화 상세 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>영화 상세 페이지</p>
+  </div>
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/review.png" alt="리뷰 작성 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>리뷰 작성 페이지</p>
+  </div>
+
+  <div style="flex: 1 1 calc(33.333% - 10px); box-sizing: border-box; border: 1px solid #ddd; border-radius: 8px; padding: 16px; text-align: center;">
+    <img src="https://github.com/yourusername/yourrepo/blob/master/images/search.png" alt="영화 / 해시태그 검색 페이지" style="width: 100%; border-bottom: 1px solid #ddd; padding-bottom: 10px;">
+    <p>영화 / 해시태그 검색 페이지</p>
+  </div>
+
+</div>
 ![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
 
 
