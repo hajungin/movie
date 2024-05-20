@@ -1,4 +1,4 @@
-# 🍿 Ticketing
+# 🎬 Ticketing
 영화 예매 사이트 구현
 
 ---
@@ -20,6 +20,27 @@
 
 
 # 🛠 기술 스택
+## _Frontend_
+- HTML
+- CSS
+- JavaScript
+
+
+## _Backend_
+#### 1)_Language_
+- JAVA 17
+- JSP
+
+#### 2)_FrameWork_
+- Spring Boot
+
+#### 3)_Server_
+- Tomcat
+
+#### 4)_DataBase_
+- PostgreSQL
+
+  ----
 - **JAVA 17**: 최신 기능과 성능 향상을 제공하는 프로그래밍 언어
 - **Spring Boot**: 빠르고 간편한 설정으로 효율적인 개발을 지원
   - Spring Data JPA: 데이터베이스와의 효율적인 연동
