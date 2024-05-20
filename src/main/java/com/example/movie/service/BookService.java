@@ -162,7 +162,11 @@ public class BookService {
                 .map(x -> TicketDto.fromTicketEntity(x))
                 .toList();
         return ticketDtoList;
-
+    }
+    public Long All() {
+        String sql = "SELECT SUM(t.totalPrice) FROM Ticket t";
+        TypedQuery<Long> query = em.createQuery(sql, Long.class);
+        return query.getSingleResult();
     }
 
     public List<TotalPrice> findMovie() {
@@ -170,17 +174,33 @@ public class BookService {
         TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
         return query.getResultList();
     }
+    public Long SumMovie() {
+        String sql = "SELECT SUM(t.totalPrice) FROM Ticket t WHERE t.movies IN (SELECT t.movies FROM Ticket t)";
+        TypedQuery<Long> query = em.createQuery(sql, Long.class);
+        return query.getSingleResult();
+    }
 
     public List<TotalPrice> findUser() {
-        String sql = "SELECT t.user.userName, SUM(t.totalPrice)  FROM Ticket t GROUP BY t.user.userName ";
+        String sql = "SELECT t.user.userName, SUM(t.totalPrice) FROM Ticket t GROUP BY t.user.userName ";
+        TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
+        return query.getResultList();
+    }
+    public Long SumUser(){
+        String sql = "SELECT SUM(t.totalPrice) FROM Ticket t WHERE t.user IN (SELECT t.user FROM Ticket t)";
+        TypedQuery<Long> query = em.createQuery(sql, Long.class);
+        return query.getSingleResult();
+    }
+
+    public List<TotalPrice> findLocation() {
+        String sql = "SELECT t.location.locationName, SUM(t.totalPrice) FROM Ticket t GROUP BY t.location.locationName";
         TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
         return query.getResultList();
     }
 
-    public List<TotalPrice> findLocation() {
-        String sql = "SELECT t.location.locationName, SUM(t.totalPrice)  FROM Ticket t GROUP BY t.location.locationName ";
-        TypedQuery<TotalPrice> query = em.createQuery(sql, TotalPrice.class);
-        return query.getResultList();
+    public Long SumLocation() {
+        String sql = "SELECT SUM(t.totalPrice) FROM Ticket t WHERE t.location IN (SELECT t.location FROM Ticket t)";
+        TypedQuery<Long> query = em.createQuery(sql, Long.class);
+        return query.getSingleResult();
     }
 
     public List<TotalPrice> findDate() {
@@ -189,7 +209,11 @@ public class BookService {
         return query.getResultList();
     }
 
-
+    public Long SumDate() {
+        String sql = "SELECT SUM(t.totalPrice) FROM Ticket t WHERE t.bookDate IN (SELECT t.bookDate FROM Ticket t)";
+        TypedQuery<Long> query = em.createQuery(sql, Long.class);
+        return query.getSingleResult();
+    }
 }
 
 //    public List<Ticket> findSum() {

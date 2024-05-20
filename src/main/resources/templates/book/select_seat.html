@@ -46,9 +46,10 @@
         <input type="hidden" id="locationNo" name="locationNo" th:value="${locationNo}">
         <input type="hidden" id="date" name="date" th:value="${date}">
 
-        <div>
+        <div style="margin-top: 125px;">
             <h1>Total Price: <span id="totalPriceDisplay">0.00</span>krw</h1>
         </div>
+        <br><br>
 
 
         <input type="button" value="예매" class="next" onclick="submitForm()">
@@ -116,6 +117,12 @@ function submitForm() {
 
     // 선택된 좌석 정보를 구분 문자(여기서는 쉼표)로 조합하여 문자열 생성
     const selectedSeatsString = selectedSeats.map(seat => `${seat.row}${seat.column}`).join(',');
+
+    if (selectedSeatsString === '') {
+        alert('좌석이 선택되지 않았습니다');
+        return false;
+    }
+
 
     // hidden input에 값 설정
     selectedSeatsInput.value = selectedSeatsString;

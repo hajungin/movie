@@ -32,14 +32,6 @@ public class BoardService {
         this.boardRepository = boardRepository;
     }
 
-//    public List<BoardDto> viewAllBoard(Pageable pageable) {
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//        return boardRepository.findAll(pageable)
-//                .stream()
-//                .map(x -> BoardDto.fromBoardEntity(x))
-//                .toList();
-//    }
-
     public Page<BoardDto> viewAllBoard(Pageable pageable) {
         return boardRepository.findAll(pageable)
                 .map(BoardDto::fromBoardEntity);
@@ -47,6 +39,14 @@ public class BoardService {
 
     public Page<Board> viewBoard(Pageable pageable) {
         return boardRepository.findAll(pageable);
+    }
+
+    public Page<Board> viewBoard1(String keyword, Pageable pageable) {
+        return boardRepository.searchMovieTitle(keyword, pageable);
+    }
+
+    public Page<Board> viewBoard2(String keyword, Pageable pageable) {
+        return boardRepository.searchUser1(keyword, pageable);
     }
 
     public void insert(BoardDto dto) {
@@ -58,51 +58,28 @@ public class BoardService {
         Long userNo = user1.getUserNo();
         User user = em.find(User.class, userNo);
 
-
         Board board = Board.builder()
                 .boardId(dto.getBoardId())
                 .title(dto.getTitle())
                 .content(dto.getContent())
                 .movies(movies)
                 .user(user)
+                .goodPoint(dto.getGoodPoint())
                 .build();
         boardRepository.save(board);
     }
 
     public void update(BoardDto boardDto) {
-        // 주어진 boardDto의 id로 기존의 board 객체를 조회합니다.
         Board board = boardRepository.findById(boardDto.getBoardId()).orElse(null);
 
-        // board가 null이 아닌 경우에만 업데이트를 진행합니다.
         if (board != null) {
-            // boardDto의 필드들을 사용하여 기존의 board 객체를 업데이트합니다.
             board.setTitle(boardDto.getTitle());
             board.setContent(boardDto.getContent());
+            board.setGoodPoint(boardDto.getGoodPoint());
 
-            // movies와 user는 별도의 엔티티이므로 다른 방식으로 업데이트해야 합니다.
-            // 현재 코드는 Movies와 User 객체를 새로 생성하여 board에 설정하고 있습니다.
-            // 따라서 이 부분은 해당 엔티티를 업데이트하는 방법에 따라 적절하게 수정되어야 합니다.
-            // 예를 들어, movies와 user의 id를 사용하여 엔티티를 조회하고 업데이트할 수 있습니다.
-            // 또는 boardDto에 movies와 user의 id를 전달하여 업데이트하는 방식도 가능합니다.
-
-            // 업데이트된 board 객체를 저장합니다.
             boardRepository.save(board);
         }
     }
-
-
-
-    public void updateGoodPoint(Long movieNo){
-        String sql1 = "SELECT AVG(b.goodPoint) FROM Board b WHERE b.movies.movieNO:movieNo";
-        TypedQuery<Double> query1 = em.createQuery(sql1, Double.class).setParameter("movieNo", movieNo);
-
-        String sql2 = "SELECT m FROM Movies m WHERE m.movieNo:movieNo";
-        TypedQuery<Movies> query2 = em.createQuery(sql2, Movies.class).setParameter("movieNo", movieNo);
-        Movies movies = query2.getSingleResult();
-        movies.setGoodPointAvg(query1.getSingleResult());
-        em.persist(movies);
-            }
-
 
     @Transactional
     public void delete(Long id) {
@@ -134,6 +111,7 @@ public class BoardService {
     }
 
     private static final int BAR_LENGTH=5;
+
     public List<Integer> getPaginationBarNumbers(int pageNumber, int totalPage) {
         int startNumber = Math.max(pageNumber-(BAR_LENGTH/2),0);
 
@@ -164,33 +142,5 @@ public class BoardService {
 
     public void search() {
         List<BoardDto> boardDtoList = new ArrayList<>();
-    }
-
-    public List<BoardDto> searchAll(String type, String keyword) {
-        List<BoardDto> boardDtoList = new ArrayList<>();
-        switch (type) {
-            case "movieNo":
-                // 영화제목 DB 검색
-                boardDtoList = boardRepository.searchMovieTitle(keyword)
-                        .stream()
-                        .map(x->BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-            case "userNo":
-                // 작성자로 DB 검색
-                boardDtoList = boardRepository.searchUser(keyword)
-                        .stream()
-                        .map(x->BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-            default:
-                // 전체 검색
-                boardDtoList = boardRepository.searchQuery()
-                        .stream()
-                        .map(x->BoardDto.fromBoardEntity(x))
-                        .toList();
-                break;
-        }
-        return boardDtoList;
     }
 }

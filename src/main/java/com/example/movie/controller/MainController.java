@@ -35,7 +35,12 @@ public class MainController {
 
 
     @GetMapping("")
-    public String mainView(){
+    public String mainView(Model model){
+//        List<Movies> moviesList = movieService.GoodMovie();
+//        model.addAttribute("movie",moviesList);
+
+        List<Movies> moviesList = movieService.RandomMovie();
+        model.addAttribute("movie",moviesList);
         return "cinema/cinema_main";
     }
 

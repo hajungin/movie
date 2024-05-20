@@ -18,12 +18,11 @@
             background-color: white; /* 배경색을 하얀색으로 설정 */
             color: black; /* 글자색을 검정색으로 설정 */
             font-size: 24px; /* 글자 크기를 원하는 대로 설정 */
-            padding: 20px; /* 내부 여백을 추가하여 메시지가 더 크게 보이도록 설정 */
+            padding: 4px; /* 내부 여백을 추가하여 메시지가 더 크게 보이도록 설정 */
             border: 2px solid red; /* 예시로 테두리 스타일 설정 */
             border-radius: 10px; /* 테두리의 둥근 모서리 설정 */
         }
     </style>
-
 </head>
 <body>
     <form th:action="@{/cinema/theater}" method="post" id="selectionForm">
@@ -32,7 +31,7 @@
             <p th:text="${errorMessage}"></p>
         </div>
 
-        <div class="location-container">
+        <div class="location-container"  style="margin-top: 105px;">
             <label for="location">지점 선택:</label>
             <br><br>
             <select id="location" name="location">
@@ -41,9 +40,10 @@
                     th:value="${locationDto.locationNo}"
                     th:text="${locationDto.locationName}"></option>
             </select>
-
         </div>
+
         <br>
+
         <div class="movie-container">
             <label for="movie">
                 Pick a Movie :

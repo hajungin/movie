@@ -22,7 +22,7 @@
                 <span class="nav-link">|</span>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/admin/user}">회원관리</a>
+                <a class="nav-link active" th:href="@{/admin/user}">회원관리</a>
             </li>
             <li class="nav-item">
                 <span class="nav-link">|</span>
@@ -51,29 +51,31 @@
         </ul>
 
         <br>
+        <h4 class="text-center">🙍🏻️ 회원수정 🙍🏻‍</h4>
+        <br>
 
         <form id="frm" class="row g-3" th:action="@{/admin/update}" method="post" th:object="${userDto}">
             <div align="center" class="col-md-6 offset-md-3">
-                <label for="id">ID : [[*{userNo}]]</label>
+                <label>ID : [[*{userNo}]]</label>
             </div>
             <div class="col-md-6">
                 <label for="userId" class="form-label">아이디</label>
-                <input type="text" class="form-control" th:field="*{userId}">
+                <input id="userId" type="text" class="form-control" th:field="*{userId}">
             </div>
 
             <div class="col-md-6">
                 <label for="userName" class="form-label">이름</label>
-                <input type="text" class="form-control" th:field="*{userName}">
+                <input id="userName" type="text" class="form-control" th:field="*{userName}">
             </div>
 
             <div class="col-md-6">
                 <label for="password1" class="form-label">비밀번호</label>
-                <input type="password" class="form-control" th:field="*{password1}">
+                <input id="password1" type="password" class="form-control" th:field="*{password1}">
             </div>
 
             <div class="col-md-6">
                 <label for="password2" class="form-label">비밀번호확인</label>
-                <input type="password" class="form-control" th:field="*{password2}">
+                <input id="password2" type="password" class="form-control" th:field="*{password2}">
             </div>
 
             <div class="col-md-6">
@@ -84,7 +86,7 @@
 
             <div class="col-md-6">
                 <label for="phone" class="form-label">전화번호</label>
-                <input type="text" class="form-control" th:field="*{phone}">
+                <input id="phone" type="text" class="form-control" th:field="*{phone}">
             </div>
 
             <div class="col-md-6">

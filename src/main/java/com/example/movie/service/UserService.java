@@ -53,8 +53,6 @@ public class UserService {
                 .userId(userDto.getUserId())
                 .userName(userDto.getUserName())
                 .password(userDto.getPassword1())
-//                .password(userDto.getPassword2())
-//                금액 충전때문에 잠시 비활 문제 없으면 삭제해도 무관
                 .birth(userDto.getBirth())
                 .phone(userDto.getPhone())
                 .email(userDto.getEmail())
@@ -120,6 +118,30 @@ public class UserService {
         for (Ticket ticket : boardList2) {
             ticket.setUser(null);
         }
+        em.remove(user);
+    }
+
+    @Transactional
+    public void deleteUser(Long userNo) {
+        User user = em.find(User.class, userNo);
+
+        // 1. 사용자가 예약한 좌석 정보 삭제
+        String seatQuery = "DELETE FROM Seat s WHERE s.ticket.user = :user";
+        em.createQuery(seatQuery)
+                .setParameter("user", user)
+                .executeUpdate();
+        // 2. 사용자가 예약한 티켓 정보 삭제
+        String ticketQuery = "DELETE FROM Ticket t WHERE t.user = :user";
+        em.createQuery(ticketQuery)
+                .setParameter("user", user)
+                .executeUpdate();
+        // 3. 사용자가 작성한 게시물 삭제
+        String boardQuery = "DELETE FROM Board b WHERE b.user = :user";
+        em.createQuery(boardQuery)
+                .setParameter("user", user)
+                .executeUpdate();
+
+        // 4. 사용자 정보 삭제
         em.remove(user);
     }
 

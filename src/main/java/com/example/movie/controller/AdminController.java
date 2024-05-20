@@ -33,9 +33,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 @Controller
@@ -58,21 +60,21 @@ public class AdminController {
     }
 
     @GetMapping("")
-//    관리자 페이지 메인 화면
-    public String adminView() {
+//    관리자 페이지 메인 화면, 쿼리 사용 인기 영화 티켓판매
+    public String adminView(Model model) {
+        List<Movies> moviesList = movieService.GoodMovie();
+        model.addAttribute("movie",moviesList);
+
+        List<Movies> movies = movieService.TicketMovie();
+        model.addAttribute("sell",movies);
         return "admin/main";
     }
 
     @GetMapping("user")
 //    관리자페이지 회원관리 화면
     public String userView(Model model) {
-        //        레포지토리 사용
         List<UserDto> userDtoList = userService.findAll();
         model.addAttribute("user", userDtoList);
-
-//        엔티티 매니저 사용
-//        List<User> userList = userService.findAllEm();
-//        model.addAttribute("user",userList);
         return "admin/user";
     }
 
@@ -82,14 +84,12 @@ public class AdminController {
                              Model model) {
         UserDto userDto = userService.getOneUser(userNo);
         model.addAttribute("userDto", userDto);
+//        생년월일 현재 날짜 이후로 선택 불가능
         model.addAttribute("maxDate", LocalDate.now().toString());
-
-//        User user = userService.getOneUserEm(userNo);
-//        model.addAttribute("userDto",user);
         return "admin/user_update";
     }
-
     @PostMapping("update")
+//    builder 사용
     public String updateView(@ModelAttribute("userDto") UserDto userDto) {
         userService.update(userDto);
         return "redirect:/admin/user";
@@ -100,31 +100,29 @@ public class AdminController {
     public String delete(@PathVariable("deleteId") Long id) {
 //        userService.delete(id);
 //        테이블이 foreign key 로 연결되어 있어 엔티티 매니저를 사용하여 삭제
-        userService.delete(id);
+        userService.deleteUser(id);
         return "redirect:/admin/user";
     }
 
     @GetMapping("movie")
+//    관리자페이지 영화관리 화면, 게시판 별점 바로 반영
     public String movieView(Model model) {
-//        List<MoviesDto> moviesDtoList = movieService.findAll();
-//        model.addAttribute("movie", moviesDtoList);
-        List<Movies> moviesList = movieService.findAllEm();
-        model.addAttribute("movie", moviesList);
+        List<MoviesDto> moviesDtoList = movieService.findAll();
+        model.addAttribute("movie", moviesDtoList);
+//        List<Movies> moviesList = movieService.findAllEm();
+//        model.addAttribute("movie", moviesList);
         return "admin/movie";
     }
 
 
     @GetMapping("movie_update")
-//    관리자페이지 영화수정 화면
+//    관리자페이지 영화 수정화면
     public String movieUpdateView(@RequestParam("updateId") Long movieNo,
                                   Model model) {
-
         MoviesDto moviesDto = movieService.getOneMovie(movieNo);
         model.addAttribute("movie", moviesDto);
-        model.addAttribute("maxDate", LocalDate.now().toString());
         return "admin/movie_update";
     }
-
     @PostMapping("movie_update")
     public String movieUpdateView(@ModelAttribute("moviesDto") MoviesDto moviesDto) {
         movieService.update(moviesDto);
@@ -134,7 +132,7 @@ public class AdminController {
     @PostMapping("/deleted-movie/{deleteId}")
 //    관리자페이지 영화삭제 화면
     public String deleteMovie(@PathVariable("deleteId") Long movieNo) {
-        movieService.delete(movieNo);
+        movieService.deleteMovie(movieNo);
         return "redirect:/admin/movie";
     }
 
@@ -142,7 +140,6 @@ public class AdminController {
 //    관리자페이지 영화 등록 화면
     public String insertMovie(Model model) {
         model.addAttribute("movie", new MoviesDto());
-        model.addAttribute("maxDate", LocalDate.now().toString());
         return "admin/movie_insert";
     }
 
@@ -156,7 +153,7 @@ public class AdminController {
     @GetMapping("board")
     public String board(Model model,
                         @PageableDefault(page = 0, size = 10, sort = "boardId",
-                                direction = Sort.Direction.ASC) Pageable pageable) {
+                                direction = Sort.Direction.DESC) Pageable pageable) {
         //       넘겨온 페이지 번호로 리스트 받아오기
         Page<Board> boardPage = boardService.pageList(pageable);
 
@@ -192,23 +189,47 @@ public class AdminController {
 
     @GetMapping("total")
     public String totalMoney(Model model){
-//        List<MoviesDto> moviesDtoList = movieService.findAll();
         List<TicketDto> ticketDtoList = bookService.findAll();
         log.info(ticketDtoList.toString());
         model.addAttribute("ticket",ticketDtoList);
+
+        Long sum = bookService.All();
+
+        Locale locale = new Locale("ko", "KR");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String formattedSum = currencyFormatter.format(sum);
+        model.addAttribute("formattedSum", formattedSum);
         return "admin/total_money";
     }
     @GetMapping("total_movie")
     public String totalMovie(Model model){
         List<TotalPrice> ticketName = bookService.findMovie();
         model.addAttribute("ticket",ticketName);
+
+        Long sum = bookService.SumMovie();
+
+        Locale locale = new Locale("ko", "KR");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String formattedSum = currencyFormatter.format(sum);
+        model.addAttribute("formattedSum", formattedSum);
         return "admin/total/movie";
     }
 
     @GetMapping("total_name")
-    public String totalName(Model model){
+    public String totalName(Model model) {
+        // 해당 사용자의 매출 정보를 가져옵니다.
         List<TotalPrice> ticketName = bookService.findUser();
-        model.addAttribute("ticket",ticketName);
+        model.addAttribute("ticket", ticketName);
+
+        // 전체 매출 총액을 가져옵니다.
+        Long sum = bookService.SumUser();
+
+        // 매출 합계를 한국 원화 형식으로 포맷팅합니다.
+        Locale locale = new Locale("ko", "KR");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String formattedSum = currencyFormatter.format(sum);
+        model.addAttribute("formattedSum", formattedSum);
+
         return "admin/total/name";
     }
 
@@ -216,6 +237,15 @@ public class AdminController {
     public String totalLocation(Model model){
         List<TotalPrice> ticketName = bookService.findLocation();
         model.addAttribute("ticket",ticketName);
+
+        // 전체 매출 총액을 가져옵니다.
+        Long sum = bookService.SumLocation();
+
+        // 매출 합계를 한국 원화 형식으로 포맷팅합니다.
+        Locale locale = new Locale("ko", "KR");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String formattedSum = currencyFormatter.format(sum);
+        model.addAttribute("formattedSum", formattedSum);
         return "admin/total/location";
     }
 
@@ -223,10 +253,15 @@ public class AdminController {
     public String totalDate(Model model){
         List<TotalPrice> ticketName = bookService.findDate();
         model.addAttribute("ticket",ticketName);
+
+        // 전체 매출 총액을 가져옵니다.
+        Long sum = bookService.SumDate();
+
+        // 매출 합계를 한국 원화 형식으로 포맷팅합니다.
+        Locale locale = new Locale("ko", "KR");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
+        String formattedSum = currencyFormatter.format(sum);
+        model.addAttribute("formattedSum", formattedSum);
         return "admin/total/date";
     }
-
-
-
-
 }
