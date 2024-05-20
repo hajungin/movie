@@ -24,6 +24,7 @@
 #### 1)
 - HTML
 - CSS
+- JavaScript
 
 
 ## _Backend_
