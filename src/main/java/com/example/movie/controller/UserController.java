@@ -148,6 +148,8 @@ public class UserController {
     }
     @PostMapping("information")
     public String informationEdit(@ModelAttribute("userDto") UserDto userDto){
+        String encodedInputPassword = passwordEncoder.encode(userDto.getPassword1());
+        userDto.setPassword1(encodedInputPassword);
         userService.update(userDto);
         return "redirect:/cinema";
     }
