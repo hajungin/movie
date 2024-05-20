@@ -16,7 +16,7 @@ public class Board {
 //  게시판 board_id(pk),title,content, movie_no,user_id, good_point
     @Id
     @Column(name = "board_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //사용해야할 DB가 db= postgreSQL라서  나중에 AUTO로 전환
+    @GeneratedValue(strategy = GenerationType.SEQUENCE ) //사용해야할 DB가 db= postgreSQL라서  나중에 AUTO로 전환
     private Long boardId;
 
     @Column(length = 50, nullable = false)
