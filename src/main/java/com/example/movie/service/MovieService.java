@@ -152,7 +152,7 @@ public class MovieService {
     }
 
     public List<Movies> RandomMovie() {
-        String sql = "SELECT m FROM Movies m ORDER BY RAND()";
+        String sql = "SELECT m FROM Movies m ORDER BY RANDOM()";
         TypedQuery<Movies> query = em.createQuery(sql, Movies.class).setMaxResults(3);
         return query.getResultList();
     }
