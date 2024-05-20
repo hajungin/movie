@@ -109,18 +109,21 @@
 ![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
 
 
+---
 ### 로그인 및 내 정보 화면
 ![image](https://github.com/hajungin/movie/assets/162389696/b1e9e446-45a5-4b48-9e1a-9e55f40dfad2)
 
 
+---
 ### 영화 예매 화면 
 ![image](https://github.com/hajungin/movie/assets/162389696/67f37aee-59c9-4e7f-b8b2-b61b49431b75)
 
 
+---
 ### 영화 게시판 화면
 ![image](https://github.com/hajungin/movie/assets/162389696/d232dc3d-c39c-410c-8751-9c141b812605)
 
-
+---
 ### 영화 관리자 메인 화면
 ![image](https://github.com/hajungin/movie/assets/162389696/f49b0c3e-3c01-4482-b33a-822195eccf54)
 
