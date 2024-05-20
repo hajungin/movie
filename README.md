@@ -24,7 +24,7 @@
 #### 1)
 - HTML
 - CSS
-- Jquery
+
 
 ## _Backend_
 #### 1)_Language_
@@ -38,7 +38,7 @@
 - Tomcat
 
 #### 4)_DataBase_
-- PostgeSQL
+- PostgreSQL
 
   ----
 - **JAVA 17**: 최신 기능과 성능 향상을 제공하는 프로그래밍 언어
