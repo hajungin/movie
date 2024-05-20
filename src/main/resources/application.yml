@@ -5,13 +5,13 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/cinema
+    url: jdbc:postgresql://localhost:5432/cnema
     username: postgres
     password: 1111
 
-#  sql:
-#    init:
-#      mode: always
+  sql:
+    init:
+      mode: always
 
 
   jpa:
@@ -24,7 +24,7 @@ spring:
         show_sql: true
         format_sql: true
 
-#MySQL 연결하기
+##MySQL 연결하기
 #spring:
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver

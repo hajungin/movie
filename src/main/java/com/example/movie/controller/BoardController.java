@@ -99,7 +99,6 @@ public class BoardController {
     public String boardInsertView(@ModelAttribute("boardDto")BoardDto dto,
                                   @RequestParam("movieNo") Long movieNo,
                                   @RequestParam("goodPoint") double goodPoint) {
-        log.info(dto.toString());
         movieService.updateGoodPoint(movieNo,goodPoint);
         boardService.insert(dto);
         return "redirect:/board/list";
@@ -139,8 +138,6 @@ public class BoardController {
         List<BoardDto> boardDtoList = new ArrayList<>();
         boolean flag = false;
 
-        System.out.println(pageable);
-
         switch (type) {
             case "movieNo":
                 // 영화제목 DB 검색
@@ -176,7 +173,6 @@ public class BoardController {
                         .toList();
                 break;
         }
-        System.out.println(boardDtoList);
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -197,7 +193,6 @@ public class BoardController {
         } else {
             model.addAttribute("userNo", null);
         }
-
 
         return "board/list";
     }
