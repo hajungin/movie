@@ -20,25 +20,24 @@
 
 
 # 🛠 기술 스택
-### _Frontend_
+## _Frontend_
 #### 1)
 - HTML
 - CSS
 - Jquery
 
-### _Backend_
-#### _Language_
+## _Backend_
+#### 1)_Language_
 - JAVA 17
 - JSP
 
-#### _FrameWork_
+#### 2)_FrameWork_
 - Spring Boot
 
-#### _Server_
+#### 3)_Server_
 - Tomcat
 
-
-#### _DataBase_
+#### 4)_DataBase_
 - PostgeSQL
 
   ----
