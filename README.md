@@ -21,7 +21,6 @@
 
 # 🛠 기술 스택
 ## _Frontend_
-#### 1)
 - HTML
 - CSS
 - JavaScript
