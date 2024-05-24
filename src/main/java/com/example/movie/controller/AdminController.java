@@ -44,9 +44,9 @@ import java.util.UUID;
 @Slf4j
 @RequestMapping("admin")
 public class AdminController {
-    @Autowired
-    EntityManager em;
-    private String uploadDir;
+//    @Autowired
+//    EntityManager em;
+//    private String uploadDir;
     private final UserService userService;
     private final MovieService movieService;
     private final BoardService boardService;

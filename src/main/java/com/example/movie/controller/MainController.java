@@ -36,16 +36,14 @@ public class MainController {
 
     @GetMapping("")
     public String mainView(Model model){
-//        List<Movies> moviesList = movieService.GoodMovie();
-//        model.addAttribute("movie",moviesList);
-
+//        메인페이지에서 랜덤 영화 3개 출력
         List<Movies> moviesList = movieService.RandomMovie();
         model.addAttribute("movie",moviesList);
         return "cinema/cinema_main";
     }
 
     @GetMapping("movie")
-//    메인페이지에서 영화들 출력
+//    메인페이지에서 영화목록 출력
     public String movie(Model model){
         List<MoviesDto> moviesDtoList = movieService.findAll();
         log.info(moviesDtoList.toString());

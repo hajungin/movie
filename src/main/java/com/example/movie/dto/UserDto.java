@@ -65,17 +65,4 @@ public class UserDto {
                 user.getUserRole()
         );
     }
-
-    public User fromUserDto(UserDto dto){
-        User user = new User();
-        user.setUserId(dto.getUserId());
-        user.setUserNo(dto.getUserNo());
-        user.setPassword(dto.getPassword1());
-        user.setUserName(dto.getUserName());
-        user.setBirth(dto.getBirth());
-        user.setEmail(dto.getEmail());
-        user.setPhone(dto.getPhone());
-        user.setUserRole(dto.getUserRole());
-        return user;
-    }
 }

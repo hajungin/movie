@@ -40,7 +40,8 @@ public class MovieService {
 
     public List<Movies> findAllEm(){
         List<Movies> moviesList = em.createQuery("SELECT m FROM Movies m ORDER BY m.movieNo", Movies.class).getResultList();
-        return moviesList;
+        List<Movies> movies = moviesRepository.findAll();
+        return movies;
     }
     public Movies updateGoodPoint(Long movieNo, double goodPoint) {
         // 평균 평점 계산 쿼리
