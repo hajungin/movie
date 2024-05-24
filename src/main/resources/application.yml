@@ -1,11 +1,11 @@
 server:
-  port: 8080
+  port: 8090
 
 
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://localhost:5432/cnema
+    url: jdbc:postgresql://localhost:5432/cinema
     username: postgres
     password: 1111
 
@@ -28,7 +28,7 @@ spring:
 #spring:
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/cnema
+#    url: jdbc:mysql://localhost:3306/cinema
 #    username: root
 #    password: 1111
 #

@@ -27,9 +27,6 @@ public class MoviesDto {
 
     private int price;
 
-
-
-
     public static MoviesDto fromMoviesEntity(Movies movies){
         return new MoviesDto(
                 movies.getMovieNo(),

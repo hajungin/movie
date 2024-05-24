@@ -6,10 +6,7 @@ import com.example.movie.entity.Board;
 import com.example.movie.entity.Movies;
 import com.example.movie.entity.User;
 import com.example.movie.repository.BoardRepository;
-import com.example.movie.repository.MoviesRepository;
-import com.example.movie.repository.UserRepository;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -57,7 +53,6 @@ public class BoardService {
         User user1 = userDetails.getUser();
         Long userNo = user1.getUserNo();
         User user = em.find(User.class, userNo);
-
         Board board = Board.builder()
                 .boardId(dto.getBoardId())
                 .title(dto.getTitle())
@@ -71,12 +66,10 @@ public class BoardService {
 
     public void update(BoardDto boardDto) {
         Board board = boardRepository.findById(boardDto.getBoardId()).orElse(null);
-
         if (board != null) {
             board.setTitle(boardDto.getTitle());
             board.setContent(boardDto.getContent());
             board.setGoodPoint(boardDto.getGoodPoint());
-
             boardRepository.save(board);
         }
     }
@@ -93,12 +86,13 @@ public class BoardService {
         List<BoardDto> boardDtoList = new ArrayList<>();
         return boardRepository.findAll()
                 .stream()
-                .map(x->BoardDto.fromBoardEntity(x))
+                .map(x -> BoardDto.fromBoardEntity(x))
                 .toList();
     }
 
     @Autowired
     EntityManager em;
+
     public List<Board> findAllem() {
         String sql = "SELECT b FROM Board b";
         Query query = em.createQuery(sql);
@@ -109,27 +103,25 @@ public class BoardService {
     public Page<Board> pageList(Pageable pageable) {
         return boardRepository.findAll(pageable);
     }
-
-    private static final int BAR_LENGTH=5;
+    private static final int BAR_LENGTH = 5;
 
     public List<Integer> getPaginationBarNumbers(int pageNumber, int totalPage) {
-        int startNumber = Math.max(pageNumber-(BAR_LENGTH/2),0);
+        int startNumber = Math.max(pageNumber - (BAR_LENGTH / 2), 0);
 
         int endNumber = Math.min(startNumber + BAR_LENGTH, totalPage);
 
-        return IntStream.range(startNumber,endNumber).boxed().toList();
+        return IntStream.range(startNumber, endNumber).boxed().toList();
     }
 
     public BoardDto getOneBoard(Long boardId) {
         return boardRepository.findById(boardId)
-                .map(x->BoardDto.fromBoardEntity(x))
+                .map(x -> BoardDto.fromBoardEntity(x))
                 .orElse(null);
     }
 
     public List<Board> movie() {
         String sql = "SELECT b.movieTitle  FROM Board b";
         TypedQuery<Board> query = em.createQuery(sql, Board.class);
-
         List<Board> movie = query.getResultList();
         return movie;
     }
@@ -138,9 +130,5 @@ public class BoardService {
         String sql = "SELECT b FROM Board b WHERE b.movies.movieNo = :movieNo";
         TypedQuery<Board> query = em.createQuery(sql, Board.class).setParameter("movieNo", movieNo);
         return query.getResultList();
-    }
-
-    public void search() {
-        List<BoardDto> boardDtoList = new ArrayList<>();
     }
 }

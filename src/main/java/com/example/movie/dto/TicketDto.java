@@ -1,17 +1,11 @@
 package com.example.movie.dto;
 
-import com.example.movie.entity.Seat;
 import com.example.movie.entity.Ticket;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -24,11 +18,6 @@ public class TicketDto {
     private String locationNo;
     private LocalDate bookDate; //예약 날짜 (영화보는 날짜)
     private int totalPrice;
-
-
-
-
-
 
     public TicketDto(Long ticketNo, String movieTitle, String userName, String locationName, LocalDate bookDate, int totalPrice) {
         this.ticketNo = ticketNo;
