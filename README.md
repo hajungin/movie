@@ -126,6 +126,12 @@
 ### 영화 관리자 메인 화면
 ![image](https://github.com/hajungin/movie/assets/162389696/f49b0c3e-3c01-4482-b33a-822195eccf54)
 
+### 관리자 회원관리 화면
+|회원조회|회원수정|
+| ------------- | ------------- |
+| ![image](https://github.com/user-attachments/assets/e4f0b887-104f-48a8-8f98-d1e5d7b85954)
+ | ![image](https://github.com/user-attachments/assets/8b9e819e-fb0a-4445-a9b6-0caa20b270bb)
+ |
 
 
 
