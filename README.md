@@ -58,7 +58,8 @@
 
 #### 5)_GitHub_
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-  ----
+
+---
 - **JAVA 17**: 최신 기능과 성능 향상을 제공하는 프로그래밍 언어
 - **Spring Boot**: 빠르고 간편한 설정으로 효율적인 개발을 지원
   - Spring Data JPA: 데이터베이스와의 효율적인 연동
