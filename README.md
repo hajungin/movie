@@ -111,7 +111,7 @@
 ### 영화 정보 화면
 | 영화 목록 | 관람후기 | 지점목록 |
 | ------------- | ------------- | ------------- |
-| ![image](https://github.com/user-attachments/assets/c7f889ff-8f7d-4404-9ee1-e9b541dd51e6) | ![image](https://github.com/user-attachments/assets/0f76eac2-44e8-4ebd-8df8-ff96011895ff) | ------------- |
+| ![image](https://github.com/user-attachments/assets/c7f889ff-8f7d-4404-9ee1-e9b541dd51e6) | ![image](https://github.com/user-attachments/assets/0f76eac2-44e8-4ebd-8df8-ff96011895ff) | ![image](https://github.com/user-attachments/assets/8fa66cd4-e1eb-4f38-a486-e27a1e5cb837) |
 
 
 ---
@@ -135,7 +135,7 @@
 ### 영화 게시판 화면
 | 게시판 메인 화면 | 게시판 작성 | 게시판 수정 |
 | ----- | ------ | ----- |
-| ![image](https://github.com/user-attachments/assets/31ddff12-a03f-4686-b42e-53079fb5fef2) | ![image](https://github.com/user-attachments/assets/5b249aef-0241-4563-b48d-92951421d824) | ![image](https://github.com/user-attachments/assets/05d6e3e7-f160-4c6e-9022-bbc86d9d9b88) |
+| ![image](https://github.com/user-attachments/assets/31ddff12-a03f-4686-b42e-53079fb5fef2) | ![image](https://github.com/user-attachments/assets/04432eb5-c3bb-47ce-b886-628c8fffa13b) | ![image](https://github.com/user-attachments/assets/05d6e3e7-f160-4c6e-9022-bbc86d9d9b88) |
 
 
 
