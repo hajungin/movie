@@ -154,46 +154,46 @@
 | 패키지명 | 클래스명 | 설명 |
 | ---- | ---- | ---- |
 | **config** | | |
-| | PrincipalDetails | |
-| | SecurityConfig | |
+| | PrincipalDetails | pring Security에서 사용자 인증과 권한 부여를 위한 사용자 정보를 담고 있는 클래스 |
+| | SecurityConfig | Spring Security를 설정하는 클래스 |
 | **constant** | | |
-| | SeatCordinates | |
-| | TotalPrice | |
-| | UserRole | |
+| | SeatCordinates | 좌석정보를 담는 클래스 |
+| | TotalPrice | 매출현황 값을 담을 클래스 |
+| | UserRole | 사용자의 권한 정의|
 | **controller** | | |
-| | AdminController | |
-| | BoardController | |
-| | BookController | |
-| | MainController | |
-| | UserController | |
+| | AdminController | 관리자 View 요청처리 및 서비스 호출, View 선택|
+| | BoardController | 게시판 View 요청처리 및 서비스 호출, View 선택|
+| | BookController | 예매 View 요청처리 및 서비스 호출, View 선택|
+| | MainController | 메인화면 View 요청처리 및 서비스 호출, View 선택|
+| | UserController | 사용자 View 요청처리 및 서비스 호출, View 선택|
 | **dto** | | |
-| | BoardDto | |
-| | LocationDto | |
-| | MoviesDto | |
-| | SeatDto | |
-| | TicketDto | |
-| | UserDto | |
+| | BoardDto | 게시판DTO 및 정적 팩토리 메서드|
+| | LocationDto | 지점DTO 및 정적 팩토리 메서드|
+| | MoviesDto | 영화DTO 및 정적 팩토리 메서드|
+| | SeatDto | 좌석DTO 및 정적 팩토리 메서드|
+| | TicketDto | 티켓DTO 및 정적 팩토리 메서드|
+| | UserDto | 사용자DTO 및 정적 팩토리 메서드|
 | **entity** | | |
-| | Board | |
-| | Location | |
-| | Movies | |
-| | Seat | |
-| | Ticeket | |
-| | User | |
+| | Board | 게시판 객체 정의 및 데이터 저장|
+| | Location | 지점 객체 정의 및 데이터 저장|
+| | Movies | 영화 객체 정의 및 데이터 저장|
+| | Seat | 좌석 객체 정의 및 데이터 저장|
+| | Ticeket | 티켓 객체 정의 및 데이터 저장|
+| | User | 사용자 객체 정의 및 데이터 저장|
 | **repository** | | |
-| | BoardRepository | |
-| | LocationRepository | |
-| | MoviesRepository | |
-| | SeatRepository | |
-| | TicketRepository | |
-| | UserRepository | |
-| **service** | | |
-| | BoardService | |
-| | BookService | |
-| | LocationService | |
-| | MoviesService | |
-| | UserDetailService | |
-| | UserService | |
+| | BoardRepository | 게시판 테이블 데이터 추상화 접근 및 검색 쿼리 기능|
+| | LocationRepository | 지점 테이블 데이터 추상화 접근|
+| | MoviesRepository | 영화 테이블 데이터 추상화 접근|
+| | SeatRepository | 좌석 테이블 데이터 추상화 접근|
+| | TicketRepository | 티켓 테이블 데이터 추상화 접근|
+| | UserRepository | 사용자 테이블 데이터 추상화 접근|
+| **service** | | 트랜잭션|
+| | BoardService | 게시판 데이터 관리 및 처리|
+| | BookService | 예매 데이터 관리 및 처리|
+| | LocationService | 지점 데이터 관리 및 처리|
+| | MoviesService | 영화 데이터 관리 및 처리|
+| | UserDetailService | 로그인 DB값 검증|
+| | UserService | 사용자 데이터 관리 및 처리|
 
 
 
