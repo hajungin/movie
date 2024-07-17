@@ -184,7 +184,7 @@
 
 ---
 # 🧩 ERD
-![ERD_1](https://github.com/hajungin/movie/blob/master/cinemaERD_1.png)
----
+![image](https://github.com/user-attachments/assets/b6d5fbd1-87c1-4341-b40d-23cfded6a799)
+
 
 
