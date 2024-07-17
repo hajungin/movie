@@ -109,24 +109,36 @@
 
 ---
 ### 영화 정보 화면
-| 영화 목록 | 관람후기 |
-| ------------- | ------------- |
-| ![image](https://github.com/user-attachments/assets/c7f889ff-8f7d-4404-9ee1-e9b541dd51e6) | ![image](https://github.com/user-attachments/assets/0f76eac2-44e8-4ebd-8df8-ff96011895ff) |
+| 영화 목록 | 관람후기 | 지점목록 |
+| ------------- | ------------- | ------------- |
+| ![image](https://github.com/user-attachments/assets/c7f889ff-8f7d-4404-9ee1-e9b541dd51e6) | ![image](https://github.com/user-attachments/assets/0f76eac2-44e8-4ebd-8df8-ff96011895ff) | ------------- |
 
 
 ---
-### 로그인 및 내 정보 화면
-![image](https://github.com/hajungin/movie/assets/162389696/b1e9e446-45a5-4b48-9e1a-9e55f40dfad2)
+### 회원가입 및 로그인 화면
+| 회원가입 | 로그인 |
+| ------ | ------ |
+| ![image](https://github.com/user-attachments/assets/8c1fb3c5-e12f-49db-9c58-c83f88a3eb6a) | ![image](https://github.com/user-attachments/assets/0e3a6fba-59e2-4e92-b56b-467668f8d4c8) |
 
+### 회원정보 및 My Page
+| My Page 메인 | 내 정보수정 | 예매내역 |  금액충전 |
+| ------ | ------ | ------ | ------ |
+| ![image](https://github.com/user-attachments/assets/f02dd471-07a3-4ff2-adc2-e944faf4d40b) | ![image](https://github.com/user-attachments/assets/190cc0fa-5961-4acd-999c-a093a1d45a28) | ![image](https://github.com/user-attachments/assets/2711ed17-3b0b-44e3-b4fc-f8f8144d869d) | ![image](https://github.com/user-attachments/assets/c1728bae-a5eb-4694-937b-49a342517791) |
 
 ---
 ### 영화 예매 화면 
-![image](https://github.com/hajungin/movie/assets/162389696/67f37aee-59c9-4e7f-b8b2-b61b49431b75)
-
+| 영화 및 지점,날짜 선택 | 좌석 선택 | 
+| ----- | ----- |
+| ![image](https://github.com/user-attachments/assets/4edf6a67-7d79-416f-9677-4dd7248ee210) | ![image](https://github.com/user-attachments/assets/1527233e-eca9-4064-a178-656e0ee05552) | 
 
 ---
 ### 영화 게시판 화면
-![image](https://github.com/hajungin/movie/assets/162389696/d232dc3d-c39c-410c-8751-9c141b812605)
+| 게시판 메인 화면 | 게시판 작성 | 게시판 수정 |
+| ----- | ------ | ----- |
+| ![image](https://github.com/user-attachments/assets/31ddff12-a03f-4686-b42e-53079fb5fef2) | ![image](https://github.com/user-attachments/assets/5b249aef-0241-4563-b48d-92951421d824) | ![image](https://github.com/user-attachments/assets/05d6e3e7-f160-4c6e-9022-bbc86d9d9b88) |
+
+
+
 
 ---
 ### 영화 관리자 메인 화면
