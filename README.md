@@ -39,38 +39,42 @@
   - 영화 관리 : 등록된 영화정보 조회 및 등록, 수정, 삭제
   - 티켓 관리 : 회원들이 예매한 티켓 내용 조회 및 예매 취소
   - 게시판 관리 : 회원들이 등록한 게시판 내용 조회 및 삭제
-  - 총 매출 현황 : 전체 매출 조회, 영화별 매출 조회, 회원별 매출 조회, 지점별 매출 조회, 날짜별 매출 조회 
+  - 총 매출 현황 : 전체 매출 조회, 영화별 매출 조회, 회원별 매출 조회, 지점별 매출 조회, 날짜별 매출 조회
+    
 - 이정민 - 좌석 기능 구현, 티켓 예약 관리, 로그인, 마이 페이지(CRUD), 예매 내역
-- 이호중 - 게시판 페이징 처리, 게시판 (CRUD) 검색 기능,영화 평점, ppt 제작
+- 이호중 - 게시판 페이징 처리, 게시판 (CRUD) 검색 기능,영화 평점
 
 
 ---
 
 
 # 🛠 기술 스택
-## _Frontend_
+## __IDE__
+![image](https://github.com/user-attachments/assets/7a402f12-e2be-486e-9067-327f6257271d)
+
+## __Frontend__
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
 ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
 <img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
 
 
-## _Backend_
+## __Backend__
 #### 1)_Language_
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 - JSP
 
-#### 2)_FrameWork_
+## __FrameWork__
 <img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 
-#### 3)_Server_
+## __Server__
 ![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
 
-#### 4)_DataBase_
+## __DataBase__
 ![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 - DBeaver
 
-#### 5)_GitHub_
+## __GitHub__
 <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
 
 ---
@@ -87,8 +91,6 @@
 
 
 ---
-
-
 # 📌 주요 기능
 
 ### 메인페이지
@@ -137,6 +139,25 @@
 
 ---
 
+# 프로젝트 package
+| 패키지명 | 클래스명 | 설명 |
+| ---- | ---- | ---- |
+| **config** | PrincipalDetails | |
+| | SecurityConfig | |
+| **constant** | | |
+| **controller** | | |
+| **dto** | | |
+| **entity** | | |
+| **repository** | | |
+| **service** | | |
+
+
+
+
+
+
+
+---
 # 🎬 화면구성
 ### 메인 화면
 ![image](https://github.com/user-attachments/assets/372af8dc-e6d1-49e8-bda0-a46cf643e84a)
