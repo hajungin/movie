@@ -35,27 +35,29 @@
 
 # 🛠 기술 스택
 ## _Frontend_
-- HTML
-- CSS
-- JavaScript
-- BootStrap
+![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white">
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E)
+<img src="https://img.shields.io/badge/bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white">
 
 
 ## _Backend_
 #### 1)_Language_
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white">
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 - JSP
 
 #### 2)_FrameWork_
-- Spring Boot
+<img src="https://img.shields.io/badge/springboot-6DB33F?style=for-the-badge&logo=springboot&logoColor=white">
 
 #### 3)_Server_
-- Tomcat
+![Apache Tomcat](https://img.shields.io/badge/apache%20tomcat-%23F8DC75.svg?style=for-the-badge&logo=apache-tomcat&logoColor=black)
 
 #### 4)_DataBase_
-- PostgreSQL
+![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 - DBeaver
 
+#### 5)_GitHub_
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
   ----
 - **JAVA 17**: 최신 기능과 성능 향상을 제공하는 프로그래밍 언어
 - **Spring Boot**: 빠르고 간편한 설정으로 효율적인 개발을 지원
