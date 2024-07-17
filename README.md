@@ -142,8 +142,8 @@
 
 ---
 ### 관리자 영화관리 화면
-|영화조회|영화수정|영화등록|
-| ------------- | ------------- |
+| 영화조회 | 영화수정 | 영화등록 |
+| -------- | -------- | -------- | 
 | ![image](https://github.com/user-attachments/assets/61e8f250-3fae-4610-a735-13e41d5b087d) | ![image](https://github.com/user-attachments/assets/57b44430-d674-42db-868c-83d3ff6159ff) | ![image](https://github.com/user-attachments/assets/d1c4cc95-9502-4c8c-8d12-60f9f279110c)
  |
 
