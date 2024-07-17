@@ -104,8 +104,14 @@
 ---
 
 # 🎬 화면구성
-### 영화 메인 화면
-![image](https://github.com/hajungin/movie/assets/162389696/74da6146-95d0-4ae5-9437-349cdba6131f)
+### 메인 화면
+![image](https://github.com/user-attachments/assets/372af8dc-e6d1-49e8-bda0-a46cf643e84a)
+
+---
+### 영화 정보 화면
+| 영화 목록 | 관람후기 |
+| ------------- | ------------- |
+| ![image](https://github.com/user-attachments/assets/c7f889ff-8f7d-4404-9ee1-e9b541dd51e6) | ![image](https://github.com/user-attachments/assets/0f76eac2-44e8-4ebd-8df8-ff96011895ff) |
 
 
 ---
@@ -124,12 +130,22 @@
 
 ---
 ### 영화 관리자 메인 화면
-![image](https://github.com/hajungin/movie/assets/162389696/f49b0c3e-3c01-4482-b33a-822195eccf54)
+| 평점 Top3 | 예매율 Top3 |
+| ------------- | ------------- |
+| ![image](https://github.com/user-attachments/assets/d61fabad-a4c8-481c-bd6a-f1db2c30536d) | ![image](https://github.com/user-attachments/assets/4ef5a23f-1b6a-480a-b247-2fe74207e95d) |
 
+---
 ### 관리자 회원관리 화면
 |회원조회|회원수정|
 | ------------- | ------------- |
 | ![image](https://github.com/user-attachments/assets/e4f0b887-104f-48a8-8f98-d1e5d7b85954) | ![image](https://github.com/user-attachments/assets/8b9e819e-fb0a-4445-a9b6-0caa20b270bb) |
+
+---
+### 관리자 영화관리 화면
+|영화조회|영화수정|영화등록|
+| ------------- | ------------- |
+| ![image](https://github.com/user-attachments/assets/61e8f250-3fae-4610-a735-13e41d5b087d) | ![image](https://github.com/user-attachments/assets/57b44430-d674-42db-868c-83d3ff6159ff) | ![image](https://github.com/user-attachments/assets/d1c4cc95-9502-4c8c-8d12-60f9f279110c)
+ |
 
 
 
