@@ -142,14 +142,47 @@
 # 프로젝트 package
 | 패키지명 | 클래스명 | 설명 |
 | ---- | ---- | ---- |
-| **config** | PrincipalDetails | |
+| **config** | | |
+| | PrincipalDetails | |
 | | SecurityConfig | |
 | **constant** | | |
+| | SeatCordinates | |
+| | TotalPrice | |
+| | UserRole | |
 | **controller** | | |
+| | AdminController | |
+| | BoardController | |
+| | BookController | |
+| | MainController | |
+| | UserController | |
 | **dto** | | |
+| | BoardDto | |
+| | LocationDto | |
+| | MoviesDto | |
+| | SeatDto | |
+| | TicketDto | |
+| | UserDto | |
 | **entity** | | |
+| | Board | |
+| | Location | |
+| | Movies | |
+| | Seat | |
+| | Ticeket | |
+| | User | |
 | **repository** | | |
+| | BoardRepository | |
+| | LocationRepository | |
+| | MoviesRepository | |
+| | SeatRepository | |
+| | TicketRepository | |
+| | UserRepository | |
 | **service** | | |
+| | BoardService | |
+| | BookService | |
+| | LocationService | |
+| | MoviesService | |
+| | UserDetailService | |
+| | UserService | |
 
 
 
