@@ -144,13 +144,34 @@
 ### 관리자 영화관리 화면
 | 영화조회 | 영화수정 | 영화등록 |
 | -------- | -------- | -------- | 
-| ![image](https://github.com/user-attachments/assets/61e8f250-3fae-4610-a735-13e41d5b087d) | ![image](https://github.com/user-attachments/assets/57b44430-d674-42db-868c-83d3ff6159ff) | ![image](https://github.com/user-attachments/assets/d1c4cc95-9502-4c8c-8d12-60f9f279110c)
- |
+| ![image](https://github.com/user-attachments/assets/61e8f250-3fae-4610-a735-13e41d5b087d) | ![image](https://github.com/user-attachments/assets/57b44430-d674-42db-868c-83d3ff6159ff) | ![image](https://github.com/user-attachments/assets/d1c4cc95-9502-4c8c-8d12-60f9f279110c) |
+
+---
+### 관리자 티켓관리 화면
+| 티켓 관리 |
+| -------- | 
+| ![image](https://github.com/user-attachments/assets/dd41f3e1-7f46-4d06-b86d-67491559adc2) |
+
+---
+### 관리자 게시판관리 화면
+| 게시판 관리 |
+| -------- | 
+| ![image](https://github.com/user-attachments/assets/ce12388c-1008-4ed6-9451-241e64140eb0) |
+
+---
+### 관리자 총 매출 관리 화면
+| 총 매출 |
+| ------- |
+| ![image](https://github.com/user-attachments/assets/f50be4dc-7dbc-417f-9a0f-37514b820a61) |
+
+---
+| 영화별 | 회원별 | 지점별 | 날짜별 |
+| ------- | ------- | ------- | ------- |
+| ![image](https://github.com/user-attachments/assets/933c516b-eb42-429e-8c02-548c30c26c69) | ![image](https://github.com/user-attachments/assets/62fb511b-e284-4afb-9d85-345138fd635e) | ![image](https://github.com/user-attachments/assets/cb17ce05-5fa9-4be5-ab7e-552ef0bb8075) | ![image](https://github.com/user-attachments/assets/c6984a2b-2d6e-43e0-b938-cb8947e72211) |
 
 
 
-
-  
+---
 # 🧩 ERD
 ![ERD_1](https://github.com/hajungin/movie/blob/master/cinemaERD_1.png)
 ---
